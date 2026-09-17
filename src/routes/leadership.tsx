@@ -37,7 +37,7 @@ function LeadershipPage() {
           {founders.map((person) => (
             <li key={person.name} className="bg-background p-9 sm:p-10">
               <p className="eyebrow">{person.role}</p>
-              <p className="mt-5 text-2xl leading-snug text-ink">{person.name}</p>
+              <p className="mt-5 text-2xl font-semibold leading-snug text-ink">{person.name}</p>
             </li>
           ))}
         </ul>
@@ -54,7 +54,7 @@ function LeadershipPage() {
           <SectionTitle eyebrow="Management" title="Society management" />
           <div className="mt-10 rounded-sm border border-rule bg-background p-9 sm:p-12">
             <p className="eyebrow">{management.role}</p>
-            <p className="mt-5 text-3xl text-ink">{management.name}</p>
+            <p className="mt-5 text-3xl font-semibold text-ink">{management.name}</p>
             <p className="measure mt-6 text-base leading-relaxed text-muted-foreground">
               {management.summary}
             </p>

@@ -122,7 +122,7 @@ function HomePage() {
         <div className="grid gap-10 rounded-sm border border-rule p-8 sm:p-12 lg:grid-cols-[1fr_1fr]">
           <div>
             <StatusTag>{announcement.confirmed ? "Announced" : "Planned"}</StatusTag>
-            <h2 className="mt-4 text-2xl sm:text-3xl">{announcement.heading}</h2>
+            <h2 className="mt-4">{announcement.heading}</h2>
             <p className="measure mt-5 text-base leading-relaxed text-muted-foreground">
               {announcement.body}
             </p>
