@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/Page";
-import { announcement, contactDetails, legalForm, legalStatus, society } from "@/content/site";
+import { contactDetails, legalForm, legalStatus, society } from "@/content/site";
 
 export const Route = createFileRoute("/legal")({
   head: () => ({
@@ -68,11 +68,6 @@ function LegalPage() {
               offer of membership, a guarantee of any place on a programme, or a commitment to a
               particular benefit. Activities and dates require approval by the Society's Board.
             </p>
-          </div>
-
-          <div>
-            <SectionTitle title="Independent events" />
-            <p className="mt-4 text-muted-foreground">{announcement.courseNote}</p>
           </div>
 
           <div>

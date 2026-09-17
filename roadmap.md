@@ -4,12 +4,12 @@
 - [x] Brand system from approved logo (navy/teal/white/pale grey), editorial typography, reduced-motion support
 - [x] Header with public ENDOFACE by ISEFS text treatment + nav + "Register your interest"
 - [x] Pages: Home, About, Education & Science, Membership, Leadership, Contact
-- [ ] Draft Privacy and Legal pages, marked for owner approval, out of main nav
-- [ ] Interest registration form (name, email, country, specialty, institution optional, areas of interest, optional newsletter consent)
-- [ ] Contact enquiry form
+- [x] Draft Privacy and Legal pages, marked for owner approval, out of main nav
+- [ ] Interest registration form prepared but server-disabled pending responsible contact and receiving process
+- [ ] Contact enquiry form prepared but server-disabled pending responsible contact and receiving process
 - [x] Private storage, validation, spam protection and duplicate prevention prepared; forms remain unavailable until owner/contact and receipt workflow are confirmed
-- [ ] Per-page metadata, social sharing tags, alt text, favicon
-- [ ] Verify all routes, CTAs, form states on mobile and desktop
+- [x] Per-page metadata, social sharing tags, alt text, favicon
+- [x] Verify all routes, navigation and unavailable form states on mobile and desktop
 
 ## Phase 2 — Member portal (target November 2026)
 - [ ] Accounts, application submission, individual application status
