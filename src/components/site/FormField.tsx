@@ -13,9 +13,9 @@ export function Field({
 }: {
   id: string;
   label: string;
-  error?: string;
-  hint?: string;
-  optional?: boolean;
+  error?: string | undefined;
+  hint?: string | undefined;
+  optional?: boolean | undefined;
   children: ReactNode;
 }) {
   return (
@@ -39,7 +39,7 @@ export function TextInput({
   id,
   error,
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { id: string; error?: string }) {
+}: React.InputHTMLAttributes<HTMLInputElement> & { id: string; error?: string | undefined }) {
   return (
     <input
       id={id}
@@ -55,7 +55,7 @@ export function TextArea({
   id,
   error,
   ...props
-}: React.TextareaHTMLAttributes<HTMLTextAreaElement> & { id: string; error?: string }) {
+}: React.TextareaHTMLAttributes<HTMLTextAreaElement> & { id: string; error?: string | undefined }) {
   return (
     <textarea
       id={id}
