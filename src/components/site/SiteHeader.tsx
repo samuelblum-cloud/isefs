@@ -14,25 +14,15 @@ const navigation = [
 ] as const;
 
 /**
- * Header leads with the institutional ISEFS logo, with ENDOFACE named as the
- * Society's flagship programme underneath.
+ * Header leads with the institutional ISEFS logo only.
  */
 function BrandLockup() {
   return (
-    <span
-      className="inline-grid items-start leading-none"
-      style={{ gridTemplateColumns: "36.6% minmax(0, 1fr)" }}
-    >
-      <img
-        src={isefsLogo.url}
-        alt={`${society.shortName} — ${society.name}`}
-        className="col-span-2 h-12 w-auto sm:h-14"
-      />
-      <span className="col-start-2 mt-1.5 whitespace-nowrap text-xs font-semibold tracking-wide text-accent">
-        Home of {society.brand}
-        <sup className="ml-0.5 align-super text-[0.7em]">™</sup>
-      </span>
-    </span>
+    <img
+      src={isefsLogo.url}
+      alt={`${society.shortName} — ${society.name}`}
+      className="h-12 w-auto sm:h-14"
+    />
   );
 }
 
