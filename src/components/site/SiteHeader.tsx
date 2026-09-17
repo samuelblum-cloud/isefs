@@ -21,14 +21,14 @@ function BrandLockup() {
   return (
     <span
       className="inline-grid items-start leading-none"
-      style={{ gridTemplateColumns: "36.6% 1fr" }}
+      style={{ gridTemplateColumns: "36.6% minmax(0, 1fr)" }}
     >
       <img
         src={isefsLogo.url}
         alt={`${society.shortName} — ${society.name}`}
         className="col-span-2 h-12 w-auto sm:h-14"
       />
-      <span className="col-start-2 mt-1.5 text-xs font-semibold tracking-wide text-accent">
+      <span className="col-start-2 mt-1.5 whitespace-nowrap text-xs font-semibold tracking-wide text-accent">
         Home of {society.brand}
         <sup className="ml-0.5 align-super text-[0.7em]">™</sup>
       </span>
