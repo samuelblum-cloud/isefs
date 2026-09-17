@@ -58,9 +58,6 @@ function LeadershipPage() {
               {management.summary}
             </p>
           </div>
-          <p className="measure mt-8 text-sm leading-relaxed text-muted-foreground">
-            &nbsp;
-          </p>
         </Section>
       </div>
     </>
