@@ -64,8 +64,7 @@ function HomePage() {
               height={628}
             />
             <p className="mt-8 border-t border-rule pt-6 text-base leading-relaxed text-muted-foreground">
-              {society.brand} is the public-facing identity of the {society.name}, the Society
-              behind its educational and scientific work.
+              {' '}
             </p>
           </div>
         </div>
