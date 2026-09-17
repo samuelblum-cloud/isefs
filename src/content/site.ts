@@ -153,7 +153,7 @@ export const educationAreas = [
     summary:
       "A structured training pathway for surgeons seeking sustained, mentored experience.",
     detail:
-      "The pathway is under development. Entry requirements, duration and host centres are not yet defined, and no places are available or guaranteed at this stage.",
+      "The planned ISEFS fellowship will comprise four weeks of training, which may be distributed across approved host centres and completed within one year. Society membership will be a prerequisite. Detailed selection criteria and host arrangements are being developed; membership will not guarantee a placement.",
   },
   {
     title: "Webinars and educational resources",
