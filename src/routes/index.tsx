@@ -29,42 +29,42 @@ function HomePage() {
   return (
     <>
       <section className="border-b border-rule bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.25fr_1fr] lg:items-center">
+        <div className="container-page grid gap-16 py-16 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-24">
           <div className="fade-up">
-            <p className="eyebrow">{society.brand} · by {society.shortName}</p>
-            <h1 className="mt-5 text-[2.6rem] leading-[1.05] sm:text-6xl">{society.tagline}</h1>
-            <p className="measure mt-7 text-lg leading-relaxed text-muted-foreground">
-              {society.intro}
+            <p className="eyebrow">
+              {society.brand} · by {society.shortName}
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <h1 className="mt-5">{society.tagline}</h1>
+            <p className="measure mt-6 text-muted-foreground">{society.intro}</p>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                to="/membership"
-                hash="register"
-                className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
+                to="/education-and-science"
+                className="btn-primary no-underline"
               >
-                Register your interest
+                Explore education
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
               <Link
-                to="/education-and-science"
-                className="inline-flex items-center justify-center gap-2 rounded-sm border border-primary/25 px-6 py-3.5 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
+                to="/membership"
+                hash="register"
+                className="btn-secondary no-underline"
               >
-                Explore our educational programme
+                Register interest
               </Link>
             </div>
-            <p className="mt-8 text-sm text-muted-foreground">{society.status}</p>
+            <p className="mt-8 text-base text-muted-foreground">{society.status}</p>
           </div>
 
-          <div className="rounded-sm border border-rule bg-background p-8 sm:p-10">
+          <div className="rounded-sm border border-rule bg-background p-8 lg:p-12">
             <img
               src={endofaceLogo.url}
               alt="ENDOFACE by ISEFS — International Society for Endoscopic Facial Surgery logo"
-              className="h-auto w-full max-w-sm"
+              className="h-auto w-full"
               width={1920}
               height={628}
             />
-            <p className="mt-8 border-t border-rule pt-6 text-sm leading-relaxed text-muted-foreground">
-              {society.brand} is the public-facing programme of the {society.name}, the Society
+            <p className="mt-8 border-t border-rule pt-6 text-base leading-relaxed text-muted-foreground">
+              {society.brand} is the public-facing identity of the {society.name}, the Society
               behind its educational and scientific work.
             </p>
           </div>
@@ -87,7 +87,7 @@ function HomePage() {
             </p>
             <Link
               to="/about"
-              className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+              className="link-inline"
             >
               Read about our mission
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -103,14 +103,14 @@ function HomePage() {
             {educationAreas.map((area) => (
               <li key={area.title} className="bg-background p-7">
                 <StatusTag>{area.status}</StatusTag>
-                <h3 className="mt-4 text-lg">{area.title}</h3>
+                <h3 className="mt-4">{area.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{area.summary}</p>
               </li>
             ))}
           </ul>
           <Link
             to="/education-and-science"
-            className="mt-9 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            className="mt-9 link-inline"
           >
             See the full programme
             <ArrowRight className="h-4 w-4" aria-hidden />
@@ -122,13 +122,13 @@ function HomePage() {
         <div className="grid gap-10 rounded-sm border border-rule p-8 sm:p-12 lg:grid-cols-[1fr_1fr]">
           <div>
             <StatusTag>{announcement.confirmed ? "Announced" : "Planned"}</StatusTag>
-            <h2 className="mt-4 text-2xl sm:text-3xl">{announcement.heading}</h2>
+            <h2 className="mt-4">{announcement.heading}</h2>
             <p className="measure mt-5 text-base leading-relaxed text-muted-foreground">
               {announcement.body}
             </p>
           </div>
           <div className="rule-top pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <h3 className="text-lg">{announcement.courseName}</h3>
+            <h3>{announcement.courseName}</h3>
             <p className="mt-2 text-sm text-muted-foreground">
               {announcement.courseDates} · {announcement.courseLocation}
             </p>
@@ -139,7 +139,7 @@ function HomePage() {
               href={announcement.courseUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+              className="mt-6 link-inline"
             >
               Visit the official course website
               <ExternalLink className="h-4 w-4" aria-hidden />
@@ -155,17 +155,17 @@ function HomePage() {
             {founders.map((person) => (
               <div key={person.name} className="bg-background p-7">
                 <p className="eyebrow">{person.role}</p>
-                <p className="mt-3 font-display text-lg text-ink">{person.name}</p>
+                <p className="mt-3 text-lg font-semibold text-ink">{person.name}</p>
               </div>
             ))}
             <div className="bg-background p-7">
               <p className="eyebrow">{management.role}</p>
-              <p className="mt-3 font-display text-lg text-ink">{management.name}</p>
+              <p className="mt-3 text-lg font-semibold text-ink">{management.name}</p>
             </div>
           </div>
           <Link
             to="/leadership"
-            className="mt-9 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            className="mt-9 link-inline"
           >
             More about the Society's leadership
             <ArrowRight className="h-4 w-4" aria-hidden />
@@ -186,7 +186,7 @@ function HomePage() {
           <Link
             to="/membership"
             hash="register"
-            className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent lg:justify-self-start"
+            className="btn-primary no-underline lg:justify-self-start"
           >
             Register your interest
             <ArrowRight className="h-4 w-4" aria-hidden />

@@ -82,7 +82,7 @@ function AboutPage() {
           <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2">
             {principles.map((item) => (
               <div key={item.title} className="bg-background p-8">
-                <h3 className="text-lg">{item.title}</h3>
+                <h3>{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
               </div>
             ))}
@@ -117,7 +117,7 @@ function AboutPage() {
       <Section>
 
         <div className="rounded-sm border border-rule p-8 sm:p-12">
-          <h2 className="text-2xl">Current status</h2>
+          <h2>Current status</h2>
           <p className="measure mt-5 text-base leading-relaxed text-muted-foreground">
             The Society is currently being established. Its governing documents, formal
             registration and admission rules are being prepared, and this website will be updated
@@ -128,7 +128,7 @@ function AboutPage() {
           <Link
             to="/membership"
             hash="register"
-            className="mt-8 inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
+            className="btn-primary mt-8 no-underline"
           >
             Register your interest
           </Link>

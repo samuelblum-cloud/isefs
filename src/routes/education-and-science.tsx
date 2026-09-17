@@ -46,7 +46,7 @@ function EducationPage() {
         </ul>
 
         <div className="mt-12 rounded-sm bg-surface p-8">
-          <h2 className="text-lg">A note on what these activities are</h2>
+          <h2>A note on what these activities are</h2>
           <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">
             A scientific congress is a meeting for presenting and debating research. It is not the
             same as a course that includes surgical observation or laboratory teaching, which has
@@ -72,7 +72,7 @@ function EducationPage() {
             href={announcement.courseUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            className="mt-7 link-inline"
           >
             Visit the official course website
             <ExternalLink className="h-4 w-4" aria-hidden />
@@ -82,7 +82,7 @@ function EducationPage() {
 
       <Section>
         <div className="rounded-sm border border-rule p-8 sm:p-12">
-          <h2 className="text-2xl">Stay informed</h2>
+          <h2>Stay informed</h2>
           <p className="measure mt-4 text-base leading-relaxed text-muted-foreground">
             Register your interest to receive news about the Society, membership and upcoming
             educational activities as they are confirmed.
@@ -90,7 +90,7 @@ function EducationPage() {
           <Link
             to="/membership"
             hash="register"
-            className="mt-8 inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
+            className="btn-primary mt-8 no-underline"
           >
             Register your interest
           </Link>
