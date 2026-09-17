@@ -24,8 +24,6 @@ function BrandLockup() {
         src={isefsLogo.url}
         alt={`${society.shortName} — ${society.name}`}
         className="h-12 w-auto sm:h-14"
-        width={360}
-        height={96}
       />
       <span className="mt-1.5 text-xs font-semibold tracking-wide text-accent">
         Home of {society.brand}
