@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/Page";
-import { contactDetails, legalForm, legalStatus } from "@/content/site";
+import { contactDetails, legalForm, legalStatus, submissions } from "@/content/site";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -49,8 +49,9 @@ function PrivacyPage() {
               The International Society for Endoscopic Facial Surgery (ISEFS), being established as
               an association under Swiss law with its registered office in {legalForm.seat}, is
               responsible for the personal data collected through this website. Its management
-              office administers enquiries and interest registrations.
-              {contactDetails.email ? ` Contact: ${contactDetails.email}.` : ""}
+               office will administer enquiries and interest registrations once a responsible
+               contact has been confirmed.
+               {contactDetails.email ? ` Contact: ${contactDetails.email}.` : ""}
             </p>
           </div>
 
@@ -76,9 +77,9 @@ function PrivacyPage() {
           <div>
             <SectionTitle title="Who can see it" />
             <p className="mt-4 text-muted-foreground">
-              Submissions are stored privately and are not publicly readable. Access is limited to
-              the Society's management office and to service providers engaged to operate the
-              website and its communications on the Society's behalf.
+               When submissions open, they will be stored privately and will not be publicly
+               readable. Access arrangements for authorised management staff and the relevant
+               technical service providers must be confirmed before collection begins.
             </p>
           </div>
 
@@ -93,19 +94,25 @@ function PrivacyPage() {
           <div>
             <SectionTitle title="Your rights" />
             <p className="mt-4 text-muted-foreground">
-              You may ask for access to your data, for its correction or deletion, and you may
-              withdraw your consent to receive news at any time. Please use the contact form to
-              make such a request.
+               You may ask for access to your data, for its correction or deletion, and you may
+               withdraw your consent to receive news at any time. The approved contact route for
+               these requests will be published before submissions open.
             </p>
           </div>
 
           <div>
             <SectionTitle title="Cookies and analytics" />
             <p className="mt-4 text-muted-foreground">
-              This website does not use advertising cookies or third-party tracking. Fonts are
-              loaded from Google Fonts, which receives your IP address as part of that request.
+               This website does not use advertising cookies or third-party tracking. Its typeface
+               is served with the website rather than requested from Google Fonts.
             </p>
           </div>
+
+          {!submissions.available ? (
+            <p className="rounded-sm border border-rule bg-surface p-5 text-sm text-muted-foreground">
+              Online forms are currently unavailable and are not collecting personal data.
+            </p>
+          ) : null}
         </div>
       </Section>
     </>

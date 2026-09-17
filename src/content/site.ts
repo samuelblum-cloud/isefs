@@ -62,12 +62,12 @@ export const membershipCategories = [
     body: "Other professionals and scientists who support the purpose of the Society.",
   },
   {
-    title: "Resident, Trainee or Junior Members",
+    title: "Resident or Trainee Members",
     body: "Those in training, continuing education or at an early stage of their career.",
   },
   {
-    title: "Supporting, Partner or Corporate Members",
-    body: "Individuals, institutions and organisations supporting the Society in kind, organisationally or financially.",
+    title: "Corporate Partners",
+    body: "Institutions and organisations that support the Society's purpose under terms still to be defined in the membership rules.",
   },
   {
     title: "Honorary Members",
@@ -79,7 +79,7 @@ export const membershipCategories = [
  * Admission principles from Article 5 of the draft Articles of Association.
  */
 export const admissionNotes = [
-  "Admission requires a written or electronic application; the Board, or a membership committee appointed by it, decides on admission.",
+  "Applications will undergo professional review by the Credentials and Membership Committee. The Committee will make recommendations to the Board, which will decide on admission. The management office will administer the process and communicate the decision.",
   "The Board may set professional, personal and ethical admission criteria in the membership regulations.",
   "There is no entitlement to membership, and applications may be declined.",
   "Membership, a title or a member mark is not a confirmation of independently assessed clinical competence, nor an endorsement of any particular practice.",
@@ -97,6 +97,12 @@ export const contactDetails = {
   registrationNumber: null as string | null,
 } as const;
 
+export const submissions = {
+  available: false,
+  unavailableMessage:
+    "Online submissions are not yet available while the Society confirms its responsible contact and receiving process.",
+} as const;
+
 /**
  * Legal and privacy pages are drafts awaiting owner approval.
  * Set to true once the approved text has been inserted.
@@ -112,14 +118,13 @@ export const legalStatus = {
  */
 export const announcement = {
   confirmed: false,
-  heading: "A Society announcement is planned for October 2026",
-  body: "According to current planning, the establishment of the International Society for Endoscopic Facial Surgery is to be announced at the gala evening on 16 October 2026, during the Endo Face Masters course in Barcelona. Details remain subject to confirmation.",
-  courseName: "Endo Face Masters",
+  heading: "The Society announcement is planned for 16 October 2026",
+  body: "The Society announcement is planned for the gala evening on 16 October 2026 during ENDOFACE Masters in Barcelona. The course takes place from 15 to 17 October.",
+  courseName: "ENDOFACE Masters",
   courseDates: "15–17 October 2026",
   courseLocation: "Barcelona, Spain",
   courseUrl: "https://www.endofacemasters.com/",
-  courseNote:
-    "Endo Face Masters is an independent course. ISEFS neither organises nor owns the event. Programme, registration and attendance information is published on the official course website.",
+  courseNote: "Visit the official event website for programme and registration information.",
 } as const;
 
 export const educationAreas = [
@@ -153,7 +158,7 @@ export const educationAreas = [
     summary:
       "A structured training pathway for surgeons seeking sustained, mentored experience.",
     detail:
-      "The pathway is under development. Entry requirements, duration and host centres are not yet defined, and no places are available or guaranteed at this stage.",
+      "The planned ISEFS fellowship will comprise four weeks of training, which may be distributed across approved host centres within one year. Society membership will be a prerequisite. Detailed selection criteria and host arrangements are being developed; membership will not guarantee a placement.",
   },
   {
     title: "Webinars and educational resources",
@@ -192,7 +197,7 @@ export const management = {
   name: "Samuel Blum",
   role: "Managing Director",
   summary:
-    "Responsible for the management of the Society and for operational implementation, including administration, coordination of activities and the Society's secretariat.",
+    "Samuel Blum leads the Society’s day-to-day operations and implementation of its programme. His responsibilities include member administration, provider management, communications, digital platforms and reporting to the Board. Executive management and secretariat responsibilities are combined in this role. The Board retains strategic oversight and reserved decisions; the founders and academic leads remain responsible for scientific content and professional assessment.",
 } as const;
 
 export const membershipValue = [
