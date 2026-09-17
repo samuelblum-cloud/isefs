@@ -2,7 +2,7 @@
 
 ## Phase 1 — Public website (target 16 October 2026, review by 9 October)
 - [x] Brand system from approved logo (navy/teal/white/pale grey), editorial typography, reduced-motion support
-- [x] Header with public ENDOFACE by ISEFS text treatment + nav + "Register your interest"
+- [x] Header with the approved ISEFS logo only + nav + "Register your interest", per owner direction
 - [x] Pages: Home, About, Education & Science, Membership, Leadership, Contact
 - [x] Draft Privacy and Legal pages, marked for owner approval, out of main nav
 - [ ] Interest registration form prepared but server-disabled pending responsible contact and receiving process
