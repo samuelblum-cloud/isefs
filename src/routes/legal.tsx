@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/Page";
-import { announcement, contactDetails, legalForm, legalStatus, society } from "@/content/site";
+import { contactDetails, legalForm, legalStatus, society } from "@/content/site";
 
 export const Route = createFileRoute("/legal")({
   head: () => ({
@@ -13,11 +13,17 @@ export const Route = createFileRoute("/legal")({
           "Legal information about the International Society for Endoscopic Facial Surgery, its status, and the use of this website.",
       },
       { property: "og:title", content: "Legal information — ISEFS" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://isefs.lovable.app/legal" },
       {
         property: "og:description",
         content: "Status, responsibility and terms of use for the ISEFS website.",
       },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Legal information — ISEFS" },
+      { name: "twitter:description", content: "Status, responsibility and terms of use for the ISEFS website." },
     ],
+    links: [{ rel: "canonical", href: "https://isefs.lovable.app/legal" }],
   }),
   component: LegalPage,
 });
@@ -62,11 +68,6 @@ function LegalPage() {
               offer of membership, a guarantee of any place on a programme, or a commitment to a
               particular benefit. Activities and dates require approval by the Society's Board.
             </p>
-          </div>
-
-          <div>
-            <SectionTitle title="Independent events" />
-            <p className="mt-4 text-muted-foreground">{announcement.courseNote}</p>
           </div>
 
           <div>

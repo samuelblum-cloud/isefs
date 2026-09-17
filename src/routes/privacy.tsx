@@ -13,11 +13,17 @@ export const Route = createFileRoute("/privacy")({
           "How the International Society for Endoscopic Facial Surgery handles personal data submitted through its interest registration and contact forms.",
       },
       { property: "og:title", content: "Privacy information — ISEFS" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://isefs.lovable.app/privacy" },
       {
         property: "og:description",
         content: "How ISEFS handles personal data submitted through its website forms.",
       },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Privacy information — ISEFS" },
+      { name: "twitter:description", content: "How ISEFS handles personal data submitted through its website." },
     ],
+    links: [{ rel: "canonical", href: "https://isefs.lovable.app/privacy" }],
   }),
   component: PrivacyPage,
 });

@@ -14,12 +14,21 @@ export const Route = createFileRoute("/contact")({
           "Write to the International Society for Endoscopic Facial Surgery about membership, education, scientific collaboration or partnership.",
       },
       { property: "og:title", content: "Contact — ISEFS" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://isefs.lovable.app/contact" },
       {
         property: "og:description",
         content:
           "Send an enquiry to the Society's management office about membership, education or collaboration.",
       },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Contact — ISEFS" },
+      {
+        name: "twitter:description",
+        content: "Contact information for the International Society for Endoscopic Facial Surgery.",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://isefs.lovable.app/contact" }],
   }),
   component: ContactPage,
 });
