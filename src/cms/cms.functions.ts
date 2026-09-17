@@ -210,5 +210,5 @@ export const bootstrapCms = createServerFn({ method: "POST" })
       }
     }
 
-    return { created: true, pages: defaultCmsPages.length };
+    return { created: createdCount > 0, pages: (count ?? 0) + createdCount };
   });
