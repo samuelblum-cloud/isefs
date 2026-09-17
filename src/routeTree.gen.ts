@@ -19,6 +19,7 @@ import { Route as LegalRouteImport } from './routes/legal'
 import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminCmsConceptRouteImport } from './routes/admin/cms-concept'
 import { Route as AdminDemoRouteImport } from './routes/admin/demo'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminRegisterRouteImport } from './routes/admin/register'
@@ -73,6 +74,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminCmsConceptRoute = AdminCmsConceptRouteImport.update({
+  id: '/admin/cms-concept',
+  path: '/admin/cms-concept',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminDemoRoute = AdminDemoRouteImport.update({
   id: '/admin/demo',
   path: '/admin/demo',
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/cms-concept': typeof AdminCmsConceptRoute
   '/admin/demo': typeof AdminDemoRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/register': typeof AdminRegisterRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByTo {
   '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/cms-concept': typeof AdminCmsConceptRoute
   '/admin/demo': typeof AdminDemoRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/register': typeof AdminRegisterRoute
@@ -130,6 +138,7 @@ export interface FileRoutesById {
   '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/cms-concept': typeof AdminCmsConceptRoute
   '/admin/demo': typeof AdminDemoRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/register': typeof AdminRegisterRoute
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/membership'
     | '/privacy'
+    | '/admin/cms-concept'
     | '/admin/demo'
     | '/admin/login'
     | '/admin/register'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/membership'
     | '/privacy'
+    | '/admin/cms-concept'
     | '/admin/demo'
     | '/admin/login'
     | '/admin/register'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/membership'
     | '/privacy'
+    | '/admin/cms-concept'
     | '/admin/demo'
     | '/admin/login'
     | '/admin/register'
@@ -193,6 +205,7 @@ export interface RootRouteChildren {
   LegalRoute: typeof LegalRoute
   MembershipRoute: typeof MembershipRoute
   PrivacyRoute: typeof PrivacyRoute
+  AdminCmsConceptRoute: typeof AdminCmsConceptRoute
   AdminDemoRoute: typeof AdminDemoRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminRegisterRoute: typeof AdminRegisterRoute
@@ -271,6 +284,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/cms-concept': {
+      id: '/admin/cms-concept'
+      path: '/admin/cms-concept'
+      fullPath: '/admin/cms-concept'
+      preLoaderRoute: typeof AdminCmsConceptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/demo': {
       id: '/admin/demo'
       path: '/admin/demo'
@@ -305,6 +325,7 @@ const rootRouteChildren: RootRouteChildren = {
   LegalRoute: LegalRoute,
   MembershipRoute: MembershipRoute,
   PrivacyRoute: PrivacyRoute,
+  AdminCmsConceptRoute: AdminCmsConceptRoute,
   AdminDemoRoute: AdminDemoRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminRegisterRoute: AdminRegisterRoute,

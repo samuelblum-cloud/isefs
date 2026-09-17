@@ -1,18 +1,12 @@
 import { useNavigate } from "@tanstack/react-router";
 import {
-  ArrowDown,
-  ArrowUp,
-  Copy,
-  Eye,
   FileText,
   Image,
   Inbox,
   LayoutDashboard,
   LogOut,
-  Plus,
   RefreshCw,
   Save,
-  Send,
   ShieldCheck,
   Upload,
   Users,
@@ -26,434 +20,21 @@ import { isefsLogoUrl } from "@/content/assets";
 import type { Json, Tables } from "@/integrations/supabase/types";
 
 import {
-  createCmsPage,
   loadCmsAdminSnapshot,
-  publishCmsPage,
-  restoreCmsPageVersion,
-  saveCmsDraft,
   setCmsAdminInvitation,
   signOutCms,
   updateRegistration,
   uploadCmsMedia,
-  type CmsAdminPage,
   type CmsAdminSnapshot,
 } from "./admin-api";
-import {
-  cmsBlockDefinitionMap,
-  cmsBlockDefinitions,
-  cloneDefaultBlockData,
-} from "./block-definitions";
-import { CmsFieldEditor } from "./CmsFieldEditor";
-import { CmsPageRenderer } from "./CmsPageRenderer";
-import type { CmsBlockType, CmsContentBlock } from "./types";
+import { CmsPageWorkspace, type CmsWorkspaceView } from "./CmsPageWorkspace";
 
-type AdminView = "dashboard" | "pages" | "media" | "registrations" | "enquiries" | "access";
-
-function clone<T>(value: T): T {
-  return structuredClone(value);
-}
+type AdminView = CmsWorkspaceView;
 
 function formatDate(value: string | null | undefined) {
   if (!value) return "—";
   return new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short" }).format(
     new Date(value),
-  );
-}
-
-function PageEditor({
-  source,
-  onSaved,
-  demo,
-  canPublish,
-}: {
-  source: CmsAdminPage;
-  onSaved: () => Promise<void>;
-  demo: boolean;
-  canPublish: boolean;
-}) {
-  const [page, setPage] = useState(() => clone(source));
-  const [selectedBlockId, setSelectedBlockId] = useState(source.blocks[0]?.id ?? "");
-  const [preview, setPreview] = useState(false);
-  const [busy, setBusy] = useState("");
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    setPage(clone(source));
-    setSelectedBlockId(source.blocks[0]?.id ?? "");
-  }, [source]);
-
-  const selectedBlock = page.blocks.find((block) => block.id === selectedBlockId);
-
-  function updateBlock(next: CmsContentBlock) {
-    setPage((current) => ({
-      ...current,
-      blocks: current.blocks.map((block) => (block.id === next.id ? next : block)),
-    }));
-  }
-
-  function addBlock(type: CmsBlockType) {
-    const definition = cmsBlockDefinitionMap[type];
-    const block: CmsContentBlock = {
-      id: crypto.randomUUID(),
-      pageVersionId: page.versionId,
-      type,
-      internalName: definition.label,
-      position: page.blocks.length,
-      visible: true,
-      data: cloneDefaultBlockData(type),
-    };
-    setPage((current) => ({ ...current, blocks: [...current.blocks, block] }));
-    setSelectedBlockId(block.id);
-  }
-
-  function moveBlock(index: number, direction: -1 | 1) {
-    const target = index + direction;
-    if (target < 0 || target >= page.blocks.length) return;
-    const blocks = clone(page.blocks);
-    [blocks[index], blocks[target]] = [blocks[target]!, blocks[index]!];
-    setPage({ ...page, blocks: blocks.map((block, position) => ({ ...block, position })) });
-  }
-
-  function duplicateBlock(block: CmsContentBlock) {
-    const copy = {
-      ...clone(block),
-      id: crypto.randomUUID(),
-      internalName: `${block.internalName} copy`,
-      position: page.blocks.length,
-    };
-    setPage((current) => ({ ...current, blocks: [...current.blocks, copy] }));
-    setSelectedBlockId(copy.id);
-  }
-
-  async function save() {
-    setBusy("save");
-    setMessage("");
-    try {
-      if (!demo) await saveCmsDraft(page);
-      setMessage(demo ? "Demo draft updated locally." : "Draft saved.");
-      if (!demo) await onSaved();
-    } catch (cause) {
-      setMessage(cause instanceof Error ? cause.message : "Could not save the draft.");
-    } finally {
-      setBusy("");
-    }
-  }
-
-  async function publish() {
-    if (
-      !window.confirm(
-        "Publish this draft to the public website? The current published version will remain in history.",
-      )
-    )
-      return;
-    setBusy("publish");
-    setMessage("");
-    try {
-      if (!demo) {
-        await saveCmsDraft(page);
-        await publishCmsPage(page.pageId);
-        await onSaved();
-      }
-      setMessage(
-        demo ? "Publishing is disabled in demo mode." : "Page published and a new draft created.",
-      );
-    } catch (cause) {
-      setMessage(cause instanceof Error ? cause.message : "Could not publish the page.");
-    } finally {
-      setBusy("");
-    }
-  }
-
-  async function restoreVersion(versionId: string, versionNumber: number) {
-    if (
-      !window.confirm(
-        `Restore version ${versionNumber} as a new draft? Your current draft will be replaced.`,
-      )
-    )
-      return;
-    setBusy(`restore-${versionId}`);
-    setMessage("");
-    try {
-      if (!demo) {
-        await restoreCmsPageVersion(page.pageId, versionId);
-        await onSaved();
-      }
-      setMessage(
-        demo
-          ? "Restoring is disabled in demo mode."
-          : `Version ${versionNumber} restored as a new draft.`,
-      );
-    } catch (cause) {
-      setMessage(cause instanceof Error ? cause.message : "Could not restore this version.");
-    } finally {
-      setBusy("");
-    }
-  }
-
-  const previewDocument = { ...page, status: "draft" as const };
-
-  return (
-    <div className="grid min-h-0 flex-1 xl:grid-cols-[440px_1fr]">
-      <div
-        className={`${preview ? "hidden xl:block" : "block"} border-r border-rule bg-background`}
-      >
-        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 border-b border-rule bg-background p-4">
-          <div>
-            <p className="text-sm font-semibold text-foreground">{page.internalName}</p>
-            <p className="text-xs text-muted-foreground">
-              Draft v{page.versionNumber} · Published v{page.publishedVersionNumber ?? "—"}
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              className="btn-secondary min-h-10 px-3 text-sm xl:hidden"
-              onClick={() => setPreview((value) => !value)}
-            >
-              <Eye className="h-4 w-4" /> Preview
-            </button>
-            <button
-              type="button"
-              className="btn-secondary min-h-10 px-3 text-sm"
-              onClick={save}
-              disabled={Boolean(busy)}
-            >
-              <Save className="h-4 w-4" /> {busy === "save" ? "Saving…" : "Save"}
-            </button>
-            {canPublish ? (
-              <button
-                type="button"
-                className="btn-primary min-h-10 px-3 text-sm"
-                onClick={publish}
-                disabled={Boolean(busy)}
-              >
-                <Send className="h-4 w-4" /> {busy === "publish" ? "Publishing…" : "Publish"}
-              </button>
-            ) : null}
-          </div>
-          {message ? (
-            <p className="w-full rounded-sm bg-surface p-2 text-xs text-muted-foreground">
-              {message}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="space-y-7 p-5">
-          <details className="rounded-sm border border-rule p-4" open>
-            <summary className="cursor-pointer text-sm font-semibold text-foreground">
-              Page settings
-            </summary>
-            <div className="mt-5 space-y-4">
-              <div>
-                <Label htmlFor="page-title">Internal page title</Label>
-                <Input
-                  id="page-title"
-                  className="mt-2 h-11"
-                  value={page.pageTitle}
-                  onChange={(event) => setPage({ ...page, pageTitle: event.target.value })}
-                />
-              </div>
-              <div>
-                <Label htmlFor="meta-title">Browser and search title</Label>
-                <Input
-                  id="meta-title"
-                  className="mt-2 h-11"
-                  value={page.metaTitle}
-                  onChange={(event) => setPage({ ...page, metaTitle: event.target.value })}
-                />
-              </div>
-              <div>
-                <Label htmlFor="meta-description">Search description</Label>
-                <Textarea
-                  id="meta-description"
-                  className="mt-2"
-                  value={page.metaDescription}
-                  onChange={(event) => setPage({ ...page, metaDescription: event.target.value })}
-                />
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Public URL: /{page.slug === "home" ? "" : page.slug}
-              </p>
-            </div>
-          </details>
-
-          <details className="rounded-sm border border-rule p-4">
-            <summary className="cursor-pointer text-sm font-semibold text-foreground">
-              Version history
-            </summary>
-            <div className="mt-4 space-y-2">
-              {page.versions.map((version) => (
-                <div
-                  key={version.id}
-                  className="flex items-center justify-between gap-3 border-t border-rule pt-3 text-xs"
-                >
-                  <div>
-                    <p className="font-semibold text-foreground">
-                      Version {version.versionNumber} · {version.status}
-                    </p>
-                    <p className="mt-1 text-muted-foreground">
-                      {formatDate(version.publishedAt ?? version.createdAt)}
-                    </p>
-                  </div>
-                  {version.status !== "draft" ? (
-                    <button
-                      type="button"
-                      className="btn-secondary min-h-9 px-3 text-xs"
-                      disabled={Boolean(busy)}
-                      onClick={() => restoreVersion(version.id, version.versionNumber)}
-                    >
-                      {busy === `restore-${version.id}` ? "Restoring…" : "Restore as draft"}
-                    </button>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </details>
-
-          <div>
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-sm font-semibold text-foreground">Page blocks</p>
-                <p className="text-xs text-muted-foreground">
-                  Select, reorder, duplicate or hide content.
-                </p>
-              </div>
-              <select
-                aria-label="Add a content block"
-                className="h-10 max-w-44 rounded-sm border border-input bg-background px-2 text-sm"
-                value=""
-                onChange={(event) => {
-                  if (event.target.value) addBlock(event.target.value as CmsBlockType);
-                }}
-              >
-                <option value="">Add block…</option>
-                {cmsBlockDefinitions.map((definition) => (
-                  <option key={definition.type} value={definition.type}>
-                    {definition.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mt-4 space-y-2">
-              {page.blocks.map((block, index) => (
-                <div
-                  key={block.id}
-                  className={`flex items-center gap-2 rounded-sm border p-2 ${selectedBlockId === block.id ? "border-primary bg-highlight" : "border-rule"}`}
-                >
-                  <button
-                    type="button"
-                    className="min-w-0 flex-1 text-left"
-                    onClick={() => setSelectedBlockId(block.id)}
-                  >
-                    <span className="block truncate text-sm font-semibold text-foreground">
-                      {block.internalName}
-                    </span>
-                    <span className="block text-xs text-muted-foreground">
-                      {cmsBlockDefinitionMap[block.type]?.label ?? block.type}
-                      {block.visible ? "" : " · hidden"}
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    className="rounded-sm p-2 hover:bg-surface"
-                    onClick={() => moveBlock(index, -1)}
-                    aria-label="Move block up"
-                  >
-                    <ArrowUp className="h-4 w-4" />
-                  </button>
-                  <button
-                    type="button"
-                    className="rounded-sm p-2 hover:bg-surface"
-                    onClick={() => moveBlock(index, 1)}
-                    aria-label="Move block down"
-                  >
-                    <ArrowDown className="h-4 w-4" />
-                  </button>
-                  <button
-                    type="button"
-                    className="rounded-sm p-2 hover:bg-surface"
-                    onClick={() => duplicateBlock(block)}
-                    aria-label="Duplicate block"
-                  >
-                    <Copy className="h-4 w-4" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {selectedBlock ? (
-            <div className="border-t border-rule pt-6">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Edit block</p>
-                  <p className="text-xs text-muted-foreground">
-                    {cmsBlockDefinitionMap[selectedBlock.type].description}
-                  </p>
-                </div>
-                <label className="flex items-center gap-2 text-xs font-semibold">
-                  <input
-                    type="checkbox"
-                    checked={selectedBlock.visible}
-                    onChange={(event) =>
-                      updateBlock({ ...selectedBlock, visible: event.target.checked })
-                    }
-                  />{" "}
-                  Visible
-                </label>
-              </div>
-              <div className="mt-5">
-                <Label htmlFor="block-name">Internal name</Label>
-                <Input
-                  id="block-name"
-                  className="mt-2 h-11"
-                  value={selectedBlock.internalName}
-                  onChange={(event) =>
-                    updateBlock({ ...selectedBlock, internalName: event.target.value })
-                  }
-                />
-              </div>
-              <div className="mt-5">
-                <CmsFieldEditor
-                  fields={cmsBlockDefinitionMap[selectedBlock.type].fields}
-                  value={selectedBlock.data}
-                  onChange={(data) => updateBlock({ ...selectedBlock, data })}
-                />
-              </div>
-            </div>
-          ) : null}
-        </div>
-      </div>
-
-      <div className={`${preview ? "block" : "hidden"} min-w-0 bg-surface xl:block`}>
-        <div className="sticky top-0 z-10 flex h-14 items-center justify-between border-b border-rule bg-background px-5">
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              className="btn-secondary min-h-9 px-3 text-xs xl:hidden"
-              onClick={() => setPreview(false)}
-            >
-              Back to editor
-            </button>
-            <div>
-              <p className="text-sm font-semibold text-foreground">Draft preview</p>
-              <p className="text-xs text-muted-foreground">Real ISEFS layout · unpublished</p>
-            </div>
-          </div>
-          <a
-            href={page.slug === "home" ? "/" : `/${page.slug}`}
-            target="_blank"
-            rel="noreferrer"
-            className="link-inline text-sm"
-          >
-            Open published page
-          </a>
-        </div>
-        <div className="max-h-[calc(100vh-3.5rem)] overflow-y-auto bg-background">
-          <CmsPageRenderer page={previewDocument} />
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -969,8 +550,6 @@ export function CmsAdminApp({
   const [selectedPageId, setSelectedPageId] = useState(initialSnapshot?.pages[0]?.pageId ?? "");
   const [loading, setLoading] = useState(!initialSnapshot);
   const [error, setError] = useState("");
-  const [createOpen, setCreateOpen] = useState(false);
-  const [newPage, setNewPage] = useState({ slug: "", internalName: "", title: "" });
 
   const reload = useCallback(async () => {
     if (demo) return;
@@ -997,18 +576,6 @@ export function CmsAdminApp({
     () => snapshot?.pages.find((page) => page.pageId === selectedPageId) ?? snapshot?.pages[0],
     [snapshot, selectedPageId],
   );
-
-  async function handleCreatePage(event: React.FormEvent) {
-    event.preventDefault();
-    try {
-      if (!demo) await createCmsPage(newPage.slug, newPage.internalName, newPage.title);
-      setCreateOpen(false);
-      setNewPage({ slug: "", internalName: "", title: "" });
-      if (!demo) await reload();
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Could not create the page.");
-    }
-  }
 
   if (loading)
     return (
@@ -1042,6 +609,27 @@ export function CmsAdminApp({
       ? [{ id: "access" as const, label: "Access", icon: ShieldCheck }]
       : []),
   ];
+
+  if (view === "pages" && selectedPage) {
+    return (
+      <CmsPageWorkspace
+        key={`${selectedPage.pageId}-${selectedPage.versionId}`}
+        source={selectedPage}
+        pages={snapshot.pages}
+        media={snapshot.media}
+        userEmail={snapshot.userEmail}
+        owner={snapshot.role === "owner"}
+        demo={demo}
+        onReload={reload}
+        onSelectPage={setSelectedPageId}
+        onChangeView={setView}
+        onSignOut={async () => {
+          if (!demo) await signOutCms();
+          await navigate({ to: "/admin/login" });
+        }}
+      />
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-surface">
@@ -1110,74 +698,6 @@ export function CmsAdminApp({
           </div>
         ) : null}
         {view === "dashboard" ? <Dashboard snapshot={snapshot} setView={setView} /> : null}
-        {view === "pages" ? (
-          <div className="flex min-h-[calc(100vh-4rem)] flex-col">
-            <div className="flex flex-wrap items-center gap-3 border-b border-rule bg-background px-4 py-3">
-              <select
-                className="h-11 min-w-60 rounded-sm border border-input bg-background px-3 text-sm"
-                value={selectedPage?.pageId ?? ""}
-                onChange={(event) => setSelectedPageId(event.target.value)}
-              >
-                {snapshot.pages.map((page) => (
-                  <option key={page.pageId} value={page.pageId}>
-                    {page.internalName} · /{page.slug === "home" ? "" : page.slug}
-                  </option>
-                ))}
-              </select>
-              <button
-                type="button"
-                className="btn-secondary min-h-11 px-4 text-sm"
-                onClick={() => setCreateOpen((value) => !value)}
-              >
-                <Plus className="h-4 w-4" /> New page
-              </button>
-            </div>
-            {createOpen ? (
-              <form
-                onSubmit={handleCreatePage}
-                className="grid gap-3 border-b border-rule bg-highlight p-4 md:grid-cols-[1fr_1fr_1fr_auto]"
-              >
-                <Input
-                  required
-                  placeholder="URL slug"
-                  value={newPage.slug}
-                  onChange={(event) =>
-                    setNewPage({
-                      ...newPage,
-                      slug: event.target.value.toLowerCase().replace(/[^a-z0-9-]+/g, "-"),
-                    })
-                  }
-                />
-                <Input
-                  required
-                  placeholder="Internal name"
-                  value={newPage.internalName}
-                  onChange={(event) => setNewPage({ ...newPage, internalName: event.target.value })}
-                />
-                <Input
-                  required
-                  placeholder="Page title"
-                  value={newPage.title}
-                  onChange={(event) => setNewPage({ ...newPage, title: event.target.value })}
-                />
-                <button type="submit" className="btn-primary min-h-10 px-4 text-sm">
-                  Create draft
-                </button>
-              </form>
-            ) : null}
-            {selectedPage ? (
-              <PageEditor
-                key={`${selectedPage.pageId}-${selectedPage.versionId}`}
-                source={selectedPage}
-                onSaved={reload}
-                demo={demo}
-                canPublish={snapshot.role === "owner"}
-              />
-            ) : (
-              <div className="p-8 text-sm text-muted-foreground">No pages available.</div>
-            )}
-          </div>
-        ) : null}
         {view === "media" ? <MediaManager snapshot={snapshot} reload={reload} demo={demo} /> : null}
         {view === "registrations" ? (
           <InboxManager

@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CmsAdminApp } from "@/cms/CmsAdminApp";
 import { defaultCmsPages } from "@/cms/default-pages";
 import type { CmsAdminSnapshot } from "@/cms/admin-api";
+import { endofaceLogoUrl } from "@/content/assets";
 
 export const Route = createFileRoute("/admin/demo")({
   head: () => ({ meta: [{ title: "ISEFS CMS design preview" }] }),
@@ -51,7 +52,26 @@ const demoSnapshot: CmsAdminSnapshot = {
       data: block.data,
     })),
   })),
-  media: [],
+  media: [
+    {
+      id: "media-endoface-logo",
+      storage_path: "identity/endoface-logo.webp",
+      public_url: endofaceLogoUrl,
+      file_name: "endoface-logo.webp",
+      mime_type: "image/webp",
+      title: "ENDOFACE by ISEFS logo",
+      alt_text: "ENDOFACE by ISEFS — International Society for Endoscopic Facial Surgery logo",
+      caption: "ENDOFACE by ISEFS",
+      rights_holder: "ISEFS",
+      rights_note: "ISEFS identity asset",
+      focal_x: 0.5,
+      focal_y: 0.5,
+      is_public: true,
+      uploaded_by: "local-design-preview",
+      created_at: "2026-09-17T11:00:00.000Z",
+      updated_at: "2026-09-17T11:00:00.000Z",
+    },
+  ],
   registrations: [],
   enquiries: [],
   invitations: [

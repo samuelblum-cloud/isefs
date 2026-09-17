@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp, Plus, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import type { Json } from "@/integrations/supabase/types";
+import type { Json, Tables } from "@/integrations/supabase/types";
 
 import type { CmsFieldDefinition } from "./types";
 
@@ -21,10 +21,12 @@ export function CmsFieldEditor({
   fields,
   value,
   onChange,
+  media = [],
 }: {
   fields: CmsFieldDefinition[];
   value: CmsFormData;
   onChange: (value: CmsFormData) => void;
+  media?: Tables<"cms_media_assets">[];
 }) {
   const setField = (key: string, next: Json | undefined) => onChange({ ...value, [key]: next });
 
@@ -231,6 +233,7 @@ export function CmsFieldEditor({
                     <CmsFieldEditor
                       fields={field.itemFields ?? []}
                       value={item}
+                      media={media}
                       onChange={(nextItem) => {
                         const next = clone(items);
                         next[index] = nextItem;
@@ -293,6 +296,35 @@ export function CmsFieldEditor({
               }
               className="mt-2 h-11"
             />
+            {field.kind === "url" &&
+            /image|media|document|file/i.test(field.key) &&
+            media.length ? (
+              <select
+                aria-label={`Choose ${field.label.toLowerCase()} from the media library`}
+                className="mt-2 h-11 w-full rounded-sm border border-input bg-background px-3 text-sm"
+                value=""
+                onChange={(event) => {
+                  const asset = media.find((candidate) => candidate.id === event.target.value);
+                  if (!asset) return;
+                  const next: CmsFormData = { ...value, [field.key]: asset.public_url };
+                  if (field.key.toLowerCase().includes("image")) {
+                    if ("imageAlt" in value) next["imageAlt"] = asset.alt_text;
+                    if ("caption" in value && !value["caption"]) next["caption"] = asset.caption;
+                    if ("rightsHolder" in value && !value["rightsHolder"]) {
+                      next["rightsHolder"] = asset.rights_holder;
+                    }
+                  }
+                  onChange(next);
+                }}
+              >
+                <option value="">Choose from media library…</option>
+                {media.map((asset) => (
+                  <option key={asset.id} value={asset.id}>
+                    {asset.title || asset.file_name}
+                  </option>
+                ))}
+              </select>
+            ) : null}
             {field.help ? <p className="mt-1 text-xs text-muted-foreground">{field.help}</p> : null}
           </div>
         );
