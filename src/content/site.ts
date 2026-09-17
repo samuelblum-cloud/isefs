@@ -79,7 +79,7 @@ export const membershipCategories = [
  * Admission principles from Article 5 of the draft Articles of Association.
  */
 export const admissionNotes = [
-  "Admission requires a written or electronic application; the Board, or a membership committee appointed by it, decides on admission.",
+  "Applications will undergo professional review by the Credentials and Membership Committee. The Committee will make recommendations to the Board, which will decide on admission. The management office will administer the process and communicate the decision.",
   "The Board may set professional, personal and ethical admission criteria in the membership regulations.",
   "There is no entitlement to membership, and applications may be declined.",
   "Membership, a title or a member mark is not a confirmation of independently assessed clinical competence, nor an endorsement of any particular practice.",
