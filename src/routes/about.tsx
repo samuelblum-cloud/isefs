@@ -13,21 +13,12 @@ export const Route = createFileRoute("/about")({
           "ISEFS connects an international professional community through structured education, practical learning, discussion of outcomes and scientific collaboration.",
       },
       { property: "og:title", content: "About the Society — ISEFS" },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://isefs.lovable.app/about" },
       {
         property: "og:description",
         content:
           "The mission of the International Society for Endoscopic Facial Surgery, currently being established.",
       },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "About the Society — ISEFS" },
-      {
-        name: "twitter:description",
-        content: "The mission of the International Society for Endoscopic Facial Surgery, currently being established.",
-      },
     ],
-    links: [{ rel: "canonical", href: "https://isefs.lovable.app/about" }],
   }),
   component: AboutPage,
 });

@@ -13,17 +13,11 @@ export const Route = createFileRoute("/leadership")({
           "The scientific founders of ISEFS and the Managing Director responsible for Society management and operational implementation.",
       },
       { property: "og:title", content: "Leadership — ISEFS" },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://isefs.lovable.app/leadership" },
       {
         property: "og:description",
         content: "Scientific leadership and operational management of the Society.",
       },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Leadership — ISEFS" },
-      { name: "twitter:description", content: "Scientific leadership and operational management of the Society." },
     ],
-    links: [{ rel: "canonical", href: "https://isefs.lovable.app/leadership" }],
   }),
   component: LeadershipPage,
 });
@@ -48,9 +42,10 @@ function LeadershipPage() {
           ))}
         </ul>
         <p className="measure mt-8 text-sm leading-relaxed text-muted-foreground">
-          The scientific founders and academic leads remain responsible for scientific content and
-          professional assessment. This page presents the Society's scientific founders and
-          executive management; it is not a complete Board roster.
+          The scientific founders lead the Society's academic direction. Committee appointments and
+          further Board roles are being prepared as part of the Society's establishment and are not
+          yet confirmed. Biographies and photographs will be published once approved by each
+          individual.
         </p>
       </Section>
 
@@ -64,6 +59,11 @@ function LeadershipPage() {
               {management.summary}
             </p>
           </div>
+          <p className="measure mt-8 text-sm leading-relaxed text-muted-foreground">
+            Executive management and secretariat responsibilities are held within this single
+            Managing Director role. Scientific direction remains with the Society's scientific
+            leadership.
+          </p>
         </Section>
       </div>
     </>

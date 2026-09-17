@@ -14,21 +14,12 @@ export const Route = createFileRoute("/education-and-science")({
           "Congress, monographic courses, practical laboratories, a fellowship pathway under development, webinars and planned scientific collaboration.",
       },
       { property: "og:title", content: "Education & Science — ISEFS" },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://isefs.lovable.app/education-and-science" },
       {
         property: "og:description",
         content:
           "The educational and scientific activities of the International Society for Endoscopic Facial Surgery.",
       },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Education & Science — ISEFS" },
-      {
-        name: "twitter:description",
-        content: "The educational and scientific activities of the International Society for Endoscopic Facial Surgery.",
-      },
     ],
-    links: [{ rel: "canonical", href: "https://isefs.lovable.app/education-and-science" }],
   }),
   component: EducationPage,
 });
@@ -63,8 +54,9 @@ function EducationPage() {
             The Society will publish the specific conditions for each activity when it is confirmed.
           </p>
           <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">
-            Programme details and participation conditions will be published as they are confirmed.
-            Planned activities are not yet available to book.
+            No dates, locations, faculty appointments or booking options are published until they
+            are confirmed. ISEFS does not currently offer guaranteed fellowship places, CME credits
+            or professional certification.
           </p>
         </div>
       </Section>

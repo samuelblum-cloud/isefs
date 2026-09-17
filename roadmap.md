@@ -1,15 +1,15 @@
 # ISEFS roadmap
 
 ## Phase 1 — Public website (target 16 October 2026, review by 9 October)
-- [x] Brand system from approved logo (navy/teal/white/pale grey), editorial typography, reduced-motion support
-- [x] Header with the approved ISEFS logo only + nav + "Register your interest", per owner direction
-- [x] Pages: Home, About, Education & Science, Membership, Leadership, Contact
-- [x] Draft Privacy and Legal pages, marked for owner approval, out of main nav
-- [ ] Interest registration form prepared but server-disabled pending responsible contact and receiving process
-- [ ] Contact enquiry form prepared but server-disabled pending responsible contact and receiving process
-- [x] Private storage, validation, spam protection and duplicate prevention prepared; forms remain unavailable until owner/contact and receipt workflow are confirmed
-- [x] Per-page metadata, social sharing tags, alt text, favicon
-- [x] Verify all routes, navigation and unavailable form states on mobile and desktop
+- [ ] Brand system from approved logo (navy/teal/white/pale grey), editorial typography, reduced-motion support
+- [ ] Header with logo + nav (About, Education & Science, Membership, Leadership, Contact) + "Register your interest"
+- [ ] Pages: Home, About, Education & Science, Membership, Leadership, Contact
+- [ ] Draft Privacy and Legal pages, marked for owner approval, out of main nav
+- [ ] Interest registration form (name, email, country, specialty, institution optional, areas of interest, optional newsletter consent)
+- [ ] Contact enquiry form
+- [ ] Private storage of submissions, validation, spam protection, duplicate prevention, accessible states
+- [ ] Per-page metadata, social sharing tags, alt text, favicon
+- [ ] Verify all routes, CTAs, form states on mobile and desktop
 
 ## Phase 2 — Member portal (target November 2026)
 - [ ] Accounts, application submission, individual application status
@@ -32,9 +32,7 @@
 - [ ] Founding Board presidential rotation (Mani → Renert → Díaz Carandell) publish only after founding meeting adopts it
 
 ## Open (blocked on owner)
-- [ ] Approved responsible party/contact details, privacy/legal notices, service-provider disclosures and domain
-- [ ] Genuine enquiry receiver, delivery workflow and authorised staff access
-- [ ] Reconcile final membership labels, including Junior and combined supporting/partner/corporate wording
+- [ ] Approved organisation contact details, privacy notice, domain
 - [ ] Approved admission rules and membership terms before formal applications open
 - [ ] Approved fees, currency, bank account, provider onboarding and verification before live collection
 - [ ] Adoption of the articles of association at the founding meeting

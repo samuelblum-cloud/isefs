@@ -13,6 +13,9 @@ const navigation = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+/**
+ * Header leads with the institutional ISEFS logo only.
+ */
 function BrandLockup() {
   return (
     <img

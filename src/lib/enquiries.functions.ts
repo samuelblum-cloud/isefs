@@ -1,8 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-import { submissions } from "@/content/site";
-
 const areaValues = ["membership", "courses", "fellowship", "collaboration"] as const;
 
 export const interestSchema = z.object({
@@ -64,9 +62,6 @@ export type SubmissionResult =
 export const submitInterest = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => interestSchema.parse(data))
   .handler(async ({ data }): Promise<SubmissionResult> => {
-    if (!submissions.available) {
-      return { status: "error", message: submissions.unavailableMessage };
-    }
     if (data.website) return { status: "ok" };
     if (data.elapsedMs < MIN_COMPLETION_MS) {
       return {
@@ -104,9 +99,6 @@ export const submitInterest = createServerFn({ method: "POST" })
 export const submitContact = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => contactSchema.parse(data))
   .handler(async ({ data }): Promise<SubmissionResult> => {
-    if (!submissions.available) {
-      return { status: "error", message: submissions.unavailableMessage };
-    }
     if (data.website) return { status: "ok" };
     if (data.elapsedMs < MIN_COMPLETION_MS) {
       return {

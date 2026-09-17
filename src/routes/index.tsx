@@ -15,22 +15,12 @@ export const Route = createFileRoute("/")({
           "ISEFS is an international scientific society being established to advance education, practical training and scientific exchange in endoscopic facial surgery.",
       },
       { property: "og:title", content: "ISEFS — Advancing endoscopic facial surgery" },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://isefs.lovable.app/" },
       {
         property: "og:description",
         content:
           "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
       },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "ISEFS — Advancing endoscopic facial surgery" },
-      {
-        name: "twitter:description",
-        content:
-          "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
-      },
     ],
-    links: [{ rel: "canonical", href: "https://isefs.lovable.app/" }],
   }),
   component: HomePage,
 });
@@ -74,8 +64,8 @@ function HomePage() {
               height={628}
             />
             <p className="mt-8 border-t border-rule pt-6 text-base leading-relaxed text-muted-foreground">
-              {society.brand} is the Society's flagship educational programme and brand, bringing
-              its education, practical training and scientific exchange into a shared programme.
+              {society.brand} is the public-facing identity of the {society.name}, the Society
+              behind its educational and scientific work.
             </p>
           </div>
         </div>

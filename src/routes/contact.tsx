@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { ContactForm } from "@/components/site/ContactForm";
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
-import { contactDetails, legalForm, submissions } from "@/content/site";
+import { contactDetails, legalForm } from "@/content/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -14,21 +14,12 @@ export const Route = createFileRoute("/contact")({
           "Write to the International Society for Endoscopic Facial Surgery about membership, education, scientific collaboration or partnership.",
       },
       { property: "og:title", content: "Contact — ISEFS" },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://isefs.lovable.app/contact" },
       {
         property: "og:description",
         content:
           "Send an enquiry to the Society's management office about membership, education or collaboration.",
       },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Contact — ISEFS" },
-      {
-        name: "twitter:description",
-        content: "Contact information for the International Society for Endoscopic Facial Surgery.",
-      },
     ],
-    links: [{ rel: "canonical", href: "https://isefs.lovable.app/contact" }],
   }),
   component: ContactPage,
 });
@@ -75,8 +66,9 @@ function ContactPage() {
               </dl>
             ) : (
               <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
-                The Society's responsible contact details are being confirmed. They will be
-                published here before enquiries open.
+                The Society's published contact details are being confirmed as part of its
+                establishment. Until then, please use the form and the management office will
+                reply to you directly.
               </p>
             )}
             <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
@@ -85,16 +77,7 @@ function ContactPage() {
           </div>
 
           <div className="rounded-sm border border-rule bg-surface p-7 sm:p-10">
-            {submissions.available ? (
-              <ContactForm />
-            ) : (
-              <div role="status" className="border-l-4 border-accent pl-5">
-                <h2 className="text-xl">Enquiries opening soon</h2>
-                <p className="measure mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {submissions.unavailableMessage} A contact route will appear here once confirmed.
-                </p>
-              </div>
-            )}
+            <ContactForm />
           </div>
         </div>
       </Section>
