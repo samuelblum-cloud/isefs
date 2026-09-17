@@ -108,9 +108,22 @@ export const bootstrapCms = createServerFn({ method: "POST" })
       .select("id", { count: "exact", head: true });
 
     if (countError) throw new Error(`CMS page count failed: ${countError.message}`);
-    if ((count ?? 0) > 0) return { created: false, pages: count ?? 0 };
+
+    let createdCount = 0;
 
     for (const seed of defaultCmsPages) {
+      const { data: existing, error: existingError } = await supabaseAdmin
+        .from("cms_pages")
+        .select("id")
+        .eq("slug", seed.slug)
+        .maybeSingle();
+
+      if (existingError)
+        throw new Error(`CMS page lookup failed for ${seed.slug}: ${existingError.message}`);
+
+      // Already seeded (or partially seeded) — leave existing content untouched.
+      if (existing) continue;
+
       const { data: page, error: pageError } = await supabaseAdmin
         .from("cms_pages")
         .insert({ slug: seed.slug, internal_name: seed.internalName, created_by: context.userId })
@@ -119,6 +132,9 @@ export const bootstrapCms = createServerFn({ method: "POST" })
 
       if (pageError)
         throw new Error(`Could not create CMS page ${seed.slug}: ${pageError.message}`);
+
+      createdCount += 1;
+
 
       const { data: published, error: publishedError } = await supabaseAdmin
         .from("cms_page_versions")
@@ -194,5 +210,5 @@ export const bootstrapCms = createServerFn({ method: "POST" })
       }
     }
 
-    return { created: true, pages: defaultCmsPages.length };
+    return { created: createdCount > 0, pages: (count ?? 0) + createdCount };
   });
