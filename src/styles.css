@@ -6,16 +6,19 @@
 
 /*
  * ISEFS design system.
- * Palette derived from the approved ISEFS / ENDOFACE logo:
- * deep navy, restrained teal, white and very pale grey.
+ * Implements "ISEFS Corporate Identity and Design" v1:
+ * Navy #17354A, Teal #287F83, Mist #F3F7F8, White #FFFFFF,
+ * Ink #20343E, Slate #536873, Pale teal #EAF3F3, Line #D8E3E8,
+ * Control border #788B95, Deep teal hover #216B6F.
+ * Typeface: Source Sans 3 (Arial fallback). Radius 4 px. Borders, not shadows.
  */
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 3px);
-  --radius-md: calc(var(--radius) - 1px);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 10px);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -30,6 +33,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -38,74 +42,56 @@
   --color-ring-offset-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-foreground: var(--surface-foreground);
+  --color-highlight: var(--highlight);
   --color-ink: var(--ink);
   --color-rule: var(--rule);
-  --font-display: "Spectral", Georgia, "Times New Roman", serif;
-  --font-sans: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Source Sans 3", Arial, Helvetica, sans-serif;
+  --font-sans: "Source Sans 3", Arial, Helvetica, sans-serif;
 }
 
 :root {
-  --radius: 0.25rem;
+  --radius: 4px;
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.26 0.045 245);
+  /* Main canvas */
+  --background: #ffffff;
+  /* Ink — body text */
+  --foreground: #20343e;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.26 0.045 245);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.26 0.045 245);
+  --card: #ffffff;
+  --card-foreground: #20343e;
+  --popover: #ffffff;
+  --popover-foreground: #20343e;
 
-  /* Deep navy from the logo lettering */
-  --primary: oklch(0.31 0.058 246);
-  --primary-foreground: oklch(0.99 0.003 230);
+  /* Navy — primary brand colour */
+  --primary: #17354a;
+  --primary-foreground: #ffffff;
 
-  /* Restrained teal from the logo arc */
-  --accent: oklch(0.52 0.072 196);
-  --accent-foreground: oklch(0.99 0.003 230);
+  /* Teal — primary actions and restrained accents */
+  --accent: #287f83;
+  --accent-foreground: #ffffff;
+  --accent-hover: #216b6f;
 
-  /* Very pale grey */
-  --secondary: oklch(0.966 0.005 230);
-  --secondary-foreground: oklch(0.31 0.058 246);
-  --muted: oklch(0.966 0.005 230);
-  --muted-foreground: oklch(0.51 0.022 245);
+  /* Mist / pale teal */
+  --secondary: #f3f7f8;
+  --secondary-foreground: #17354a;
+  --muted: #f3f7f8;
+  /* Slate — secondary text and captions */
+  --muted-foreground: #536873;
 
-  --surface: oklch(0.977 0.004 225);
-  --surface-foreground: oklch(0.26 0.045 245);
-  --ink: oklch(0.22 0.05 248);
-  --rule: oklch(0.905 0.009 235);
+  --surface: #f3f7f8;
+  --surface-foreground: #20343e;
+  --highlight: #eaf3f3;
+  --ink: #17354a;
+  /* Line — decorative dividers only */
+  --rule: #d8e3e8;
 
-  --destructive: oklch(0.52 0.19 27);
-  --destructive-foreground: oklch(0.99 0.003 230);
+  --destructive: #a8332b;
+  --destructive-foreground: #ffffff;
 
-  --border: oklch(0.905 0.009 235);
-  --input: oklch(0.88 0.011 235);
-  --ring: oklch(0.52 0.072 196);
-}
-
-.dark {
-  --background: oklch(0.22 0.05 248);
-  --foreground: oklch(0.97 0.004 230);
-  --card: oklch(0.26 0.045 245);
-  --card-foreground: oklch(0.97 0.004 230);
-  --popover: oklch(0.26 0.045 245);
-  --popover-foreground: oklch(0.97 0.004 230);
-  --primary: oklch(0.97 0.004 230);
-  --primary-foreground: oklch(0.26 0.045 245);
-  --accent: oklch(0.62 0.078 196);
-  --accent-foreground: oklch(0.2 0.045 248);
-  --secondary: oklch(0.3 0.04 246);
-  --secondary-foreground: oklch(0.97 0.004 230);
-  --muted: oklch(0.3 0.04 246);
-  --muted-foreground: oklch(0.75 0.018 235);
-  --surface: oklch(0.26 0.045 245);
-  --surface-foreground: oklch(0.97 0.004 230);
-  --ink: oklch(0.97 0.004 230);
-  --rule: oklch(1 0 0 / 14%);
-  --destructive: oklch(0.63 0.18 25);
-  --destructive-foreground: oklch(0.99 0.003 230);
-  --border: oklch(1 0 0 / 14%);
-  --input: oklch(1 0 0 / 20%);
-  --ring: oklch(0.62 0.078 196);
+  --border: #d8e3e8;
+  /* Control border — visible field boundaries on white */
+  --input: #788b95;
+  --ring: #17354a;
 }
 
 @layer base {
@@ -121,6 +107,8 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -131,13 +119,55 @@
   h4 {
     font-family: var(--font-display);
     color: var(--color-ink);
-    font-weight: 500;
-    letter-spacing: -0.015em;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
   }
 
+  /* Type scale: mobile first, desktop from 1024 px */
+  h1 {
+    font-size: 36px;
+    line-height: 1.12;
+  }
+
+  h2 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 56px;
+      line-height: 1.08;
+    }
+
+    h2 {
+      font-size: 36px;
+      line-height: 1.15;
+    }
+
+    h3 {
+      font-size: 24px;
+      line-height: 1.25;
+    }
+  }
+
+  /* Persistent keyboard focus: navy 3 px outline with a 2 px gap */
   :focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  /* Tabular figures when comparing dates or numbers */
+  time,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -156,13 +186,93 @@
   }
 }
 
+/* Content container: max 1200 px, 20 px mobile / 48 px desktop padding */
+@utility container-page {
+  width: 100%;
+  max-width: 1296px; /* 1200 px content + 48 px padding each side */
+  margin-inline: auto;
+  padding-inline: 20px;
+
+  @media (min-width: 1024px) {
+    padding-inline: 48px;
+  }
+}
+
 @utility eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent);
+}
+
+/* Primary action: teal with white text, minimum 48 px high */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 24px;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+  font-size: 1rem;
+  font-weight: 600;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+
+  &:hover {
+    background-color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
+
+/* Secondary action: navy on white */
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 24px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+/* Text links are underlined */
+@utility link-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: var(--color-accent-hover);
+  }
 }
 
 @utility rule-top {
