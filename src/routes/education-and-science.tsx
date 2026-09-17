@@ -48,15 +48,13 @@ function EducationPage() {
         <div className="mt-12 rounded-sm bg-surface p-8">
           <h2>A note on what these activities are</h2>
           <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">
-            A scientific congress is a meeting for presenting and debating research. It is not the
-            same as a course that includes surgical observation or laboratory teaching, which has
-            different aims, different supervision requirements and different participant criteria.
-            The Society will publish the specific conditions for each activity when it is confirmed.
+            ISEFS will develop a coordinated programme of scientific congresses, focused monographic
+            courses, practical laboratories, webinars, fellowship training and collaborative
+            scientific work. Dates, faculty and participation requirements will be published once
+            the relevant programme has been approved.
           </p>
           <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">
-            No dates, locations, faculty appointments or booking options are published until they
-            are confirmed. ISEFS does not currently offer guaranteed fellowship places, CME credits
-            or professional certification.
+            {"\n"}
           </p>
         </div>
       </Section>
