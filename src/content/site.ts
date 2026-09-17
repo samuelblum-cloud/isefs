@@ -112,7 +112,7 @@ export const legalStatus = {
  */
 export const announcement = {
   confirmed: false,
-  heading: "A Society announcement is planned for October 2026",
+  heading: "ISEFS will be announced in Barcelona in October 2026",
   body: "According to current planning, the establishment of the International Society for Endoscopic Facial Surgery is to be announced at the gala evening on 16 October 2026, during the Endo Face Masters course in Barcelona. Details remain subject to confirmation.",
   courseName: "Endo Face Masters",
   courseDates: "15–17 October 2026",
