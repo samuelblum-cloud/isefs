@@ -8,12 +8,12 @@ export function SiteFooter() {
 
   return (
     <footer className="mt-24 border-t border-rule bg-surface">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="container-page grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <img
             src={logo.url}
             alt="ISEFS — International Society for Endoscopic Facial Surgery logo"
-            className="h-10 w-auto"
+            className="h-auto w-full max-w-[360px]"
             width={320}
             height={104}
             loading="lazy"
@@ -83,7 +83,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-rule">
-        <p className="mx-auto max-w-6xl px-5 py-6 text-xs text-muted-foreground sm:px-8">
+        <p className="container-page py-6 text-sm text-muted-foreground">
           © {year} {society.name} ({society.shortName}). All rights reserved.
         </p>
       </div>
