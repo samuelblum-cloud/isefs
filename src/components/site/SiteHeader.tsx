@@ -51,7 +51,7 @@ export function SiteHeader() {
         <Link
           to="/"
           className="shrink-0 no-underline"
-          aria-label={`${society.brand} by ${society.shortName} — ${society.name}, home`}
+          aria-label={`${society.shortName} — ${society.name}, home`}
           onClick={() => setOpen(false)}
         >
           <BrandLockup />
