@@ -192,7 +192,7 @@ export const management = {
   name: "Samuel Blum",
   role: "Managing Director",
   summary:
-    "Responsible for the management of the Society and for operational implementation, including administration, coordination of activities and the Society's secretariat.",
+    "Samuel Blum leads the Society’s day-to-day operations and the implementation of its programme. His responsibilities include member administration, provider management, operational banking, communications, digital platforms and reporting to the Board. Executive management and secretariat responsibilities are combined in this single Managing Director role. The Board retains strategic oversight and its reserved decisions, while the founders and academic leads remain responsible for scientific content and professional assessment.",
 } as const;
 
 export const membershipValue = [
