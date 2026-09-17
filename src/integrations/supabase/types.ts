@@ -14,7 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_enquiries: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      interest_registrations: {
+        Row: {
+          areas_of_interest: string[]
+          country: string
+          created_at: string
+          email: string
+          email_normalised: string | null
+          first_name: string
+          id: string
+          institution: string | null
+          last_name: string
+          newsletter_consent: boolean
+          privacy_accepted_at: string | null
+          source: string
+          specialty: string
+          updated_at: string
+        }
+        Insert: {
+          areas_of_interest?: string[]
+          country: string
+          created_at?: string
+          email: string
+          email_normalised?: string | null
+          first_name: string
+          id?: string
+          institution?: string | null
+          last_name: string
+          newsletter_consent?: boolean
+          privacy_accepted_at?: string | null
+          source?: string
+          specialty: string
+          updated_at?: string
+        }
+        Update: {
+          areas_of_interest?: string[]
+          country?: string
+          created_at?: string
+          email?: string
+          email_normalised?: string | null
+          first_name?: string
+          id?: string
+          institution?: string | null
+          last_name?: string
+          newsletter_consent?: boolean
+          privacy_accepted_at?: string | null
+          source?: string
+          specialty?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

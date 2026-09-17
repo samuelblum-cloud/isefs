@@ -1,24 +1,198 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import endofaceLogo from "@/assets/endoface-logo.png.asset.json";
+import { Section, SectionTitle, StatusTag } from "@/components/site/Page";
+import { announcement, educationAreas, founders, management, society } from "@/content/site";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "ISEFS — Advancing endoscopic facial surgery" },
+      {
+        name: "description",
+        content:
+          "ISEFS is an international scientific society being established to advance education, practical training and scientific exchange in endoscopic facial surgery.",
+      },
+      { property: "og:title", content: "ISEFS — Advancing endoscopic facial surgery" },
+      {
+        property: "og:description",
+        content:
+          "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
+      },
+    ],
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <section className="border-b border-rule bg-surface">
+        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.25fr_1fr] lg:items-center">
+          <div className="fade-up">
+            <p className="eyebrow">{society.brand} · by {society.shortName}</p>
+            <h1 className="mt-5 text-[2.6rem] leading-[1.05] sm:text-6xl">{society.tagline}</h1>
+            <p className="measure mt-7 text-lg leading-relaxed text-muted-foreground">
+              {society.intro}
+            </p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/membership"
+                hash="register"
+                className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
+              >
+                Register your interest
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+              <Link
+                to="/education-and-science"
+                className="inline-flex items-center justify-center gap-2 rounded-sm border border-primary/25 px-6 py-3.5 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
+              >
+                Explore our educational programme
+              </Link>
+            </div>
+            <p className="mt-8 text-sm text-muted-foreground">{society.status}</p>
+          </div>
+
+          <div className="rounded-sm border border-rule bg-background p-8 sm:p-10">
+            <img
+              src={endofaceLogo.url}
+              alt="ENDOFACE by ISEFS — International Society for Endoscopic Facial Surgery logo"
+              className="h-auto w-full max-w-sm"
+              width={1920}
+              height={628}
+            />
+            <p className="mt-8 border-t border-rule pt-6 text-sm leading-relaxed text-muted-foreground">
+              {society.brand} is the public-facing programme of the {society.name}, the Society
+              behind its educational and scientific work.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Section>
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionTitle eyebrow="The Society" title="A professional community for a demanding discipline" />
+          <div className="measure space-y-5 text-base leading-relaxed text-muted-foreground">
+            <p>
+              Endoscopic facial surgery is a precise, technically demanding field. Progress depends
+              on careful teaching, honest discussion of outcomes and sustained contact between
+              surgeons working in different centres and health systems.
+            </p>
+            <p>
+              ISEFS is being established to give that work a permanent home: a scientific society
+              that brings together surgeons, residents, faculty and professional partners around
+              structured education, supervised practical learning and shared scientific enquiry.
+            </p>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            >
+              Read about our mission
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </div>
+      </Section>
+
+      <div className="border-y border-rule bg-surface">
+        <Section>
+          <SectionTitle eyebrow="Education & Science" title="Our areas of activity" />
+          <ul className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
+            {educationAreas.map((area) => (
+              <li key={area.title} className="bg-background p-7">
+                <StatusTag>{area.status}</StatusTag>
+                <h3 className="mt-4 text-lg">{area.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{area.summary}</p>
+              </li>
+            ))}
+          </ul>
+          <Link
+            to="/education-and-science"
+            className="mt-9 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+          >
+            See the full programme
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </Section>
+      </div>
+
+      <Section>
+        <div className="grid gap-10 rounded-sm border border-rule p-8 sm:p-12 lg:grid-cols-[1fr_1fr]">
+          <div>
+            <StatusTag>{announcement.confirmed ? "Announced" : "Planned"}</StatusTag>
+            <h2 className="mt-4 text-2xl sm:text-3xl">{announcement.heading}</h2>
+            <p className="measure mt-5 text-base leading-relaxed text-muted-foreground">
+              {announcement.body}
+            </p>
+          </div>
+          <div className="rule-top pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+            <h3 className="text-lg">{announcement.courseName}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {announcement.courseDates} · {announcement.courseLocation}
+            </p>
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              {announcement.courseNote}
+            </p>
+            <a
+              href={announcement.courseUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            >
+              Visit the official course website
+              <ExternalLink className="h-4 w-4" aria-hidden />
+            </a>
+          </div>
+        </div>
+      </Section>
+
+      <div className="border-y border-rule bg-surface">
+        <Section>
+          <SectionTitle eyebrow="Leadership" title="Founders and management" />
+          <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+            {founders.map((person) => (
+              <div key={person.name} className="bg-background p-7">
+                <p className="eyebrow">{person.role}</p>
+                <p className="mt-3 font-display text-lg text-ink">{person.name}</p>
+              </div>
+            ))}
+            <div className="bg-background p-7">
+              <p className="eyebrow">{management.role}</p>
+              <p className="mt-3 font-display text-lg text-ink">{management.name}</p>
+            </div>
+          </div>
+          <Link
+            to="/leadership"
+            className="mt-9 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+          >
+            More about the Society's leadership
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </Section>
+      </div>
+
+      <Section>
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
+            <SectionTitle eyebrow="Membership" title="Register your interest" />
+            <p className="measure mt-6 text-base leading-relaxed text-muted-foreground">
+              Register your interest to receive news about the Society, membership and upcoming
+              educational activities. Registering interest does not constitute admission to
+              membership.
+            </p>
+          </div>
+          <Link
+            to="/membership"
+            hash="register"
+            className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent lg:justify-self-start"
+          >
+            Register your interest
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+      </Section>
+    </>
   );
 }
