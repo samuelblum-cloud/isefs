@@ -46,8 +46,8 @@ function LegalPage() {
             <SectionTitle title="The Society" />
             <p className="mt-4 text-muted-foreground">
               {society.name} ({society.shortName}). {legalForm.summary} {society.status} Entries in
-              the commercial register, a registration number and formal contact details will be
-              published once available.
+               approved responsibility and formal contact details will be published before public
+               submissions open.
               {contactDetails.registrationNumber
                 ? ` Registration number: ${contactDetails.registrationNumber}.`
                 : ""}

@@ -54,9 +54,8 @@ function EducationPage() {
             The Society will publish the specific conditions for each activity when it is confirmed.
           </p>
           <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">
-            No dates, locations, faculty appointments or booking options are published until they
-            are confirmed. ISEFS does not currently offer guaranteed fellowship places, CME credits
-            or professional certification.
+            Programme details and participation conditions will be published as they are confirmed.
+            Planned activities are not yet available to book.
           </p>
         </div>
       </Section>

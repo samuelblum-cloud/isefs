@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { ContactForm } from "@/components/site/ContactForm";
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
-import { contactDetails, legalForm } from "@/content/site";
+import { contactDetails, legalForm, submissions } from "@/content/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -66,9 +66,8 @@ function ContactPage() {
               </dl>
             ) : (
               <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
-                The Society's published contact details are being confirmed as part of its
-                establishment. Until then, please use the form and the management office will
-                reply to you directly.
+                The Society's responsible contact details are being confirmed. They will be
+                published here before enquiries open.
               </p>
             )}
             <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
@@ -77,7 +76,16 @@ function ContactPage() {
           </div>
 
           <div className="rounded-sm border border-rule bg-surface p-7 sm:p-10">
-            <ContactForm />
+            {submissions.available ? (
+              <ContactForm />
+            ) : (
+              <div role="status" className="border-l-4 border-accent pl-5">
+                <h2 className="text-xl">Enquiries opening soon</h2>
+                <p className="measure mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {submissions.unavailableMessage} A contact route will appear here once confirmed.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </Section>

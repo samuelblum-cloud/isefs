@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-import isefsLogo from "@/assets/isefs-logo.png.asset.json";
 import { society } from "@/content/site";
 
 const navigation = [
@@ -13,16 +12,14 @@ const navigation = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-/**
- * Header leads with the institutional ISEFS logo only.
- */
 function BrandLockup() {
   return (
-    <img
-      src={isefsLogo.url}
-      alt={`${society.shortName} — ${society.name}`}
-      className="h-12 w-auto sm:h-14"
-    />
+    <span className="flex max-w-72 flex-col leading-none sm:max-w-none">
+      <span className="text-2xl font-semibold text-primary">
+        {society.brand} <span className="text-sm font-normal text-accent">by {society.shortName}</span>
+      </span>
+      <span className="mt-1 text-xs leading-tight text-muted-foreground">{society.name}</span>
+    </span>
   );
 }
 

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { InterestForm } from "@/components/site/InterestForm";
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
-import { admissionNotes, membershipCategories, membershipValue } from "@/content/site";
+import { admissionNotes, membershipCategories, membershipValue, submissions } from "@/content/site";
 
 export const Route = createFileRoute("/membership")({
   head: () => ({
@@ -97,7 +97,16 @@ function MembershipPage() {
               </p>
             </div>
             <div className="rounded-sm border border-rule bg-background p-7 sm:p-10">
-              <InterestForm />
+              {submissions.available ? (
+                <InterestForm />
+              ) : (
+                <div role="status" className="border-l-4 border-accent pl-5">
+                  <h3 className="text-xl">Registration opening soon</h3>
+                  <p className="measure mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {submissions.unavailableMessage}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </Section>
