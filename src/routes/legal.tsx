@@ -1,21 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/Page";
+import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
+import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { announcement, contactDetails, legalForm, legalStatus, society } from "@/content/site";
 
 export const Route = createFileRoute("/legal")({
-  head: () => ({
+  loader: () => getPublishedCmsPage({ data: { slug: "legal" } }),
+  head: ({ loaderData }) => ({
     meta: [
-      { title: "Legal information — ISEFS" },
+      { title: loaderData?.metaTitle || "Legal information — ISEFS" },
       {
         name: "description",
         content:
+          loaderData?.metaDescription ||
           "Legal information about the International Society for Endoscopic Facial Surgery, its status, and the use of this website.",
       },
-      { property: "og:title", content: "Legal information — ISEFS" },
+      { property: "og:title", content: loaderData?.metaTitle || "Legal information — ISEFS" },
       {
         property: "og:description",
-        content: "Status, responsibility and terms of use for the ISEFS website.",
+        content:
+          loaderData?.metaDescription ||
+          "Status, responsibility and terms of use for the ISEFS website.",
       },
     ],
   }),
@@ -23,6 +29,9 @@ export const Route = createFileRoute("/legal")({
 });
 
 function LegalPage() {
+  const cmsPage = Route.useLoaderData();
+  if (cmsPage) return <CmsPageRenderer page={cmsPage} />;
+
   return (
     <>
       <PageHeader

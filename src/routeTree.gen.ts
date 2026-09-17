@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SlugRouteImport } from './routes/$slug'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EducationAndScienceRouteImport } from './routes/education-and-science'
@@ -17,10 +18,19 @@ import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminDemoRouteImport } from './routes/admin/demo'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminRegisterRouteImport } from './routes/admin/register'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SlugRoute = SlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -58,9 +68,30 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDemoRoute = AdminDemoRouteImport.update({
+  id: '/admin/demo',
+  path: '/admin/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRegisterRoute = AdminRegisterRouteImport.update({
+  id: '/admin/register',
+  path: '/admin/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$slug': typeof SlugRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/education-and-science': typeof EducationAndScienceRoute
@@ -68,9 +99,14 @@ export interface FileRoutesByFullPath {
   '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/demo': typeof AdminDemoRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/register': typeof AdminRegisterRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$slug': typeof SlugRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/education-and-science': typeof EducationAndScienceRoute
@@ -78,10 +114,15 @@ export interface FileRoutesByTo {
   '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/demo': typeof AdminDemoRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/register': typeof AdminRegisterRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$slug': typeof SlugRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/education-and-science': typeof EducationAndScienceRoute
@@ -89,11 +130,16 @@ export interface FileRoutesById {
   '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/demo': typeof AdminDemoRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/register': typeof AdminRegisterRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$slug'
     | '/about'
     | '/contact'
     | '/education-and-science'
@@ -101,9 +147,14 @@ export interface FileRouteTypes {
     | '/legal'
     | '/membership'
     | '/privacy'
+    | '/admin/demo'
+    | '/admin/login'
+    | '/admin/register'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$slug'
     | '/about'
     | '/contact'
     | '/education-and-science'
@@ -111,9 +162,14 @@ export interface FileRouteTypes {
     | '/legal'
     | '/membership'
     | '/privacy'
+    | '/admin/demo'
+    | '/admin/login'
+    | '/admin/register'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/$slug'
     | '/about'
     | '/contact'
     | '/education-and-science'
@@ -121,10 +177,15 @@ export interface FileRouteTypes {
     | '/legal'
     | '/membership'
     | '/privacy'
+    | '/admin/demo'
+    | '/admin/login'
+    | '/admin/register'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SlugRoute: typeof SlugRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   EducationAndScienceRoute: typeof EducationAndScienceRoute
@@ -132,6 +193,10 @@ export interface RootRouteChildren {
   LegalRoute: typeof LegalRoute
   MembershipRoute: typeof MembershipRoute
   PrivacyRoute: typeof PrivacyRoute
+  AdminDemoRoute: typeof AdminDemoRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminRegisterRoute: typeof AdminRegisterRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$slug': {
+      id: '/$slug'
+      path: '/$slug'
+      fullPath: '/$slug'
+      preLoaderRoute: typeof SlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -192,11 +264,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/demo': {
+      id: '/admin/demo'
+      path: '/admin/demo'
+      fullPath: '/admin/demo'
+      preLoaderRoute: typeof AdminDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/register': {
+      id: '/admin/register'
+      path: '/admin/register'
+      fullPath: '/admin/register'
+      preLoaderRoute: typeof AdminRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SlugRoute: SlugRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   EducationAndScienceRoute: EducationAndScienceRoute,
@@ -204,6 +305,10 @@ const rootRouteChildren: RootRouteChildren = {
   LegalRoute: LegalRoute,
   MembershipRoute: MembershipRoute,
   PrivacyRoute: PrivacyRoute,
+  AdminDemoRoute: AdminDemoRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminRegisterRoute: AdminRegisterRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

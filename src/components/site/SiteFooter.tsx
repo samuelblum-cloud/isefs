@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import logo from "@/assets/isefs-logo.png.asset.json";
+import { isefsLogoUrl } from "@/content/assets";
 import { contactDetails, society } from "@/content/site";
 
 export function SiteFooter() {
@@ -11,7 +11,7 @@ export function SiteFooter() {
       <div className="container-page grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <img
-            src={logo.url}
+            src={isefsLogoUrl}
             alt="ISEFS — International Society for Endoscopic Facial Surgery logo"
             className="h-auto w-full max-w-[360px]"
             width={320}

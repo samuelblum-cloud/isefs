@@ -1,23 +1,31 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
-import endofaceLogo from "@/assets/endoface-logo.png.asset.json";
+import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
+import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { Section, SectionTitle, StatusTag } from "@/components/site/Page";
+import { endofaceLogoUrl } from "@/content/assets";
 import { announcement, educationAreas, founders, management, society } from "@/content/site";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
+  loader: () => getPublishedCmsPage({ data: { slug: "home" } }),
+  head: ({ loaderData }) => ({
     meta: [
-      { title: "ISEFS — Advancing endoscopic facial surgery" },
+      { title: loaderData?.metaTitle || "ISEFS — Advancing endoscopic facial surgery" },
       {
         name: "description",
         content:
+          loaderData?.metaDescription ||
           "ISEFS is an international scientific society being established to advance education, practical training and scientific exchange in endoscopic facial surgery.",
       },
-      { property: "og:title", content: "ISEFS — Advancing endoscopic facial surgery" },
+      {
+        property: "og:title",
+        content: loaderData?.metaTitle || "ISEFS — Advancing endoscopic facial surgery",
+      },
       {
         property: "og:description",
         content:
+          loaderData?.metaDescription ||
           "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
       },
     ],
@@ -26,6 +34,9 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const cmsPage = Route.useLoaderData();
+  if (cmsPage) return <CmsPageRenderer page={cmsPage} />;
+
   return (
     <>
       <section className="border-b border-rule bg-surface">
@@ -37,18 +48,11 @@ function HomePage() {
             <h1 className="mt-5">{society.tagline}</h1>
             <p className="measure mt-6 text-muted-foreground">{society.intro}</p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link
-                to="/education-and-science"
-                className="btn-primary no-underline"
-              >
+              <Link to="/education-and-science" className="btn-primary no-underline">
                 Explore education
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
-              <Link
-                to="/membership"
-                hash="register"
-                className="btn-secondary no-underline"
-              >
+              <Link to="/membership" hash="register" className="btn-secondary no-underline">
                 Register interest
               </Link>
             </div>
@@ -57,7 +61,7 @@ function HomePage() {
 
           <div className="rounded-sm border border-rule bg-background p-8 lg:p-12">
             <img
-              src={endofaceLogo.url}
+              src={endofaceLogoUrl}
               alt="ENDOFACE by ISEFS — International Society for Endoscopic Facial Surgery logo"
               className="h-auto w-full"
               width={1920}
@@ -69,7 +73,10 @@ function HomePage() {
 
       <Section>
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionTitle eyebrow="The Society" title="A professional community for a demanding discipline" />
+          <SectionTitle
+            eyebrow="The Society"
+            title="A professional community for a demanding discipline"
+          />
           <div className="measure space-y-5 text-base leading-relaxed text-muted-foreground">
             <p>
               Endoscopic facial surgery is a precise, technically demanding field. Progress depends
@@ -81,10 +88,7 @@ function HomePage() {
               that brings together surgeons, residents, faculty and professional partners around
               structured education, supervised practical learning and shared scientific enquiry.
             </p>
-            <Link
-              to="/about"
-              className="link-inline"
-            >
+            <Link to="/about" className="link-inline">
               Read about our mission
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
@@ -104,10 +108,7 @@ function HomePage() {
               </li>
             ))}
           </ul>
-          <Link
-            to="/education-and-science"
-            className="mt-9 link-inline"
-          >
+          <Link to="/education-and-science" className="mt-9 link-inline">
             See the full programme
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
@@ -159,10 +160,7 @@ function HomePage() {
               <p className="mt-3 text-lg font-semibold text-ink">{management.name}</p>
             </div>
           </div>
-          <Link
-            to="/leadership"
-            className="mt-9 link-inline"
-          >
+          <Link to="/leadership" className="mt-9 link-inline">
             More about the Society's leadership
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>

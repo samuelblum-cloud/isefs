@@ -2,21 +2,26 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 
 import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/Page";
+import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
+import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { announcement, educationAreas } from "@/content/site";
 
 export const Route = createFileRoute("/education-and-science")({
-  head: () => ({
+  loader: () => getPublishedCmsPage({ data: { slug: "education-and-science" } }),
+  head: ({ loaderData }) => ({
     meta: [
-      { title: "Education & Science — ISEFS" },
+      { title: loaderData?.metaTitle || "Education & Science — ISEFS" },
       {
         name: "description",
         content:
+          loaderData?.metaDescription ||
           "Congress, monographic courses, practical laboratories, a fellowship pathway under development, webinars and planned scientific collaboration.",
       },
-      { property: "og:title", content: "Education & Science — ISEFS" },
+      { property: "og:title", content: loaderData?.metaTitle || "Education & Science — ISEFS" },
       {
         property: "og:description",
         content:
+          loaderData?.metaDescription ||
           "The educational and scientific activities of the International Society for Endoscopic Facial Surgery.",
       },
     ],
@@ -25,6 +30,9 @@ export const Route = createFileRoute("/education-and-science")({
 });
 
 function EducationPage() {
+  const cmsPage = Route.useLoaderData();
+  if (cmsPage) return <CmsPageRenderer page={cmsPage} />;
+
   return (
     <>
       <PageHeader
@@ -53,9 +61,7 @@ function EducationPage() {
             scientific work. Dates, faculty and participation requirements will be published once
             the relevant programme has been approved.
           </p>
-          <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">
-            {"\n"}
-          </p>
+          <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">{"\n"}</p>
         </div>
       </Section>
 
@@ -85,11 +91,7 @@ function EducationPage() {
             Register your interest to receive news about the Society, membership and upcoming
             educational activities as they are confirmed.
           </p>
-          <Link
-            to="/membership"
-            hash="register"
-            className="btn-primary mt-8 no-underline"
-          >
+          <Link to="/membership" hash="register" className="btn-primary mt-8 no-underline">
             Register your interest
           </Link>
         </div>

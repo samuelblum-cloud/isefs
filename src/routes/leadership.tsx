@@ -1,21 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
+import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
+import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { founders, management } from "@/content/site";
 
 export const Route = createFileRoute("/leadership")({
-  head: () => ({
+  loader: () => getPublishedCmsPage({ data: { slug: "leadership" } }),
+  head: ({ loaderData }) => ({
     meta: [
-      { title: "Leadership — ISEFS" },
+      { title: loaderData?.metaTitle || "Leadership — ISEFS" },
       {
         name: "description",
         content:
+          loaderData?.metaDescription ||
           "The scientific founders of ISEFS and the Managing Director responsible for Society management and operational implementation.",
       },
-      { property: "og:title", content: "Leadership — ISEFS" },
+      { property: "og:title", content: loaderData?.metaTitle || "Leadership — ISEFS" },
       {
         property: "og:description",
-        content: "Scientific leadership and operational management of the Society.",
+        content:
+          loaderData?.metaDescription ||
+          "Scientific leadership and operational management of the Society.",
       },
     ],
   }),
@@ -23,6 +29,9 @@ export const Route = createFileRoute("/leadership")({
 });
 
 function LeadershipPage() {
+  const cmsPage = Route.useLoaderData();
+  if (cmsPage) return <CmsPageRenderer page={cmsPage} />;
+
   return (
     <>
       <PageHeader

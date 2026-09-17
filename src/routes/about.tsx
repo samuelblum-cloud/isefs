@@ -1,21 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
+import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
+import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { legalForm, purposeStatements, society } from "@/content/site";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
+  loader: () => getPublishedCmsPage({ data: { slug: "about" } }),
+  head: ({ loaderData }) => ({
     meta: [
-      { title: "About the Society — ISEFS" },
+      { title: loaderData?.metaTitle || "About the Society — ISEFS" },
       {
         name: "description",
         content:
+          loaderData?.metaDescription ||
           "ISEFS connects an international professional community through structured education, practical learning, discussion of outcomes and scientific collaboration.",
       },
-      { property: "og:title", content: "About the Society — ISEFS" },
+      { property: "og:title", content: loaderData?.metaTitle || "About the Society — ISEFS" },
       {
         property: "og:description",
         content:
+          loaderData?.metaDescription ||
           "The mission of the International Society for Endoscopic Facial Surgery, currently being established.",
       },
     ],
@@ -43,6 +48,9 @@ const principles = [
 ];
 
 function AboutPage() {
+  const cmsPage = Route.useLoaderData();
+  if (cmsPage) return <CmsPageRenderer page={cmsPage} />;
+
   return (
     <>
       <PageHeader
@@ -115,21 +123,16 @@ function AboutPage() {
       </Section>
 
       <Section>
-
         <div className="rounded-sm border border-rule p-8 sm:p-12">
           <h2>Current status</h2>
           <p className="measure mt-5 text-base leading-relaxed text-muted-foreground">
-            The Society is currently being established. Its governing documents, formal
-            registration and admission rules are being prepared, and this website will be updated
-            as each step is completed. Until then, ISEFS makes no claim to registered, charitable,
-            tax-exempt or accredited status, and its programmes are described according to their
-            actual stage of development.
+            The Society is currently being established. Its governing documents, formal registration
+            and admission rules are being prepared, and this website will be updated as each step is
+            completed. Until then, ISEFS makes no claim to registered, charitable, tax-exempt or
+            accredited status, and its programmes are described according to their actual stage of
+            development.
           </p>
-          <Link
-            to="/membership"
-            hash="register"
-            className="btn-primary mt-8 no-underline"
-          >
+          <Link to="/membership" hash="register" className="btn-primary mt-8 no-underline">
             Register your interest
           </Link>
         </div>

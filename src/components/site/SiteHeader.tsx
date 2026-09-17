@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-import isefsLogo from "@/assets/isefs-logo.png.asset.json";
+import { isefsLogoUrl } from "@/content/assets";
 import { society } from "@/content/site";
 
 const navigation = [
@@ -19,13 +19,12 @@ const navigation = [
 function BrandLockup() {
   return (
     <img
-      src={isefsLogo.url}
+      src={isefsLogoUrl}
       alt={`${society.shortName} — ${society.name}`}
       className="h-12 w-auto sm:h-14"
     />
   );
 }
-
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);

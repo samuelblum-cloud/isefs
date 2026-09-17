@@ -1,21 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/Page";
+import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
+import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { contactDetails, legalForm, legalStatus } from "@/content/site";
 
 export const Route = createFileRoute("/privacy")({
-  head: () => ({
+  loader: () => getPublishedCmsPage({ data: { slug: "privacy" } }),
+  head: ({ loaderData }) => ({
     meta: [
-      { title: "Privacy information — ISEFS" },
+      { title: loaderData?.metaTitle || "Privacy information — ISEFS" },
       {
         name: "description",
         content:
+          loaderData?.metaDescription ||
           "How the International Society for Endoscopic Facial Surgery handles personal data submitted through its interest registration and contact forms.",
       },
-      { property: "og:title", content: "Privacy information — ISEFS" },
+      { property: "og:title", content: loaderData?.metaTitle || "Privacy information — ISEFS" },
       {
         property: "og:description",
-        content: "How ISEFS handles personal data submitted through its website forms.",
+        content:
+          loaderData?.metaDescription ||
+          "How ISEFS handles personal data submitted through its website forms.",
       },
     ],
   }),
@@ -23,6 +29,9 @@ export const Route = createFileRoute("/privacy")({
 });
 
 function PrivacyPage() {
+  const cmsPage = Route.useLoaderData();
+  if (cmsPage) return <CmsPageRenderer page={cmsPage} />;
+
   return (
     <>
       <PageHeader
@@ -36,8 +45,8 @@ function PrivacyPage() {
           <div className="mb-10 rounded-sm border border-rule bg-surface p-6">
             <StatusTag>Draft — pending approval</StatusTag>
             <p className="measure mt-3 text-sm leading-relaxed text-muted-foreground">
-              This text is a working draft prepared for review. It has not yet been approved and
-              may change before the Society's formal establishment is completed.
+              This text is a working draft prepared for review. It has not yet been approved and may
+              change before the Society's formal establishment is completed.
             </p>
           </div>
         ) : null}
@@ -59,8 +68,8 @@ function PrivacyPage() {
             <p className="mt-4 text-muted-foreground">
               Interest registration: first name, last name, email address, country, specialty, an
               optional institution, your selected areas of interest, whether you agreed to receive
-              news, and the time of submission. Contact enquiries: your name, email address,
-              subject and message.
+              news, and the time of submission. Contact enquiries: your name, email address, subject
+              and message.
             </p>
           </div>
 
@@ -94,8 +103,8 @@ function PrivacyPage() {
             <SectionTitle title="Your rights" />
             <p className="mt-4 text-muted-foreground">
               You may ask for access to your data, for its correction or deletion, and you may
-              withdraw your consent to receive news at any time. Please use the contact form to
-              make such a request.
+              withdraw your consent to receive news at any time. Please use the contact form to make
+              such a request.
             </p>
           </div>
 

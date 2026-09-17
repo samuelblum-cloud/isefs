@@ -2,21 +2,26 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { InterestForm } from "@/components/site/InterestForm";
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
+import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
+import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { admissionNotes, membershipCategories, membershipValue } from "@/content/site";
 
 export const Route = createFileRoute("/membership")({
-  head: () => ({
+  loader: () => getPublishedCmsPage({ data: { slug: "membership" } }),
+  head: ({ loaderData }) => ({
     meta: [
-      { title: "Membership — ISEFS" },
+      { title: loaderData?.metaTitle || "Membership — ISEFS" },
       {
         name: "description",
         content:
+          loaderData?.metaDescription ||
           "Register your interest to receive news about the Society, membership and upcoming educational activities in endoscopic facial surgery.",
       },
-      { property: "og:title", content: "Membership — ISEFS" },
+      { property: "og:title", content: loaderData?.metaTitle || "Membership — ISEFS" },
       {
         property: "og:description",
         content:
+          loaderData?.metaDescription ||
           "Professional exchange, educational resources, scientific collaboration and access to Society programmes.",
       },
     ],
@@ -25,6 +30,9 @@ export const Route = createFileRoute("/membership")({
 });
 
 function MembershipPage() {
+  const cmsPage = Route.useLoaderData();
+  if (cmsPage) return <CmsPageRenderer page={cmsPage} />;
+
   return (
     <>
       <PageHeader
@@ -80,7 +88,6 @@ function MembershipPage() {
         </div>
       </Section>
 
-
       <div className="border-y border-rule bg-surface">
         <Section id="register">
           <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
@@ -91,9 +98,9 @@ function MembershipPage() {
                 educational activities.
               </p>
               <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">
-                Registering your interest does not constitute an application for membership and
-                does not constitute admission. No payment is requested or required at this stage.
-                When formal applications open, we will write to everyone who has registered.
+                Registering your interest does not constitute an application for membership and does
+                not constitute admission. No payment is requested or required at this stage. When
+                formal applications open, we will write to everyone who has registered.
               </p>
             </div>
             <div className="rounded-sm border border-rule bg-background p-7 sm:p-10">

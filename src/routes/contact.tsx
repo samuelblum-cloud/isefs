@@ -2,21 +2,26 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { ContactForm } from "@/components/site/ContactForm";
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
+import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
+import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { contactDetails, legalForm } from "@/content/site";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
+  loader: () => getPublishedCmsPage({ data: { slug: "contact" } }),
+  head: ({ loaderData }) => ({
     meta: [
-      { title: "Contact — ISEFS" },
+      { title: loaderData?.metaTitle || "Contact — ISEFS" },
       {
         name: "description",
         content:
+          loaderData?.metaDescription ||
           "Write to the International Society for Endoscopic Facial Surgery about membership, education, scientific collaboration or partnership.",
       },
-      { property: "og:title", content: "Contact — ISEFS" },
+      { property: "og:title", content: loaderData?.metaTitle || "Contact — ISEFS" },
       {
         property: "og:description",
         content:
+          loaderData?.metaDescription ||
           "Send an enquiry to the Society's management office about membership, education or collaboration.",
       },
     ],
@@ -25,6 +30,9 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const cmsPage = Route.useLoaderData();
+  if (cmsPage) return <CmsPageRenderer page={cmsPage} />;
+
   const hasDetails = Boolean(
     contactDetails.email || contactDetails.telephone || contactDetails.address,
   );
@@ -67,8 +75,8 @@ function ContactPage() {
             ) : (
               <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
                 The Society's published contact details are being confirmed as part of its
-                establishment. Until then, please use the form and the management office will
-                reply to you directly.
+                establishment. Until then, please use the form and the management office will reply
+                to you directly.
               </p>
             )}
             <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
