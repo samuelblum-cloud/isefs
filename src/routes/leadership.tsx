@@ -13,11 +13,17 @@ export const Route = createFileRoute("/leadership")({
           "The scientific founders of ISEFS and the Managing Director responsible for Society management and operational implementation.",
       },
       { property: "og:title", content: "Leadership — ISEFS" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://isefs.lovable.app/leadership" },
       {
         property: "og:description",
         content: "Scientific leadership and operational management of the Society.",
       },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Leadership — ISEFS" },
+      { name: "twitter:description", content: "Scientific leadership and operational management of the Society." },
     ],
+    links: [{ rel: "canonical", href: "https://isefs.lovable.app/leadership" }],
   }),
   component: LeadershipPage,
 });

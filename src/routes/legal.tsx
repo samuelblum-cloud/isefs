@@ -13,11 +13,17 @@ export const Route = createFileRoute("/legal")({
           "Legal information about the International Society for Endoscopic Facial Surgery, its status, and the use of this website.",
       },
       { property: "og:title", content: "Legal information — ISEFS" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://isefs.lovable.app/legal" },
       {
         property: "og:description",
         content: "Status, responsibility and terms of use for the ISEFS website.",
       },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Legal information — ISEFS" },
+      { name: "twitter:description", content: "Status, responsibility and terms of use for the ISEFS website." },
     ],
+    links: [{ rel: "canonical", href: "https://isefs.lovable.app/legal" }],
   }),
   component: LegalPage,
 });

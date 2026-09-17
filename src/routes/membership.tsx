@@ -14,12 +14,21 @@ export const Route = createFileRoute("/membership")({
           "Register your interest to receive news about the Society, membership and upcoming educational activities in endoscopic facial surgery.",
       },
       { property: "og:title", content: "Membership — ISEFS" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://isefs.lovable.app/membership" },
       {
         property: "og:description",
         content:
           "Professional exchange, educational resources, scientific collaboration and access to Society programmes.",
       },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Membership — ISEFS" },
+      {
+        name: "twitter:description",
+        content: "Professional exchange, education and scientific collaboration through planned ISEFS membership.",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://isefs.lovable.app/membership" }],
   }),
   component: MembershipPage,
 });
