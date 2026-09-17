@@ -87,7 +87,7 @@ function HomePage() {
             </p>
             <Link
               to="/about"
-              className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+              className="link-inline"
             >
               Read about our mission
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -110,7 +110,7 @@ function HomePage() {
           </ul>
           <Link
             to="/education-and-science"
-            className="mt-9 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            className="mt-9 link-inline"
           >
             See the full programme
             <ArrowRight className="h-4 w-4" aria-hidden />
@@ -139,7 +139,7 @@ function HomePage() {
               href={announcement.courseUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+              className="mt-6 link-inline"
             >
               Visit the official course website
               <ExternalLink className="h-4 w-4" aria-hidden />
@@ -155,17 +155,17 @@ function HomePage() {
             {founders.map((person) => (
               <div key={person.name} className="bg-background p-7">
                 <p className="eyebrow">{person.role}</p>
-                <p className="mt-3 font-display text-lg text-ink">{person.name}</p>
+                <p className="mt-3 text-lg text-ink">{person.name}</p>
               </div>
             ))}
             <div className="bg-background p-7">
               <p className="eyebrow">{management.role}</p>
-              <p className="mt-3 font-display text-lg text-ink">{management.name}</p>
+              <p className="mt-3 text-lg text-ink">{management.name}</p>
             </div>
           </div>
           <Link
             to="/leadership"
-            className="mt-9 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            className="mt-9 link-inline"
           >
             More about the Society's leadership
             <ArrowRight className="h-4 w-4" aria-hidden />
@@ -186,7 +186,7 @@ function HomePage() {
           <Link
             to="/membership"
             hash="register"
-            className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent lg:justify-self-start"
+            className="btn-primary no-underline lg:justify-self-start"
           >
             Register your interest
             <ArrowRight className="h-4 w-4" aria-hidden />

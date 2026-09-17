@@ -217,7 +217,7 @@ export function InterestForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-70"
+        className="btn-primary no-underline"
       >
         {status === "submitting" ? (
           <>

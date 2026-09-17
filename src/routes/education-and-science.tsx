@@ -72,7 +72,7 @@ function EducationPage() {
             href={announcement.courseUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            className="mt-7 link-inline"
           >
             Visit the official course website
             <ExternalLink className="h-4 w-4" aria-hidden />
