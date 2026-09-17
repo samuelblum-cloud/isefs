@@ -29,42 +29,42 @@ function HomePage() {
   return (
     <>
       <section className="border-b border-rule bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.25fr_1fr] lg:items-center">
+        <div className="container-page grid gap-16 py-16 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-24">
           <div className="fade-up">
-            <p className="eyebrow">{society.brand} · by {society.shortName}</p>
-            <h1 className="mt-5 text-[2.6rem] leading-[1.05] sm:text-6xl">{society.tagline}</h1>
-            <p className="measure mt-7 text-lg leading-relaxed text-muted-foreground">
-              {society.intro}
+            <p className="eyebrow">
+              {society.brand} · by {society.shortName}
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <h1 className="mt-5">{society.tagline}</h1>
+            <p className="measure mt-6 text-muted-foreground">{society.intro}</p>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                to="/membership"
-                hash="register"
-                className="inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
+                to="/education-and-science"
+                className="btn-primary no-underline"
               >
-                Register your interest
+                Explore education
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
               <Link
-                to="/education-and-science"
-                className="inline-flex items-center justify-center gap-2 rounded-sm border border-primary/25 px-6 py-3.5 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
+                to="/membership"
+                hash="register"
+                className="btn-secondary no-underline"
               >
-                Explore our educational programme
+                Register interest
               </Link>
             </div>
-            <p className="mt-8 text-sm text-muted-foreground">{society.status}</p>
+            <p className="mt-8 text-base text-muted-foreground">{society.status}</p>
           </div>
 
-          <div className="rounded-sm border border-rule bg-background p-8 sm:p-10">
+          <div className="rounded-sm border border-rule bg-background p-8 lg:p-12">
             <img
               src={endofaceLogo.url}
               alt="ENDOFACE by ISEFS — International Society for Endoscopic Facial Surgery logo"
-              className="h-auto w-full max-w-sm"
+              className="h-auto w-full"
               width={1920}
               height={628}
             />
-            <p className="mt-8 border-t border-rule pt-6 text-sm leading-relaxed text-muted-foreground">
-              {society.brand} is the public-facing programme of the {society.name}, the Society
+            <p className="mt-8 border-t border-rule pt-6 text-base leading-relaxed text-muted-foreground">
+              {society.brand} is the public-facing identity of the {society.name}, the Society
               behind its educational and scientific work.
             </p>
           </div>
