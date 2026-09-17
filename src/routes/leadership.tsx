@@ -42,10 +42,9 @@ function LeadershipPage() {
           ))}
         </ul>
         <p className="measure mt-8 text-sm leading-relaxed text-muted-foreground">
-          The scientific founders lead the Society's academic direction. Committee appointments and
-          further Board roles are being prepared as part of the Society's establishment and are not
-          yet confirmed. Biographies and photographs will be published once approved by each
-          individual.
+          The scientific founders lead the Society’s academic direction and its educational and
+          scientific programme. The Society’s complete governance and committee structure will be
+          published as part of its formal establishment.
         </p>
       </Section>
 
