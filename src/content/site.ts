@@ -119,7 +119,7 @@ export const announcement = {
   courseLocation: "Barcelona, Spain",
   courseUrl: "https://www.endofacemasters.com/",
   courseNote:
-    "Endo Face Masters is an independent course. ISEFS neither organises nor owns the event. Programme, registration and attendance information is published on the official course website.",
+    "ENDOFACE Masters takes place in Barcelona from 15 to 17 October 2026 and will host the announcement of ISEFS at its gala evening. Its combination of lectures, surgical observation and practical teaching provides an important reference for the Society’s future educational programme. Programme, registration and attendance information is available on the official event website.",
 } as const;
 
 export const educationAreas = [
