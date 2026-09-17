@@ -13,27 +13,28 @@ const navigation = [
 ] as const;
 
 /**
- * Public identity per the corporate identity guide: "ENDOFACE by ISEFS".
- * The header uses a live-text lockup because the supplied ENDOFACE artwork
- * has a minimum reproduction width of 640 px and must not be squeezed into a
- * navigation bar. Replace with a compact master once one is approved.
+ * Header leads with the institutional ISEFS identity, with ENDOFACE named as
+ * the Society's flagship programme. Live text is used because the supplied
+ * artwork has a 360 px minimum reproduction width and must not be squeezed
+ * into a navigation bar. Replace with a compact master once one is approved.
  */
 function BrandLockup() {
   return (
     <span className="flex flex-col leading-none">
       <span className="text-xl font-bold tracking-[0.14em] text-primary sm:text-2xl">
-        {society.brand}
-        <sup className="ml-0.5 align-super text-[0.5em] font-semibold">™</sup>
-      </span>
-      <span className="mt-1 text-xs font-semibold tracking-wide text-accent">
-        by {society.shortName}
+        {society.shortName}
       </span>
       <span className="mt-1 hidden text-[11px] leading-tight text-muted-foreground lg:block">
         {society.name}
       </span>
+      <span className="mt-1 text-xs font-semibold tracking-wide text-accent">
+        Home of {society.brand}
+        <sup className="ml-0.5 align-super text-[0.7em]">™</sup>
+      </span>
     </span>
   );
 }
+
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
