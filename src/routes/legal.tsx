@@ -65,7 +65,7 @@ function LegalPage() {
           </div>
 
           <div>
-            <SectionTitle title="Independent events" />
+            <SectionTitle title="ENDOFACE Masters" />
             <p className="mt-4 text-muted-foreground">{announcement.courseNote}</p>
           </div>
 
