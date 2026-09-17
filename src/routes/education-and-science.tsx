@@ -46,7 +46,7 @@ function EducationPage() {
         </ul>
 
         <div className="mt-12 rounded-sm bg-surface p-8">
-          <h2 className="text-lg">A note on what these activities are</h2>
+          <h2>A note on what these activities are</h2>
           <p className="measure mt-4 text-sm leading-relaxed text-muted-foreground">
             A scientific congress is a meeting for presenting and debating research. It is not the
             same as a course that includes surgical observation or laboratory teaching, which has

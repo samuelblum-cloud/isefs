@@ -82,7 +82,7 @@ function AboutPage() {
           <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2">
             {principles.map((item) => (
               <div key={item.title} className="bg-background p-8">
-                <h3 className="text-lg">{item.title}</h3>
+                <h3>{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
               </div>
             ))}

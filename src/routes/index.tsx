@@ -103,7 +103,7 @@ function HomePage() {
             {educationAreas.map((area) => (
               <li key={area.title} className="bg-background p-7">
                 <StatusTag>{area.status}</StatusTag>
-                <h3 className="mt-4 text-lg">{area.title}</h3>
+                <h3 className="mt-4">{area.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{area.summary}</p>
               </li>
             ))}
@@ -128,7 +128,7 @@ function HomePage() {
             </p>
           </div>
           <div className="rule-top pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <h3 className="text-lg">{announcement.courseName}</h3>
+            <h3>{announcement.courseName}</h3>
             <p className="mt-2 text-sm text-muted-foreground">
               {announcement.courseDates} · {announcement.courseLocation}
             </p>
@@ -155,12 +155,12 @@ function HomePage() {
             {founders.map((person) => (
               <div key={person.name} className="bg-background p-7">
                 <p className="eyebrow">{person.role}</p>
-                <p className="mt-3 text-lg text-ink">{person.name}</p>
+                <p className="mt-3 text-lg font-semibold text-ink">{person.name}</p>
               </div>
             ))}
             <div className="bg-background p-7">
               <p className="eyebrow">{management.role}</p>
-              <p className="mt-3 text-lg text-ink">{management.name}</p>
+              <p className="mt-3 text-lg font-semibold text-ink">{management.name}</p>
             </div>
           </div>
           <Link

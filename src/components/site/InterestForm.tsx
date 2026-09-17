@@ -144,7 +144,7 @@ export function InterestForm() {
       </Field>
 
       <fieldset>
-        <legend className="text-sm font-medium text-foreground">Areas of interest</legend>
+        <legend className="text-base font-semibold text-primary">Areas of interest</legend>
         <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
           {areasOfInterestOptions.map((option) => (
             <label
