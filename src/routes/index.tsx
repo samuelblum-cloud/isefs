@@ -63,9 +63,6 @@ function HomePage() {
               width={1920}
               height={628}
             />
-            <p className="mt-8 border-t border-rule pt-6 text-base leading-relaxed text-muted-foreground">
-              {' '}
-            </p>
           </div>
         </div>
       </section>
