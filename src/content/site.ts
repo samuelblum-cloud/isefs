@@ -8,11 +8,83 @@ export const society = {
   shortName: "ISEFS",
   name: "International Society for Endoscopic Facial Surgery",
   brand: "ENDOFACE",
+  brandNote:
+    "ENDOFACE is the Society's flagship educational programme and brand. ISEFS is the scientific society behind it.",
   status: "The Society is currently being established.",
   tagline: "Advancing endoscopic facial surgery.",
   intro:
     "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
 } as const;
+
+/**
+ * Legal form, taken from the draft Articles of Association (v0.1).
+ * `articlesApproved` stays false until the founding meeting adopts them.
+ */
+export const legalForm = {
+  articlesApproved: false,
+  summary:
+    "ISEFS is being established as a politically and denominationally independent, non-profit association under Articles 60 et seq. of the Swiss Civil Code, with its registered office in Zurich, Switzerland.",
+  seat: "Zurich, Switzerland",
+  duration: "The duration of the association is unlimited.",
+} as const;
+
+/**
+ * Purpose statements derived from Article 2 of the draft Articles of Association.
+ */
+export const purposeStatements = [
+  "Promote science, education, patient safety, treatment quality, responsible innovation and international professional exchange in endoscopic facial surgery.",
+  "Develop, disseminate and critically discuss scientific, clinical, technical and ethical standards.",
+  "Organise congresses, courses, workshops, masterclasses, fellowships and mentoring programmes.",
+  "Initiate and support research projects, studies, registries, international collaborations and publications.",
+  "Cooperate with universities, clinics, scientific societies, professional associations and authorities.",
+  "Support qualified surgeons, physicians in training and other professionals specialised in endoscopic facial surgery.",
+] as const;
+
+/**
+ * Membership categories foreseen in Article 4 of the draft Articles of Association.
+ * These are planned categories; conditions and any contribution require Board approval.
+ */
+export const membershipCategories = [
+  {
+    title: "Founding Members",
+    body: "Members of the first cohort invited by the Board, holding a special title and the rights set out in the membership regulations.",
+  },
+  {
+    title: "Fellows (FISEFS)",
+    body: "Members who meet the professional and practical requirements of a recognised ISEFS learning or credentialing pathway, or equivalent experience.",
+  },
+  {
+    title: "Full Members",
+    body: "Individuals with recognised qualifications, a valid licence to practise and good professional standing in endoscopic facial surgery or related fields.",
+  },
+  {
+    title: "Associate Members",
+    body: "Other professionals and scientists who support the purpose of the Society.",
+  },
+  {
+    title: "Resident, Trainee or Junior Members",
+    body: "Those in training, continuing education or at an early stage of their career.",
+  },
+  {
+    title: "Supporting, Partner or Corporate Members",
+    body: "Individuals, institutions and organisations supporting the Society in kind, organisationally or financially.",
+  },
+  {
+    title: "Honorary Members",
+    body: "Persons who have rendered outstanding service to the Society or to the field.",
+  },
+] as const;
+
+/**
+ * Admission principles from Article 5 of the draft Articles of Association.
+ */
+export const admissionNotes = [
+  "Admission requires a written or electronic application; the Board, or a membership committee appointed by it, decides on admission.",
+  "The Board may set professional, personal and ethical admission criteria in the membership regulations.",
+  "There is no entitlement to membership, and applications may be declined.",
+  "Membership, a title or a member mark is not a confirmation of independently assessed clinical competence, nor an endorsement of any particular practice.",
+] as const;
+
 
 /**
  * Contact details. Leave a value as null until it has been approved;

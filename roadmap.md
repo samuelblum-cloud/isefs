@@ -25,7 +25,15 @@
 - [ ] Confirm payments via verified provider events or authorised reconciliation; prevent duplicates
 - [ ] Test activity isolated from live records
 
+## From the statutes (draft v0.1) and strategy — reflected in site content
+- [x] Swiss non-profit association, Art. 60 ff. ZGB, registered office Zurich
+- [x] Purpose statements (Art. 2), membership categories (Art. 4), admission principles (Art. 5)
+- [ ] Draft contribution amounts (Full 950 / Associate 550 / Resident 475 / Corporate tiers, EUR) stay unpublished until Board approval
+- [ ] Founding Board presidential rotation (Mani → Renert → Díaz Carandell) publish only after founding meeting adopts it
+
 ## Open (blocked on owner)
 - [ ] Approved organisation contact details, privacy notice, domain
 - [ ] Approved admission rules and membership terms before formal applications open
 - [ ] Approved fees, currency, bank account, provider onboarding and verification before live collection
+- [ ] Adoption of the articles of association at the founding meeting
+
