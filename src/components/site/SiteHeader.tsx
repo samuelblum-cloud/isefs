@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
+import isefsLogo from "@/assets/isefs-logo.png.asset.json";
 import { society } from "@/content/site";
 
 const navigation = [
@@ -13,21 +14,20 @@ const navigation = [
 ] as const;
 
 /**
- * Header leads with the institutional ISEFS identity, with ENDOFACE named as
- * the Society's flagship programme. Live text is used because the supplied
- * artwork has a 360 px minimum reproduction width and must not be squeezed
- * into a navigation bar. Replace with a compact master once one is approved.
+ * Header leads with the institutional ISEFS logo, with ENDOFACE named as the
+ * Society's flagship programme underneath.
  */
 function BrandLockup() {
   return (
     <span className="flex flex-col leading-none">
-      <span className="text-xl font-bold tracking-[0.14em] text-primary sm:text-2xl">
-        {society.shortName}
-      </span>
-      <span className="mt-1 hidden text-[11px] leading-tight text-muted-foreground lg:block">
-        {society.name}
-      </span>
-      <span className="mt-1 text-xs font-semibold tracking-wide text-accent">
+      <img
+        src={isefsLogo.url}
+        alt={`${society.shortName} — ${society.name}`}
+        className="h-12 w-auto sm:h-14"
+        width={360}
+        height={96}
+      />
+      <span className="mt-1.5 text-xs font-semibold tracking-wide text-accent">
         Home of {society.brand}
         <sup className="ml-0.5 align-super text-[0.7em]">™</sup>
       </span>
