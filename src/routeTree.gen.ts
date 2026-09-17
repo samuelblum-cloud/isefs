@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EducationAndScienceRouteImport } from './routes/education-and-science'
 import { Route as LeadershipRouteImport } from './routes/leadership'
+import { Route as LegalRouteImport } from './routes/legal'
 import { Route as MembershipRouteImport } from './routes/membership'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EducationAndScienceRoute = EducationAndScienceRouteImport.update({
@@ -35,55 +43,95 @@ const LeadershipRoute = LeadershipRouteImport.update({
   path: '/leadership',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MembershipRoute = MembershipRouteImport.update({
   id: '/membership',
   path: '/membership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/education-and-science': typeof EducationAndScienceRoute
   '/leadership': typeof LeadershipRoute
+  '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
+  '/privacy': typeof PrivacyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/education-and-science': typeof EducationAndScienceRoute
   '/leadership': typeof LeadershipRoute
+  '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
+  '/privacy': typeof PrivacyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/education-and-science': typeof EducationAndScienceRoute
   '/leadership': typeof LeadershipRoute
+  '/legal': typeof LegalRoute
   '/membership': typeof MembershipRoute
+  '/privacy': typeof PrivacyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/education-and-science' | '/leadership' | '/membership'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/education-and-science'
+    | '/leadership'
+    | '/legal'
+    | '/membership'
+    | '/privacy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/education-and-science' | '/leadership' | '/membership'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/education-and-science'
+    | '/leadership'
+    | '/legal'
+    | '/membership'
+    | '/privacy'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/contact'
     | '/education-and-science'
     | '/leadership'
+    | '/legal'
     | '/membership'
+    | '/privacy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
   EducationAndScienceRoute: typeof EducationAndScienceRoute
   LeadershipRoute: typeof LeadershipRoute
+  LegalRoute: typeof LegalRoute
   MembershipRoute: typeof MembershipRoute
+  PrivacyRoute: typeof PrivacyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/education-and-science': {
       id: '/education-and-science'
       path: '/education-and-science'
@@ -116,11 +171,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeadershipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/membership': {
       id: '/membership'
       path: '/membership'
       fullPath: '/membership'
       preLoaderRoute: typeof MembershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -129,9 +198,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
   EducationAndScienceRoute: EducationAndScienceRoute,
   LeadershipRoute: LeadershipRoute,
+  LegalRoute: LegalRoute,
   MembershipRoute: MembershipRoute,
+  PrivacyRoute: PrivacyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

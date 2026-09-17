@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
-import { society } from "@/content/site";
+import { legalForm, purposeStatements, society } from "@/content/site";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -91,6 +91,31 @@ function AboutPage() {
       </div>
 
       <Section>
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionTitle eyebrow="Purpose" title="What the Society will do" />
+          <div>
+            <p className="measure text-base leading-relaxed text-muted-foreground">
+              {legalForm.summary} The purpose set out in its draft articles of association is to:
+            </p>
+            <ul className="mt-6 space-y-3">
+              {purposeStatements.map((item) => (
+                <li
+                  key={item}
+                  className="measure border-t border-rule pt-3 text-sm leading-relaxed text-muted-foreground"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
+              The articles of association remain in draft until adopted at the founding meeting.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+
         <div className="rounded-sm border border-rule p-8 sm:p-12">
           <h2 className="text-2xl">Current status</h2>
           <p className="measure mt-5 text-base leading-relaxed text-muted-foreground">

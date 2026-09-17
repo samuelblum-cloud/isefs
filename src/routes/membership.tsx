@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { InterestForm } from "@/components/site/InterestForm";
 import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
-import { membershipValue } from "@/content/site";
+import { admissionNotes, membershipCategories, membershipValue } from "@/content/site";
 
 export const Route = createFileRoute("/membership")({
   head: () => ({
@@ -49,6 +49,37 @@ function MembershipPage() {
           constitutes an offer of membership or a commitment to any particular benefit.
         </p>
       </Section>
+
+      <Section className="pt-0">
+        <SectionTitle eyebrow="Planned categories" title="Membership categories foreseen" />
+        <ul className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2">
+          {membershipCategories.map((item) => (
+            <li key={item.title} className="bg-background p-8">
+              <h3 className="text-lg">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-12 rounded-sm border border-rule p-8 sm:p-10">
+          <h3 className="text-xl">How admission is intended to work</h3>
+          <ul className="mt-5 space-y-3">
+            {admissionNotes.map((note) => (
+              <li
+                key={note}
+                className="measure border-t border-rule pt-3 text-sm leading-relaxed text-muted-foreground"
+              >
+                {note}
+              </li>
+            ))}
+          </ul>
+          <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
+            Formal applications will open once the admission rules and membership regulations have
+            been approved. Until then, please register your interest.
+          </p>
+        </div>
+      </Section>
+
 
       <div className="border-y border-rule bg-surface">
         <Section id="register">
