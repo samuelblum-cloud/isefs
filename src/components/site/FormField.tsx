@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 const fieldClasses =
-  "mt-2 w-full rounded-sm border border-input bg-background px-3.5 py-2.5 text-base text-foreground placeholder:text-muted-foreground/70 focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "mt-2 w-full min-h-12 rounded-sm border border-input bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground aria-[invalid=true]:border-destructive aria-[invalid=true]:border-2";
 
 export function Field({
   id,
@@ -20,14 +20,16 @@ export function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="text-sm font-medium text-foreground">
+      <label htmlFor={id} className="text-base font-semibold text-primary">
         {label}
-        {optional ? <span className="ml-1 text-muted-foreground">(optional)</span> : null}
+        {optional ? (
+          <span className="ml-1 font-normal text-muted-foreground">(optional)</span>
+        ) : null}
       </label>
-      {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
+      {hint ? <p className="mt-1 text-sm text-muted-foreground">{hint}</p> : null}
       {children}
       {error ? (
-        <p id={`${id}-error`} role="alert" className="mt-1.5 text-sm text-destructive">
+        <p id={`${id}-error`} role="alert" className="mt-2 text-sm font-semibold text-destructive">
           {error}
         </p>
       ) : null}

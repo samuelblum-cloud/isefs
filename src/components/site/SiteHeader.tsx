@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-import logo from "@/assets/isefs-logo.png.asset.json";
+import { society } from "@/content/site";
 
 const navigation = [
   { to: "/about", label: "About" },
@@ -12,55 +12,68 @@ const navigation = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+/**
+ * Public identity per the corporate identity guide: "ENDOFACE by ISEFS".
+ * The header uses a live-text lockup because the supplied ENDOFACE artwork
+ * has a minimum reproduction width of 640 px and must not be squeezed into a
+ * navigation bar. Replace with a compact master once one is approved.
+ */
+function BrandLockup() {
+  return (
+    <span className="flex flex-col leading-none">
+      <span className="text-xl font-bold tracking-[0.14em] text-primary sm:text-2xl">
+        {society.brand}
+        <sup className="ml-0.5 align-super text-[0.5em] font-semibold">™</sup>
+      </span>
+      <span className="mt-1 text-xs font-semibold tracking-wide text-accent">
+        by {society.shortName}
+      </span>
+      <span className="mt-1 hidden text-[11px] leading-tight text-muted-foreground lg:block">
+        {society.name}
+      </span>
+    </span>
+  );
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-rule bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <header className="sticky top-0 z-50 border-b border-rule bg-background">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:text-primary-foreground"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-5 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:text-primary-foreground"
       >
         Skip to content
       </a>
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-6 px-5 sm:px-8">
+      <div className="container-page flex min-h-24 items-center justify-between gap-8 py-4">
         <Link
           to="/"
-          className="flex shrink-0 items-center"
-          aria-label="ISEFS — International Society for Endoscopic Facial Surgery, home"
+          className="shrink-0 no-underline"
+          aria-label={`${society.brand} by ${society.shortName} — ${society.name}, home`}
           onClick={() => setOpen(false)}
         >
-          <img
-            src={logo.url}
-            alt="ISEFS — International Society for Endoscopic Facial Surgery logo"
-            className="h-9 w-auto sm:h-11"
-            width={320}
-            height={104}
-          />
+          <BrandLockup />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
           {navigation.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground data-[status=active]:text-foreground data-[status=active]:underline data-[status=active]:decoration-accent data-[status=active]:underline-offset-8"
+              className="text-base text-foreground underline-offset-8 hover:text-accent hover:underline data-[status=active]:font-semibold data-[status=active]:text-primary data-[status=active]:underline data-[status=active]:decoration-accent data-[status=active]:decoration-2"
             >
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/membership"
-            hash="register"
-            className="rounded-sm bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
-          >
-            Register your interest
+          <Link to="/membership" hash="register" className="btn-primary text-sm no-underline">
+            Register interest
           </Link>
         </nav>
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-rule lg:hidden"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-sm border border-primary text-primary lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-navigation"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -76,13 +89,13 @@ export function SiteHeader() {
           aria-label="Primary mobile"
           className="border-t border-rule bg-background lg:hidden"
         >
-          <ul className="mx-auto flex max-w-6xl flex-col px-5 py-2 sm:px-8">
+          <ul className="container-page flex flex-col py-2">
             {navigation.map((item) => (
               <li key={item.to}>
                 <Link
                   to={item.to}
                   onClick={() => setOpen(false)}
-                  className="block border-b border-rule py-3.5 text-base text-foreground"
+                  className="flex min-h-12 items-center border-b border-rule text-base text-foreground"
                 >
                   {item.label}
                 </Link>
@@ -93,9 +106,9 @@ export function SiteHeader() {
                 to="/membership"
                 hash="register"
                 onClick={() => setOpen(false)}
-                className="block rounded-sm bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground"
+                className="btn-primary w-full no-underline"
               >
-                Register your interest
+                Register interest
               </Link>
             </li>
           </ul>
