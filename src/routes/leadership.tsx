@@ -60,9 +60,7 @@ function LeadershipPage() {
             </p>
           </div>
           <p className="measure mt-8 text-sm leading-relaxed text-muted-foreground">
-            Executive management and secretariat responsibilities are held within this single
-            Managing Director role. Scientific direction remains with the Society's scientific
-            leadership.
+            &nbsp;
           </p>
         </Section>
       </div>
