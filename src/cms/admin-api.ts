@@ -2,6 +2,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Json, Tables } from "@/integrations/supabase/types";
 
 import { bootstrapCms } from "./cms.functions";
+import { enrichFounderPeopleData } from "./founder-profiles";
 import type { CmsBlockType, CmsContentBlock, CmsPageDocument } from "./types";
 
 export type CmsAdminRole = "owner" | "editor";
@@ -146,15 +147,21 @@ export async function loadCmsAdminSnapshot(): Promise<CmsAdminSnapshot> {
           })),
         blocks: blocks
           .filter((block) => block.page_version_id === draft.id)
-          .map<CmsContentBlock>((block) => ({
-            id: block.id,
-            pageVersionId: block.page_version_id,
-            type: block.block_type as CmsBlockType,
-            internalName: block.internal_name,
-            position: block.position,
-            visible: block.visible,
-            data: toRecord(block.data),
-          })),
+          .map<CmsContentBlock>((block) => {
+            const blockData = toRecord(block.data);
+            return {
+              id: block.id,
+              pageVersionId: block.page_version_id,
+              type: block.block_type as CmsBlockType,
+              internalName: block.internal_name,
+              position: block.position,
+              visible: block.visible,
+              data:
+                block.block_type === "people_grid"
+                  ? enrichFounderPeopleData(page.slug, blockData)
+                  : blockData,
+            };
+          }),
       },
     ];
   });

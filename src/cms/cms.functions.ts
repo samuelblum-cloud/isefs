@@ -4,6 +4,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 import { defaultCmsPages } from "./default-pages";
+import { enrichFounderPeopleData } from "./founder-profiles";
 import type { CmsBlockType, CmsPageDocument } from "./types";
 
 const slugSchema = z.object({
@@ -69,18 +70,25 @@ async function readPage(slug: string, status: "draft" | "published") {
     metaTitle: version.meta_title,
     metaDescription: version.meta_description,
     publishedAt: version.published_at,
-    blocks: (blocks ?? []).map((block) => ({
-      id: block.id,
-      pageVersionId: block.page_version_id,
-      type: block.block_type as CmsBlockType,
-      internalName: block.internal_name,
-      position: block.position,
-      visible: block.visible,
-      data:
+    blocks: (blocks ?? []).map((block) => {
+      const blockData =
         typeof block.data === "object" && block.data && !Array.isArray(block.data)
           ? block.data
-          : {},
-    })),
+          : {};
+
+      return {
+        id: block.id,
+        pageVersionId: block.page_version_id,
+        type: block.block_type as CmsBlockType,
+        internalName: block.internal_name,
+        position: block.position,
+        visible: block.visible,
+        data:
+          block.block_type === "people_grid"
+            ? enrichFounderPeopleData(page.slug, blockData)
+            : blockData,
+      };
+    }),
   } satisfies CmsPageDocument;
 }
 
@@ -134,7 +142,6 @@ export const bootstrapCms = createServerFn({ method: "POST" })
         throw new Error(`Could not create CMS page ${seed.slug}: ${pageError.message}`);
 
       createdCount += 1;
-
 
       const { data: published, error: publishedError } = await supabaseAdmin
         .from("cms_page_versions")

@@ -17,7 +17,15 @@ import type { CmsSeedPage } from "./types";
 const founderCards = founders.map((person) => ({
   name: person.name,
   role: person.role,
-  summary: "",
+  summary: person.summary,
+  imageUrl: "",
+  imageAlt: "",
+}));
+
+const homeFounderCards = founders.map((person) => ({
+  name: person.name,
+  role: person.role,
+  summary: person.shortSummary,
   imageUrl: "",
   imageAlt: "",
 }));
@@ -113,11 +121,11 @@ export const defaultCmsPages: CmsSeedPage[] = [
           title: "Founders and management",
           intro: "",
           people: [
-            ...founderCards,
+            ...homeFounderCards,
             {
               name: management.name,
               role: management.role,
-              summary: "",
+              summary: "Leads the Society’s day-to-day operations and programme implementation.",
               imageUrl: "",
               imageAlt: "",
             },

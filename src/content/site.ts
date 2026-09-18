@@ -176,15 +176,27 @@ export const educationAreas = [
 export const founders = [
   {
     name: "Dr. Marc Mani",
-    role: "Scientific founder",
+    role: "Scientific Founder · Plastic & Reconstructive Surgeon",
+    shortSummary:
+      "Internationally recognised for deep-plane and endoscopic facial rejuvenation and active in international surgical education.",
+    summary:
+      "A Beverly Hills-based plastic surgeon internationally recognised for advanced facial rejuvenation. Harvard-educated and trained in plastic surgery at Baylor College of Medicine, Dr. Mani has published and taught internationally on deep-plane and endoscopic lifting techniques.",
   },
   {
     name: "Dr. Gad Renert",
-    role: "Scientific founder",
+    role: "Scientific Founder · Plastic, Reconstructive & Aesthetic Surgeon",
+    shortSummary:
+      "A specialist in endoscopic facial procedures, deep-plane rejuvenation and international surgical education.",
+    summary:
+      "A Bucharest-based plastic, reconstructive and aesthetic surgeon with extensive experience in endoscopic facial procedures, deep-plane rejuvenation and complex revision surgery. Dr. Renert is internationally active as a faculty speaker, cadaver-lab instructor and live-surgery demonstrator.",
   },
   {
     name: "Dr. Artur Díaz Carandell",
-    role: "Scientific founder",
+    role: "Scientific Founder · Cranio-Maxillofacial & Facial Plastic Surgeon",
+    shortSummary:
+      "A cranio-maxillofacial and facial plastic surgeon combining endoscopic expertise with international teaching.",
+    summary:
+      "A Barcelona-based cranio-maxillofacial and facial plastic surgeon with more than two decades of experience. A Fellow of the European Board of Oral and Maxillofacial Surgery and Medical Director of the Racine² Group, Dr. Díaz Carandell combines advanced endoscopic facial rejuvenation with international surgical teaching.",
   },
 ] as const;
 

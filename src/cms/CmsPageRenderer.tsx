@@ -368,7 +368,7 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
                   style={{ objectPosition: focalPosition(person) }}
                 />
               ) : null}
-              <p className="eyebrow">{text(person, "role")}</p>
+              <p className="eyebrow min-h-16">{text(person, "role")}</p>
               <h3 className="mt-4">{text(person, "name")}</h3>
               {text(person, "summary") ? (
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">

@@ -151,13 +151,19 @@ function HomePage() {
           <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
             {founders.map((person) => (
               <div key={person.name} className="bg-background p-7">
-                <p className="eyebrow">{person.role}</p>
+                <p className="eyebrow min-h-16">{person.role}</p>
                 <p className="mt-3 text-lg font-semibold text-ink">{person.name}</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {person.shortSummary}
+                </p>
               </div>
             ))}
             <div className="bg-background p-7">
-              <p className="eyebrow">{management.role}</p>
+              <p className="eyebrow min-h-16">{management.role}</p>
               <p className="mt-3 text-lg font-semibold text-ink">{management.name}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Leads the Society’s day-to-day operations and programme implementation.
+              </p>
             </div>
           </div>
           <Link to="/leadership" className="mt-9 link-inline">

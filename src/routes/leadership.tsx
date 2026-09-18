@@ -45,8 +45,9 @@ function LeadershipPage() {
         <ul className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule lg:grid-cols-3">
           {founders.map((person) => (
             <li key={person.name} className="bg-background p-9 sm:p-10">
-              <p className="eyebrow">{person.role}</p>
+              <p className="eyebrow min-h-16">{person.role}</p>
               <p className="mt-5 text-2xl font-semibold leading-snug text-ink">{person.name}</p>
+              <p className="mt-5 text-sm leading-relaxed text-muted-foreground">{person.summary}</p>
             </li>
           ))}
         </ul>
