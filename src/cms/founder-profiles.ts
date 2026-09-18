@@ -3,6 +3,9 @@ import type { Json } from "@/integrations/supabase/types";
 
 type CmsData = Record<string, Json | undefined>;
 
+const previousManagementSummary =
+  "Samuel Blum leads the Society’s day-to-day operations and the implementation of its programme. His responsibilities include member administration, provider management, operational banking, communications, digital platforms and reporting to the Board. Executive management and secretariat responsibilities are combined in this single Managing Director role. The Board retains strategic oversight and its reserved decisions, while the founders and academic leads remain responsible for scientific content and professional assessment.";
+
 const founderAliases = new Map<string, (typeof founders)[number]>([
   ["dr. marc mani", founders[0]],
   ["dr. gad renert", founders[1]],
@@ -69,4 +72,26 @@ export function enrichFounderPeopleData(pageSlug: string, data: CmsData): CmsDat
   });
 
   return changed ? { ...data, people: enrichedPeople } : data;
+}
+
+/**
+ * Updates the untouched management profile shipped before the shorter public
+ * biography was approved. Any text changed in the CMS remains authoritative.
+ */
+export function enrichManagementProfileData(pageSlug: string, data: CmsData): CmsData {
+  if (pageSlug !== "leadership") return data;
+
+  const name = valueText(data["name"]);
+  const role = valueText(data["role"]);
+  const summary = valueText(data["summary"]);
+
+  if (
+    name !== management.name ||
+    role !== management.role ||
+    summary !== previousManagementSummary
+  ) {
+    return data;
+  }
+
+  return { ...data, summary: management.summary };
 }

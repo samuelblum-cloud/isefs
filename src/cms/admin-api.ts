@@ -2,7 +2,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Json, Tables } from "@/integrations/supabase/types";
 
 import { bootstrapCms } from "./cms.functions";
-import { enrichFounderPeopleData } from "./founder-profiles";
+import { enrichFounderPeopleData, enrichManagementProfileData } from "./founder-profiles";
 import type { CmsBlockType, CmsContentBlock, CmsPageDocument } from "./types";
 
 export type CmsAdminRole = "owner" | "editor";
@@ -159,7 +159,9 @@ export async function loadCmsAdminSnapshot(): Promise<CmsAdminSnapshot> {
               data:
                 block.block_type === "people_grid"
                   ? enrichFounderPeopleData(page.slug, blockData)
-                  : blockData,
+                  : block.block_type === "management_profile"
+                    ? enrichManagementProfileData(page.slug, blockData)
+                    : blockData,
             };
           }),
       },

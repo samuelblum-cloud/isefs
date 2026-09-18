@@ -4,7 +4,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 import { defaultCmsPages } from "./default-pages";
-import { enrichFounderPeopleData } from "./founder-profiles";
+import { enrichFounderPeopleData, enrichManagementProfileData } from "./founder-profiles";
 import type { CmsBlockType, CmsPageDocument } from "./types";
 
 const slugSchema = z.object({
@@ -86,7 +86,9 @@ async function readPage(slug: string, status: "draft" | "published") {
         data:
           block.block_type === "people_grid"
             ? enrichFounderPeopleData(page.slug, blockData)
-            : blockData,
+            : block.block_type === "management_profile"
+              ? enrichManagementProfileData(page.slug, blockData)
+              : blockData,
       };
     }),
   } satisfies CmsPageDocument;
