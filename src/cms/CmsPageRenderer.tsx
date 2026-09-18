@@ -76,7 +76,7 @@ function CmsLink({ url, label, button = false }: { url: string; label: string; b
 function BlockShell({ block, children }: { block: CmsContentBlock; children: React.ReactNode }) {
   const data = block.data as UnknownRecord;
   return flag(data, "surface") ? (
-    <div className="border-y border-rule bg-surface">
+    <div className="section-soft">
       <Section>{children}</Section>
     </div>
   ) : (
@@ -164,7 +164,7 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
 
   if (block.type === "hero") {
     return (
-      <section className="border-b border-rule bg-surface">
+      <section className="hero-soft">
         <div className="container-page grid gap-16 py-16 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-24">
           <div>
             {text(data, "eyebrow") ? <p className="eyebrow">{text(data, "eyebrow")}</p> : null}
@@ -188,11 +188,11 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
             ) : null}
           </div>
           {text(data, "imageUrl") ? (
-            <div className="rounded-sm border border-rule bg-background p-8 lg:p-12">
+            <div className="brand-panel-soft rounded-lg border p-8 lg:p-12">
               <img
                 src={text(data, "imageUrl")}
                 alt={text(data, "imageAlt")}
-                className="h-auto w-full"
+                className="brand-mark-soft h-auto w-full"
               />
             </div>
           ) : null}

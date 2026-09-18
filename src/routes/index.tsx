@@ -39,7 +39,7 @@ function HomePage() {
 
   return (
     <>
-      <section className="border-b border-rule bg-surface">
+      <section className="hero-soft">
         <div className="container-page grid gap-16 py-16 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-24">
           <div className="fade-up">
             <p className="eyebrow">
@@ -59,11 +59,11 @@ function HomePage() {
             <p className="mt-8 text-base text-muted-foreground">{society.status}</p>
           </div>
 
-          <div className="rounded-sm border border-rule bg-background p-8 lg:p-12">
+          <div className="brand-panel-soft rounded-lg border p-8 lg:p-12">
             <img
               src={endofaceLogoUrl}
               alt="ENDOFACE by ISEFS — International Society for Endoscopic Facial Surgery logo"
-              className="h-auto w-full"
+              className="brand-mark-soft h-auto w-full"
               width={1920}
               height={628}
             />
@@ -96,7 +96,7 @@ function HomePage() {
         </div>
       </Section>
 
-      <div className="border-y border-rule bg-surface">
+      <div className="section-soft">
         <Section>
           <SectionTitle eyebrow="Education & Science" title="Our areas of activity" />
           <ul className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
@@ -145,7 +145,7 @@ function HomePage() {
         </div>
       </Section>
 
-      <div className="border-y border-rule bg-surface">
+      <div className="section-soft">
         <Section>
           <SectionTitle eyebrow="Leadership" title="Founders and management" />
           <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">

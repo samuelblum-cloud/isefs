@@ -207,6 +207,36 @@
   color: var(--color-accent);
 }
 
+/* Soft clinical transitions for content surfaces and the homepage brand panel. */
+.hero-soft {
+  background: linear-gradient(
+    180deg,
+    var(--color-surface) 0%,
+    color-mix(in srgb, var(--color-surface) 55%, var(--color-background)) 76%,
+    var(--color-background) 100%
+  );
+}
+
+.section-soft {
+  background: linear-gradient(
+    180deg,
+    var(--color-background) 0%,
+    var(--color-surface) 12%,
+    var(--color-surface) 88%,
+    var(--color-background) 100%
+  );
+}
+
+.brand-panel-soft {
+  border-color: color-mix(in srgb, var(--color-rule) 55%, transparent);
+  background-color: color-mix(in srgb, var(--color-background) 38%, transparent);
+}
+
+.brand-mark-soft {
+  mix-blend-mode: multiply;
+  opacity: 0.96;
+}
+
 /* Primary action: teal with white text, minimum 48 px high */
 @utility btn-primary {
   display: inline-flex;
