@@ -417,7 +417,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
           intro: "",
           people: founderCards,
           footer:
-            "The scientific founders lead the Society’s academic direction and its educational and scientific programme. The Society’s complete governance and committee structure will be published as part of its formal establishment.",
+            "Dr. Marc Mani will serve as the Society’s first President. The founders will determine the other offices for the first year. Together, they lead the Society’s academic direction and its educational and scientific programme.",
           linkLabel: "",
           linkUrl: "",
           surface: false,

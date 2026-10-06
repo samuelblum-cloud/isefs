@@ -85,7 +85,6 @@ export const admissionNotes = [
   "Membership, a title or a member mark is not a confirmation of independently assessed clinical competence, nor an endorsement of any particular practice.",
 ] as const;
 
-
 /**
  * Contact details. Leave a value as null until it has been approved;
  * the Contact page then shows a short note instead of inventing details.
@@ -142,16 +141,14 @@ export const educationAreas = [
   {
     title: "Practical laboratories",
     status: "In preparation",
-    summary:
-      "Supervised anatomical and technical learning in a laboratory setting.",
+    summary: "Supervised anatomical and technical learning in a laboratory setting.",
     detail:
       "Laboratory teaching is hands-on and supervised. It is organised separately from the scientific congress and follows the requirements of the host institution.",
   },
   {
     title: "Fellowship pathway",
     status: "Under development",
-    summary:
-      "A structured training pathway for surgeons seeking sustained, mentored experience.",
+    summary: "A structured training pathway for surgeons seeking sustained, mentored experience.",
     detail:
       "The planned ISEFS fellowship will comprise four weeks of training, which may be distributed across approved host centres and completed within one year. Society membership will be a prerequisite. Detailed selection criteria and host arrangements are being developed; membership will not guarantee a placement.",
   },
@@ -166,8 +163,7 @@ export const educationAreas = [
   {
     title: "Scientific collaboration",
     status: "Planned",
-    summary:
-      "Planned registry and consensus activities to support shared learning from outcomes.",
+    summary: "Planned registry and consensus activities to support shared learning from outcomes.",
     detail:
       "Collaborative work is planned rather than active. Any registry or consensus process will follow appropriate scientific and data-protection standards.",
   },
@@ -176,7 +172,7 @@ export const educationAreas = [
 export const founders = [
   {
     name: "Dr. Marc Mani",
-    role: "Scientific Founder · Plastic & Reconstructive Surgeon",
+    role: "President & Founder · Plastic & Reconstructive Surgeon",
     shortSummary:
       "Internationally recognised for deep-plane and endoscopic facial rejuvenation and active in international surgical education.",
     summary:
@@ -184,15 +180,31 @@ export const founders = [
   },
   {
     name: "Dr. Gad Renert",
-    role: "Scientific Founder · Plastic, Reconstructive & Aesthetic Surgeon",
+    role: "Founder · Plastic & Reconstructive Surgeon",
     shortSummary:
       "A specialist in endoscopic facial procedures, deep-plane rejuvenation and international surgical education.",
     summary:
       "A Bucharest-based plastic, reconstructive and aesthetic surgeon with extensive experience in endoscopic facial procedures, deep-plane rejuvenation and complex revision surgery. Dr. Renert is internationally active as a faculty speaker, cadaver-lab instructor and live-surgery demonstrator.",
   },
   {
+    name: "Dr. Mubariz Mammadli",
+    role: "Founder · Plastic & Reconstructive Surgeon",
+    shortSummary:
+      "An Azerbaijan-based surgeon combining contemporary facial rejuvenation with international surgical education.",
+    summary:
+      "An Azerbaijan-based plastic and reconstructive surgeon focused on contemporary facial rejuvenation and minimally invasive techniques. Dr. Mammadli is internationally engaged in surgical practice and education, with an emphasis on precision, individual anatomy and natural results.",
+  },
+  {
+    name: "Dr. Fayçal El Kouhen",
+    role: "Founder · Plastic & Reconstructive Surgeon",
+    shortSummary:
+      "A Morocco-based surgeon recognised for refined facial procedures and minimally invasive techniques.",
+    summary:
+      "A Morocco-based plastic and reconstructive surgeon whose work focuses on facial procedures and refined, minimally invasive techniques. Dr. El Kouhen’s approach emphasises individual anatomy, proportion, restraint and durable, natural-looking outcomes.",
+  },
+  {
     name: "Dr. Artur Díaz Carandell",
-    role: "Scientific Founder · Cranio-Maxillofacial & Facial Plastic Surgeon",
+    role: "Founder · Facial Plastic Surgeon",
     shortSummary:
       "A cranio-maxillofacial and facial plastic surgeon combining endoscopic expertise with international teaching.",
     summary:

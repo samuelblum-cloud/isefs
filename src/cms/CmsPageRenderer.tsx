@@ -349,6 +349,8 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
   }
 
   if (block.type === "people_grid") {
+    const people = records(data, "people");
+    const hasFivePeople = people.length === 5;
     return (
       <BlockShell block={block}>
         <SectionTitle eyebrow={text(data, "eyebrow")} title={text(data, "title")} />
@@ -357,9 +359,14 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
             {text(data, "intro")}
           </p>
         ) : null}
-        <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
-          {records(data, "people").map((person, index) => (
-            <article key={index} className="bg-background p-8">
+        <div
+          className={`mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 ${hasFivePeople ? "lg:grid-cols-6" : "lg:grid-cols-3"}`}
+        >
+          {people.map((person, index) => (
+            <article
+              key={index}
+              className={`bg-background p-8 ${hasFivePeople ? (index >= 3 ? "lg:col-span-3" : "lg:col-span-2") : ""}`}
+            >
               {text(person, "imageUrl") ? (
                 <img
                   src={text(person, "imageUrl")}

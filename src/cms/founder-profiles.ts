@@ -11,9 +11,25 @@ const founderAliases = new Map<string, (typeof founders)[number]>([
   ["dr. gad renert", founders[1]],
   ["dr. gad ofir renert", founders[1]],
   ["dr. gad-ofir renert", founders[1]],
-  ["dr. artur diaz carandell", founders[2]],
-  ["dr. artur díaz carandell", founders[2]],
+  ["dr. mubariz mammadli", founders[2]],
+  ["dr. faycal el kouhen", founders[3]],
+  ["dr. fayçal el kouhen", founders[3]],
+  ["dr. artur diaz carandell", founders[4]],
+  ["dr. artur díaz carandell", founders[4]],
 ]);
+
+const previousFounderRoles = new Set([
+  "scientific founder",
+  "scientific founder · plastic & reconstructive surgeon",
+  "scientific founder · plastic, reconstructive & aesthetic surgeon",
+  "scientific founder · cranio-maxillofacial & facial plastic surgeon",
+]);
+
+const previousFounderFooter =
+  "The scientific founders lead the Society’s academic direction and its educational and scientific programme. The Society’s complete governance and committee structure will be published as part of its formal establishment.";
+
+const founderFooter =
+  "Dr. Marc Mani will serve as the Society’s first President. The founders will determine the other offices for the first year. Together, they lead the Society’s academic direction and its educational and scientific programme.";
 
 function record(value: Json): CmsData | null {
   return value && typeof value === "object" && !Array.isArray(value) ? value : null;
@@ -50,14 +66,21 @@ export function enrichFounderPeopleData(pageSlug: string, data: CmsData): CmsDat
     const summary = valueText(person["summary"]);
     const founder = founderAliases.get(normaliseName(name));
 
-    if (founder && role.toLocaleLowerCase("en") === "scientific founder" && !summary) {
-      changed = true;
-      return {
-        ...person,
-        name: founder.name,
-        role: founder.role,
-        summary: pageSlug === "home" ? founder.shortSummary : founder.summary,
-      } satisfies CmsData;
+    if (founder) {
+      const canonicalSummary = pageSlug === "home" ? founder.shortSummary : founder.summary;
+      const shouldUpdateName = name !== founder.name;
+      const shouldUpdateRole = previousFounderRoles.has(role.toLocaleLowerCase("en"));
+      const shouldAddSummary = !summary;
+
+      if (shouldUpdateName || shouldUpdateRole || shouldAddSummary) {
+        changed = true;
+        return {
+          ...person,
+          name: founder.name,
+          role: shouldUpdateRole ? founder.role : role,
+          summary: shouldAddSummary ? canonicalSummary : summary,
+        } satisfies CmsData;
+      }
     }
 
     if (pageSlug === "home" && name === management.name && role === management.role && !summary) {
@@ -71,7 +94,43 @@ export function enrichFounderPeopleData(pageSlug: string, data: CmsData): CmsDat
     return value;
   });
 
-  return changed ? { ...data, people: enrichedPeople } : data;
+  const currentFounders = new Map<string, CmsData>();
+  const otherPeople: Json[] = [];
+
+  for (const value of enrichedPeople) {
+    const person = record(value);
+    const name = person ? valueText(person["name"]) : "";
+    const founder = founderAliases.get(normaliseName(name));
+    if (person && founder) currentFounders.set(founder.name, person);
+    else otherPeople.push(value);
+  }
+
+  if (currentFounders.size < founders.length) {
+    changed = true;
+    const completeFounderRoster = founders.map(
+      (founder) =>
+        currentFounders.get(founder.name) ?? {
+          name: founder.name,
+          role: founder.role,
+          summary: pageSlug === "home" ? founder.shortSummary : founder.summary,
+          imageUrl: "",
+          imageAlt: "",
+        },
+    );
+    enrichedPeople.splice(0, enrichedPeople.length, ...completeFounderRoster, ...otherPeople);
+  }
+
+  const footer = valueText(data["footer"]);
+  const updatedFooter = pageSlug === "leadership" && footer === previousFounderFooter;
+  if (updatedFooter) changed = true;
+
+  return changed
+    ? {
+        ...data,
+        people: enrichedPeople,
+        ...(updatedFooter ? { footer: founderFooter } : {}),
+      }
+    : data;
 }
 
 /**

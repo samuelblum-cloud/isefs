@@ -148,7 +148,7 @@ function HomePage() {
       <div className="section-soft">
         <Section>
           <SectionTitle eyebrow="Leadership" title="Founders and management" />
-          <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
             {founders.map((person) => (
               <div key={person.name} className="bg-background p-7">
                 <p className="eyebrow min-h-16">{person.role}</p>
