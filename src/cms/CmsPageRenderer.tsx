@@ -9,6 +9,9 @@ import type { CmsContentBlock, CmsPageDocument } from "./types";
 
 type UnknownRecord = Record<string, unknown>;
 
+const portraitGridClassName =
+  "mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-background sm:grid-cols-2 lg:grid-cols-3";
+
 function text(data: UnknownRecord, key: string) {
   const value = data[key];
   return typeof value === "string" ? value : "";
@@ -350,7 +353,6 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
 
   if (block.type === "people_grid") {
     const people = records(data, "people");
-    const hasFivePeople = people.length === 5;
     return (
       <BlockShell block={block}>
         <SectionTitle eyebrow={text(data, "eyebrow")} title={text(data, "title")} />
@@ -359,14 +361,9 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
             {text(data, "intro")}
           </p>
         ) : null}
-        <div
-          className={`mt-10 grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-2 ${hasFivePeople ? "lg:grid-cols-6" : "lg:grid-cols-3"}`}
-        >
+        <div className={portraitGridClassName}>
           {people.map((person, index) => (
-            <article
-              key={index}
-              className={`bg-background p-8 ${hasFivePeople ? (index >= 3 ? "lg:col-span-3" : "lg:col-span-2") : ""}`}
-            >
+            <article key={index} className="bg-background p-8 outline outline-1 outline-rule">
               {text(person, "imageUrl") ? (
                 <img
                   src={text(person, "imageUrl")}
@@ -401,16 +398,20 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
     return (
       <BlockShell block={block}>
         <SectionTitle eyebrow={text(data, "eyebrow")} title={text(data, "title")} />
-        <div className="mt-10 grid gap-8 rounded-sm border border-rule bg-background p-9 sm:p-12 lg:grid-cols-[1fr_2fr]">
+        <div className={portraitGridClassName}>
           {text(data, "imageUrl") ? (
-            <img
-              src={text(data, "imageUrl")}
-              alt={text(data, "imageAlt")}
-              className="aspect-[4/5] w-full object-cover"
-              style={{ objectPosition: focalPosition(data) }}
-            />
+            <div className="bg-background p-8">
+              <img
+                src={text(data, "imageUrl")}
+                alt={text(data, "imageAlt")}
+                className="aspect-[4/5] w-full object-cover"
+                style={{ objectPosition: focalPosition(data) }}
+              />
+            </div>
           ) : null}
-          <div>
+          <div
+            className={`bg-background p-8 ${text(data, "imageUrl") ? "lg:col-span-2" : "sm:col-span-2 lg:col-span-3"}`}
+          >
             <p className="eyebrow">{text(data, "role")}</p>
             <p className="mt-5 text-3xl font-semibold text-ink">{text(data, "name")}</p>
             <p className="measure mt-6 text-base leading-relaxed text-muted-foreground">
