@@ -25,6 +25,46 @@ const previousFounderRoles = new Set([
   "scientific founder · cranio-maxillofacial & facial plastic surgeon",
 ]);
 
+const previousFounderSummaries = new Map<string, { home?: string; leadership?: string }>([
+  [
+    founders[0].name,
+    {
+      leadership:
+        "A Beverly Hills-based plastic surgeon internationally recognised for advanced facial rejuvenation. Harvard-educated and trained in plastic surgery at Baylor College of Medicine, Dr. Mani has published and taught internationally on deep-plane and endoscopic lifting techniques.",
+    },
+  ],
+  [
+    founders[1].name,
+    {
+      leadership:
+        "A Bucharest-based plastic, reconstructive and aesthetic surgeon with extensive experience in endoscopic facial procedures, deep-plane rejuvenation and complex revision surgery. Dr. Renert is internationally active as a faculty speaker, cadaver-lab instructor and live-surgery demonstrator.",
+    },
+  ],
+  [
+    founders[2].name,
+    {
+      home: "An Azerbaijan-based surgeon combining contemporary facial rejuvenation with international surgical education.",
+      leadership:
+        "An Azerbaijan-based plastic and reconstructive surgeon focused on contemporary facial rejuvenation and minimally invasive techniques. Dr. Mammadli is internationally engaged in surgical practice and education, with an emphasis on precision, individual anatomy and natural results.",
+    },
+  ],
+  [
+    founders[3].name,
+    {
+      home: "A Morocco-based surgeon recognised for refined facial procedures and minimally invasive techniques.",
+      leadership:
+        "A Morocco-based plastic and reconstructive surgeon whose work focuses on facial procedures and refined, minimally invasive techniques. Dr. El Kouhen’s approach emphasises individual anatomy, proportion, restraint and durable, natural-looking outcomes.",
+    },
+  ],
+  [
+    founders[4].name,
+    {
+      leadership:
+        "A Barcelona-based cranio-maxillofacial and facial plastic surgeon with more than two decades of experience. A Fellow of the European Board of Oral and Maxillofacial Surgery and Medical Director of the Racine² Group, Dr. Díaz Carandell combines advanced endoscopic facial rejuvenation with international surgical teaching.",
+    },
+  ],
+]);
+
 const previousFounderFooter =
   "The scientific founders lead the Society’s academic direction and its educational and scientific programme. The Society’s complete governance and committee structure will be published as part of its formal establishment.";
 
@@ -48,7 +88,7 @@ function normaliseName(value: string) {
 
 /**
  * Enriches only untouched legacy founder cards. Once an editor changes a role or
- * profile, the CMS value remains authoritative and is no longer replaced here.
+ * profile beyond the known earlier copy, the CMS value remains authoritative.
  */
 export function enrichFounderPeopleData(pageSlug: string, data: CmsData): CmsData {
   if (pageSlug !== "home" && pageSlug !== "leadership") return data;
@@ -68,17 +108,18 @@ export function enrichFounderPeopleData(pageSlug: string, data: CmsData): CmsDat
 
     if (founder) {
       const canonicalSummary = pageSlug === "home" ? founder.shortSummary : founder.summary;
+      const previousSummary = previousFounderSummaries.get(founder.name)?.[pageSlug];
       const shouldUpdateName = name !== founder.name;
       const shouldUpdateRole = previousFounderRoles.has(role.toLocaleLowerCase("en"));
-      const shouldAddSummary = !summary;
+      const shouldUpdateSummary = !summary || summary === previousSummary;
 
-      if (shouldUpdateName || shouldUpdateRole || shouldAddSummary) {
+      if (shouldUpdateName || shouldUpdateRole || shouldUpdateSummary) {
         changed = true;
         return {
           ...person,
           name: founder.name,
           role: shouldUpdateRole ? founder.role : role,
-          summary: shouldAddSummary ? canonicalSummary : summary,
+          summary: shouldUpdateSummary ? canonicalSummary : summary,
         } satisfies CmsData;
       }
     }

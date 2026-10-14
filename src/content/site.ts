@@ -176,7 +176,7 @@ export const founders = [
     shortSummary:
       "Internationally recognised for deep-plane and endoscopic facial rejuvenation and active in international surgical education.",
     summary:
-      "A Beverly Hills-based plastic surgeon internationally recognised for advanced facial rejuvenation. Harvard-educated and trained in plastic surgery at Baylor College of Medicine, Dr. Mani has published and taught internationally on deep-plane and endoscopic lifting techniques.",
+      "Internationally recognised for advanced facial rejuvenation, Dr. Marc Mani practises plastic surgery in Beverly Hills. Harvard-educated and trained in plastic surgery at Baylor College of Medicine, he has published and taught internationally on deep-plane and endoscopic lifting techniques.",
   },
   {
     name: "Dr. Gad Renert",
@@ -184,23 +184,23 @@ export const founders = [
     shortSummary:
       "A specialist in endoscopic facial procedures, deep-plane rejuvenation and international surgical education.",
     summary:
-      "A Bucharest-based plastic, reconstructive and aesthetic surgeon with extensive experience in endoscopic facial procedures, deep-plane rejuvenation and complex revision surgery. Dr. Renert is internationally active as a faculty speaker, cadaver-lab instructor and live-surgery demonstrator.",
+      "Dr. Gad Renert brings extensive experience in endoscopic facial procedures, deep-plane rejuvenation and complex revision surgery to his plastic, reconstructive and aesthetic practice in Bucharest. He is internationally active as a faculty speaker, cadaver-lab instructor and live-surgery demonstrator.",
   },
   {
     name: "Dr. Mubariz Mammadli",
     role: "Founder · Plastic & Reconstructive Surgeon",
     shortSummary:
-      "An Azerbaijan-based surgeon combining contemporary facial rejuvenation with international surgical education.",
+      "Combines contemporary facial rejuvenation with international surgical education from his practice in Azerbaijan.",
     summary:
-      "An Azerbaijan-based plastic and reconstructive surgeon focused on contemporary facial rejuvenation and minimally invasive techniques. Dr. Mammadli is internationally engaged in surgical practice and education, with an emphasis on precision, individual anatomy and natural results.",
+      "Contemporary facial rejuvenation and minimally invasive techniques are central to Dr. Mubariz Mammadli’s work as a plastic and reconstructive surgeon in Azerbaijan. He is internationally engaged in surgical practice and education, with an emphasis on precision, individual anatomy and natural results.",
   },
   {
     name: "Dr. Fayçal El Kouhen",
     role: "Founder · Plastic & Reconstructive Surgeon",
     shortSummary:
-      "A Morocco-based surgeon recognised for refined facial procedures and minimally invasive techniques.",
+      "Focuses on refined facial procedures and minimally invasive techniques in his plastic and reconstructive practice in Morocco.",
     summary:
-      "A Morocco-based plastic and reconstructive surgeon whose work focuses on facial procedures and refined, minimally invasive techniques. Dr. El Kouhen’s approach emphasises individual anatomy, proportion, restraint and durable, natural-looking outcomes.",
+      "Dr. Fayçal El Kouhen’s work as a plastic and reconstructive surgeon in Morocco focuses on facial procedures and refined, minimally invasive techniques. His approach emphasises individual anatomy, proportion, restraint and durable, natural-looking outcomes.",
   },
   {
     name: "Dr. Artur Díaz Carandell",
@@ -208,7 +208,7 @@ export const founders = [
     shortSummary:
       "A cranio-maxillofacial and facial plastic surgeon combining endoscopic expertise with international teaching.",
     summary:
-      "A Barcelona-based cranio-maxillofacial and facial plastic surgeon with more than two decades of experience. A Fellow of the European Board of Oral and Maxillofacial Surgery and Medical Director of the Racine² Group, Dr. Díaz Carandell combines advanced endoscopic facial rejuvenation with international surgical teaching.",
+      "With more than two decades of experience, Dr. Artur Díaz Carandell practises cranio-maxillofacial and facial plastic surgery in Barcelona. A Fellow of the European Board of Oral and Maxillofacial Surgery and Medical Director of the Racine² Group, he combines advanced endoscopic facial rejuvenation with international surgical teaching.",
   },
 ] as const;
 
