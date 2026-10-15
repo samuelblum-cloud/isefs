@@ -32,7 +32,7 @@ export function InterestForm() {
       specialty: String(form.get("specialty") ?? ""),
       institution: String(form.get("institution") ?? ""),
       areasOfInterest: areas,
-      newsletterConsent: form.get("newsletterConsent") === "on",
+      newsletterConsent: false,
       privacyAccepted: form.get("privacyAccepted") === "on",
       website: honeypot,
       elapsedMs: Date.now() - startedAt.current,
@@ -182,8 +182,8 @@ export function InterestForm() {
             className="mt-1 h-4 w-4 accent-[var(--accent)]"
           />
           <span>
-            I understand that my details will be used by the Society to respond to my enquiry and
-            to send information about membership and educational activities, as set out in the{" "}
+            I understand that my details will be used by the Society to respond to my enquiry and to
+            send information about membership and educational activities, as set out in the{" "}
             <Link to="/privacy" className="underline underline-offset-4">
               privacy information
             </Link>
@@ -195,17 +195,6 @@ export function InterestForm() {
             {errors["privacyAccepted"]}
           </p>
         ) : null}
-        <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed">
-          <input
-            type="checkbox"
-            name="newsletterConsent"
-            className="mt-1 h-4 w-4 accent-[var(--accent)]"
-          />
-          <span>
-            Optional: I would also like to receive the Society's newsletter. I can withdraw this at
-            any time.
-          </span>
-        </label>
       </div>
 
       {formError ? (
@@ -214,11 +203,7 @@ export function InterestForm() {
         </p>
       ) : null}
 
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="btn-primary no-underline"
-      >
+      <button type="submit" disabled={status === "submitting"} className="btn-primary no-underline">
         {status === "submitting" ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
