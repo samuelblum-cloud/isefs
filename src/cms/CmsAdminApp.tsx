@@ -551,26 +551,37 @@ export function CmsAdminApp({
   const [loading, setLoading] = useState(!initialSnapshot);
   const [error, setError] = useState("");
 
-  const reload = useCallback(async () => {
-    if (demo) return;
-    setLoading(true);
-    setError("");
-    try {
-      const next = await loadCmsAdminSnapshot();
-      setSnapshot(next);
-      setSelectedPageId((current) => current || next.pages[0]?.pageId || "");
-    } catch (cause) {
-      const message = cause instanceof Error ? cause.message : "Could not load the CMS.";
-      if (/login required|session/i.test(message)) await navigate({ to: "/admin/login" });
-      else setError(message);
-    } finally {
-      setLoading(false);
-    }
-  }, [demo, navigate]);
+  const reload = useCallback(
+    async (showLoading = true) => {
+      if (demo) return;
+      if (showLoading) setLoading(true);
+      setError("");
+      try {
+        const next = await loadCmsAdminSnapshot();
+        setSnapshot(next);
+        setSelectedPageId((current) => current || next.pages[0]?.pageId || "");
+      } catch (cause) {
+        const message = cause instanceof Error ? cause.message : "Could not load the CMS.";
+        if (/login required|session/i.test(message)) await navigate({ to: "/admin/login" });
+        else setError(message);
+      } finally {
+        if (showLoading) setLoading(false);
+      }
+    },
+    [demo, navigate],
+  );
 
   useEffect(() => {
     if (!initialSnapshot) void reload();
   }, [initialSnapshot, reload]);
+
+  const openView = useCallback(
+    (nextView: AdminView) => {
+      setView(nextView);
+      if (nextView === "registrations" || nextView === "enquiries") void reload(false);
+    },
+    [reload],
+  );
 
   const selectedPage = useMemo(
     () => snapshot?.pages.find((page) => page.pageId === selectedPageId) ?? snapshot?.pages[0],
@@ -592,7 +603,7 @@ export function CmsAdminApp({
         <div className="max-w-lg rounded-sm border border-rule bg-background p-8">
           <h1 className="text-2xl">CMS unavailable</h1>
           <p className="mt-4 text-sm text-destructive">{error}</p>
-          <button type="button" className="btn-secondary mt-6" onClick={reload}>
+          <button type="button" className="btn-secondary mt-6" onClick={() => void reload()}>
             Try again
           </button>
         </div>
@@ -622,7 +633,7 @@ export function CmsAdminApp({
         demo={demo}
         onReload={reload}
         onSelectPage={setSelectedPageId}
-        onChangeView={setView}
+        onChangeView={openView}
         onSignOut={async () => {
           if (!demo) await signOutCms();
           await navigate({ to: "/admin/login" });
@@ -645,7 +656,7 @@ export function CmsAdminApp({
             <button
               key={item.id}
               type="button"
-              onClick={() => setView(item.id)}
+              onClick={() => openView(item.id)}
               className={`mb-1 flex w-full items-center gap-3 rounded-sm px-4 py-3 text-left text-sm ${view === item.id ? "bg-white text-primary" : "text-white/80 hover:bg-white/10"}`}
             >
               <item.icon className="h-4 w-4" />
@@ -675,7 +686,7 @@ export function CmsAdminApp({
               <button
                 key={item.id}
                 type="button"
-                onClick={() => setView(item.id)}
+                onClick={() => openView(item.id)}
                 className={`rounded-sm px-3 py-2 text-sm ${view === item.id ? "bg-primary text-white" : "text-foreground"}`}
               >
                 {item.label}
@@ -697,7 +708,7 @@ export function CmsAdminApp({
             {error}
           </div>
         ) : null}
-        {view === "dashboard" ? <Dashboard snapshot={snapshot} setView={setView} /> : null}
+        {view === "dashboard" ? <Dashboard snapshot={snapshot} setView={openView} /> : null}
         {view === "media" ? <MediaManager snapshot={snapshot} reload={reload} demo={demo} /> : null}
         {view === "registrations" ? (
           <InboxManager
