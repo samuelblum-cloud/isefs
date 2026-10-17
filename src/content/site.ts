@@ -109,7 +109,7 @@ export const legalStatus = {
  */
 export const announcement = {
   confirmed: true,
-  heading: "ISEFS founded and announced in Barcelona",
+  heading: "ISEFS founded and announced",
   body: "The International Society for Endoscopic Facial Surgery was founded on 15 October 2026 and introduced at the ENDOFACE Masters gala evening in Barcelona on 16 October 2026. The announcement presented the Society’s scientific purpose, leadership and programme for its first two years.",
   courseName: "Endo Face Masters",
   courseDates: "15–17 October 2026",
