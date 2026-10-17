@@ -233,7 +233,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
         data: {
           eyebrow: "",
           title: "Current status",
-          body: "ISEFS was founded in Barcelona on 15 October 2026 as an association under Swiss law with its registered office in Zurich. Membership processes and programmes are described according to their actual stage of development. ISEFS makes no claim to charitable, tax-exempt or accredited status unless and until the relevant status has been formally confirmed.",
+          body: "ISEFS was founded on 15 October 2026 as an association under Swiss law with its registered office in Zurich. Membership processes and programmes are described according to their actual stage of development. ISEFS makes no claim to charitable, tax-exempt or accredited status unless and until the relevant status has been formally confirmed.",
           buttonLabel: "Register your interest",
           buttonUrl: "/membership#register",
           surface: false,

@@ -120,11 +120,10 @@ function AboutPage() {
         <div className="rounded-sm border border-rule p-8 sm:p-12">
           <h2>Current status</h2>
           <p className="measure mt-5 text-base leading-relaxed text-muted-foreground">
-            ISEFS was founded in Barcelona on 15 October 2026 as an association under Swiss law with
-            its registered office in Zurich. Membership processes and programmes are described
-            according to their actual stage of development. ISEFS makes no claim to charitable,
-            tax-exempt or accredited status unless and until the relevant status has been formally
-            confirmed.
+            ISEFS was founded on 15 October 2026 as an association under Swiss law with its
+            registered office in Zurich. Membership processes and programmes are described according
+            to their actual stage of development. ISEFS makes no claim to charitable, tax-exempt or
+            accredited status unless and until the relevant status has been formally confirmed.
           </p>
           <Link to="/membership" hash="register" className="btn-primary mt-8 no-underline">
             Register your interest

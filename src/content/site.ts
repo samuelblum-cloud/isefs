@@ -10,7 +10,7 @@ export const society = {
   brand: "ENDOFACE",
   brandNote:
     "ENDOFACE is the Society's flagship educational programme and brand. ISEFS is the scientific society behind it.",
-  status: "Founded in Barcelona on 15 October 2026.",
+  status: "Founded on 15 October 2026.",
   tagline: "Advancing endoscopic facial surgery.",
   intro:
     "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
@@ -105,12 +105,12 @@ export const legalStatus = {
 } as const;
 
 /**
- * Founding and public announcement in Barcelona.
+ * Founding and public announcement.
  */
 export const announcement = {
   confirmed: true,
   heading: "ISEFS founded and announced in Barcelona",
-  body: "The International Society for Endoscopic Facial Surgery was founded in Barcelona on 15 October 2026 and introduced at the ENDOFACE Masters gala evening on 16 October 2026. The announcement presented the Society’s scientific purpose, leadership and programme for its first two years.",
+  body: "The International Society for Endoscopic Facial Surgery was founded on 15 October 2026 and introduced at the ENDOFACE Masters gala evening in Barcelona on 16 October 2026. The announcement presented the Society’s scientific purpose, leadership and programme for its first two years.",
   courseName: "Endo Face Masters",
   courseDates: "15–17 October 2026",
   courseLocation: "Barcelona, Spain",
