@@ -5,27 +5,21 @@ import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
 import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
 import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { admissionNotes, membershipCategories, membershipValue } from "@/content/site";
+import { pageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/membership")({
   loader: () => getPublishedCmsPage({ data: { slug: "membership" } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData?.metaTitle || "Membership — ISEFS" },
-      {
-        name: "description",
-        content:
-          loaderData?.metaDescription ||
-          "Register your interest to receive news about the Society, membership and upcoming educational activities in endoscopic facial surgery.",
-      },
-      { property: "og:title", content: loaderData?.metaTitle || "Membership — ISEFS" },
-      {
-        property: "og:description",
-        content:
-          loaderData?.metaDescription ||
-          "Professional exchange, educational resources, scientific collaboration and access to Society programmes.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    pageSeo({
+      path: "/membership",
+      title: loaderData?.metaTitle || "Membership — ISEFS",
+      description:
+        loaderData?.metaDescription ||
+        "Register your interest to receive news about the Society, membership and upcoming educational activities in endoscopic facial surgery.",
+      socialDescription:
+        loaderData?.metaDescription ||
+        "Professional exchange, educational resources, scientific collaboration and access to Society programmes.",
+    }),
   component: MembershipPage,
 });
 

@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { isefsLogoUrl } from "@/content/assets";
 import { registerInvitedCmsUser } from "@/cms/admin-api";
+import { adminNoIndexMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/admin/register")({
-  head: () => ({ meta: [{ title: "Activate ISEFS CMS access" }] }),
+  head: () => ({ meta: [{ title: "Activate ISEFS CMS access" }, ...adminNoIndexMeta] }),
   component: CmsRegistrationPage,
 });
 

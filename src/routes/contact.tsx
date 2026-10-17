@@ -5,27 +5,21 @@ import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
 import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
 import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { contactDetails, legalForm } from "@/content/site";
+import { pageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   loader: () => getPublishedCmsPage({ data: { slug: "contact" } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData?.metaTitle || "Contact — ISEFS" },
-      {
-        name: "description",
-        content:
-          loaderData?.metaDescription ||
-          "Write to the International Society for Endoscopic Facial Surgery about membership, education, scientific collaboration or partnership.",
-      },
-      { property: "og:title", content: loaderData?.metaTitle || "Contact — ISEFS" },
-      {
-        property: "og:description",
-        content:
-          loaderData?.metaDescription ||
-          "Send an enquiry to the Society's management office about membership, education or collaboration.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    pageSeo({
+      path: "/contact",
+      title: loaderData?.metaTitle || "Contact — ISEFS",
+      description:
+        loaderData?.metaDescription ||
+        "Write to the International Society for Endoscopic Facial Surgery about membership, education, scientific collaboration or partnership.",
+      socialDescription:
+        loaderData?.metaDescription ||
+        "Send an enquiry to the Society's management office about membership, education or collaboration.",
+    }),
   component: ContactPage,
 });
 

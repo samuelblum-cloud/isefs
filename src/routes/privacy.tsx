@@ -4,27 +4,21 @@ import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/
 import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
 import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { contactDetails, legalForm, legalStatus } from "@/content/site";
+import { pageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/privacy")({
   loader: () => getPublishedCmsPage({ data: { slug: "privacy" } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData?.metaTitle || "Privacy information — ISEFS" },
-      {
-        name: "description",
-        content:
-          loaderData?.metaDescription ||
-          "How the International Society for Endoscopic Facial Surgery handles personal data submitted through its interest registration and contact forms.",
-      },
-      { property: "og:title", content: loaderData?.metaTitle || "Privacy information — ISEFS" },
-      {
-        property: "og:description",
-        content:
-          loaderData?.metaDescription ||
-          "How ISEFS handles personal data submitted through its website forms.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    pageSeo({
+      path: "/privacy",
+      title: loaderData?.metaTitle || "Privacy information — ISEFS",
+      description:
+        loaderData?.metaDescription ||
+        "How the International Society for Endoscopic Facial Surgery handles personal data submitted through its interest registration and contact forms.",
+      socialDescription:
+        loaderData?.metaDescription ||
+        "How ISEFS handles personal data submitted through its website forms.",
+    }),
   component: PrivacyPage,
 });
 

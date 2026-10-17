@@ -5,27 +5,21 @@ import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/
 import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
 import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { announcement, educationAreas } from "@/content/site";
+import { pageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/education-and-science")({
   loader: () => getPublishedCmsPage({ data: { slug: "education-and-science" } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData?.metaTitle || "Education & Science — ISEFS" },
-      {
-        name: "description",
-        content:
-          loaderData?.metaDescription ||
-          "Congress, monographic courses, practical laboratories, a fellowship pathway under development, webinars and planned scientific collaboration.",
-      },
-      { property: "og:title", content: loaderData?.metaTitle || "Education & Science — ISEFS" },
-      {
-        property: "og:description",
-        content:
-          loaderData?.metaDescription ||
-          "The educational and scientific activities of the International Society for Endoscopic Facial Surgery.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    pageSeo({
+      path: "/education-and-science",
+      title: loaderData?.metaTitle || "Education & Science — ISEFS",
+      description:
+        loaderData?.metaDescription ||
+        "Congress, monographic courses, practical laboratories, a fellowship pathway under development, webinars and planned scientific collaboration.",
+      socialDescription:
+        loaderData?.metaDescription ||
+        "The educational and scientific activities of the International Society for Endoscopic Facial Surgery.",
+    }),
   component: EducationPage,
 });
 

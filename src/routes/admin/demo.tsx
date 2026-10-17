@@ -4,9 +4,10 @@ import { CmsAdminApp } from "@/cms/CmsAdminApp";
 import { defaultCmsPages } from "@/cms/default-pages";
 import type { CmsAdminSnapshot } from "@/cms/admin-api";
 import { endofaceLogoUrl } from "@/content/assets";
+import { adminNoIndexMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/admin/demo")({
-  head: () => ({ meta: [{ title: "ISEFS CMS design preview" }] }),
+  head: () => ({ meta: [{ title: "ISEFS CMS design preview" }, ...adminNoIndexMeta] }),
   component: CmsAdminDemoRoute,
 });
 

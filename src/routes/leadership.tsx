@@ -4,27 +4,21 @@ import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
 import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
 import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { founders, management } from "@/content/site";
+import { pageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/leadership")({
   loader: () => getPublishedCmsPage({ data: { slug: "leadership" } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData?.metaTitle || "Leadership — ISEFS" },
-      {
-        name: "description",
-        content:
-          loaderData?.metaDescription ||
-          "The scientific founders of ISEFS and the Managing Director responsible for Society management and operational implementation.",
-      },
-      { property: "og:title", content: loaderData?.metaTitle || "Leadership — ISEFS" },
-      {
-        property: "og:description",
-        content:
-          loaderData?.metaDescription ||
-          "Scientific leadership and operational management of the Society.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    pageSeo({
+      path: "/leadership",
+      title: loaderData?.metaTitle || "Leadership — ISEFS",
+      description:
+        loaderData?.metaDescription ||
+        "The scientific founders of ISEFS and the Managing Director responsible for Society management and operational implementation.",
+      socialDescription:
+        loaderData?.metaDescription ||
+        "Scientific leadership and operational management of the Society.",
+    }),
   component: LeadershipPage,
 });
 

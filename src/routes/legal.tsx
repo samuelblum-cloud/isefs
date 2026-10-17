@@ -4,27 +4,21 @@ import { PageHeader, Section, SectionTitle, StatusTag } from "@/components/site/
 import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
 import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { announcement, contactDetails, legalForm, legalStatus, society } from "@/content/site";
+import { pageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/legal")({
   loader: () => getPublishedCmsPage({ data: { slug: "legal" } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData?.metaTitle || "Legal information — ISEFS" },
-      {
-        name: "description",
-        content:
-          loaderData?.metaDescription ||
-          "Legal information about the International Society for Endoscopic Facial Surgery, its status, and the use of this website.",
-      },
-      { property: "og:title", content: loaderData?.metaTitle || "Legal information — ISEFS" },
-      {
-        property: "og:description",
-        content:
-          loaderData?.metaDescription ||
-          "Status, responsibility and terms of use for the ISEFS website.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    pageSeo({
+      path: "/legal",
+      title: loaderData?.metaTitle || "Legal information — ISEFS",
+      description:
+        loaderData?.metaDescription ||
+        "Legal information about the International Society for Endoscopic Facial Surgery, its status, and the use of this website.",
+      socialDescription:
+        loaderData?.metaDescription ||
+        "Status, responsibility and terms of use for the ISEFS website.",
+    }),
   component: LegalPage,
 });
 

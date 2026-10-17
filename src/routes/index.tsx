@@ -6,30 +6,21 @@ import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { Section, SectionTitle, StatusTag } from "@/components/site/Page";
 import { endofaceLogoUrl } from "@/content/assets";
 import { announcement, educationAreas, founders, management, society } from "@/content/site";
+import { pageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   loader: () => getPublishedCmsPage({ data: { slug: "home" } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData?.metaTitle || "ISEFS — Advancing endoscopic facial surgery" },
-      {
-        name: "description",
-        content:
-          loaderData?.metaDescription ||
-          "ISEFS is an international scientific society being established to advance education, practical training and scientific exchange in endoscopic facial surgery.",
-      },
-      {
-        property: "og:title",
-        content: loaderData?.metaTitle || "ISEFS — Advancing endoscopic facial surgery",
-      },
-      {
-        property: "og:description",
-        content:
-          loaderData?.metaDescription ||
-          "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    pageSeo({
+      path: "/",
+      title: loaderData?.metaTitle || "ISEFS — Advancing endoscopic facial surgery",
+      description:
+        loaderData?.metaDescription ||
+        "ISEFS is an international scientific society being established to advance education, practical training and scientific exchange in endoscopic facial surgery.",
+      socialDescription:
+        loaderData?.metaDescription ||
+        "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
+    }),
   component: HomePage,
 });
 

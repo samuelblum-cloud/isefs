@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { CmsWorkspaceConcept } from "@/cms/CmsWorkspaceConcept";
+import { adminNoIndexMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/admin/cms-concept")({
-  head: () => ({ meta: [{ title: "ISEFS CMS workspace concept" }] }),
+  head: () => ({ meta: [{ title: "ISEFS CMS workspace concept" }, ...adminNoIndexMeta] }),
   component: CmsConceptRoute,
 });
 

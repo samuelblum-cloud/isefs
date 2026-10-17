@@ -4,27 +4,21 @@ import { PageHeader, Section, SectionTitle } from "@/components/site/Page";
 import { CmsPageRenderer } from "@/cms/CmsPageRenderer";
 import { getPublishedCmsPage } from "@/cms/cms.functions";
 import { legalForm, purposeStatements, society } from "@/content/site";
+import { pageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   loader: () => getPublishedCmsPage({ data: { slug: "about" } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData?.metaTitle || "About the Society — ISEFS" },
-      {
-        name: "description",
-        content:
-          loaderData?.metaDescription ||
-          "ISEFS connects an international professional community through structured education, practical learning, discussion of outcomes and scientific collaboration.",
-      },
-      { property: "og:title", content: loaderData?.metaTitle || "About the Society — ISEFS" },
-      {
-        property: "og:description",
-        content:
-          loaderData?.metaDescription ||
-          "The mission of the International Society for Endoscopic Facial Surgery, currently being established.",
-      },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    pageSeo({
+      path: "/about",
+      title: loaderData?.metaTitle || "About the Society — ISEFS",
+      description:
+        loaderData?.metaDescription ||
+        "ISEFS connects an international professional community through structured education, practical learning, discussion of outcomes and scientific collaboration.",
+      socialDescription:
+        loaderData?.metaDescription ||
+        "The mission of the International Society for Endoscopic Facial Surgery, currently being established.",
+    }),
   component: AboutPage,
 });
 
