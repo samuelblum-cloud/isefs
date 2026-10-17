@@ -39,8 +39,7 @@ function PrivacyPage() {
           <div className="mb-10 rounded-sm border border-rule bg-surface p-6">
             <StatusTag>Draft — pending approval</StatusTag>
             <p className="measure mt-3 text-sm leading-relaxed text-muted-foreground">
-              This text is a working draft prepared for review. It has not yet been approved and may
-              change before the Society's formal establishment is completed.
+              This text is a working draft prepared for review and has not yet been approved.
             </p>
           </div>
         ) : null}
@@ -49,10 +48,10 @@ function PrivacyPage() {
           <div>
             <SectionTitle title="Who is responsible" />
             <p className="mt-4 text-muted-foreground">
-              The International Society for Endoscopic Facial Surgery (ISEFS), being established as
-              an association under Swiss law with its registered office in {legalForm.seat}, is
-              responsible for the personal data collected through this website. Its management
-              office administers enquiries and interest registrations.
+              The International Society for Endoscopic Facial Surgery (ISEFS), an association under
+              Swiss law with its registered office in {legalForm.seat}, is responsible for the
+              personal data collected through this website. Its management office administers
+              enquiries and interest registrations.
               {contactDetails.email ? ` Contact: ${contactDetails.email}.` : ""}
             </p>
           </div>
@@ -61,9 +60,8 @@ function PrivacyPage() {
             <SectionTitle title="What we collect" />
             <p className="mt-4 text-muted-foreground">
               Interest registration: first name, last name, email address, country, specialty, an
-              optional institution, your selected areas of interest, whether you agreed to receive
-              news, and the time of submission. Contact enquiries: your name, email address, subject
-              and message.
+              optional institution, your selected areas of interest and the time of submission.
+              Contact enquiries: your name, email address, subject and message.
             </p>
           </div>
 
@@ -72,7 +70,6 @@ function PrivacyPage() {
             <p className="mt-4 text-muted-foreground">
               To respond to your enquiry, to inform you about the Society, its membership and its
               educational activities, and to prepare membership processes once these are approved.
-              News is only sent where you have agreed to receive it.
             </p>
           </div>
 

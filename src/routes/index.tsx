@@ -13,10 +13,10 @@ export const Route = createFileRoute("/")({
   head: ({ loaderData }) =>
     pageSeo({
       path: "/",
-      title: loaderData?.metaTitle || "ISEFS — Advancing endoscopic facial surgery",
+      title: loaderData?.metaTitle || "ISEFS | International Society for Endoscopic Facial Surgery",
       description:
         loaderData?.metaDescription ||
-        "ISEFS is an international scientific society being established to advance education, practical training and scientific exchange in endoscopic facial surgery.",
+        "ISEFS advances endoscopic facial surgery through international education, practical training, scientific exchange and professional collaboration.",
       socialDescription:
         loaderData?.metaDescription ||
         "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
@@ -75,9 +75,9 @@ function HomePage() {
               surgeons working in different centres and health systems.
             </p>
             <p>
-              ISEFS is being established to give that work a permanent home: a scientific society
-              that brings together surgeons, residents, faculty and professional partners around
-              structured education, supervised practical learning and shared scientific enquiry.
+              ISEFS gives that work a permanent home: a scientific society that brings together
+              surgeons, residents, faculty and professional partners around structured education,
+              supervised practical learning and shared scientific enquiry.
             </p>
             <Link to="/about" className="link-inline">
               Read about our mission

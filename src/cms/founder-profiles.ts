@@ -66,10 +66,10 @@ const previousFounderSummaries = new Map<string, { home?: string; leadership?: s
 ]);
 
 const previousFounderFooter =
-  "The scientific founders lead the Society’s academic direction and its educational and scientific programme. The Society’s complete governance and committee structure will be published as part of its formal establishment.";
+  "The scientific founders lead the Society’s academic direction and its educational and scientific programme. The Society’s complete governance and committee structure will be published as it is finalised.";
 
 const founderFooter =
-  "Dr. Marc Mani will serve as the Society’s first President. The founders will determine the other offices for the first year. Together, they lead the Society’s academic direction and its educational and scientific programme.";
+  "Dr. Marc Mani serves as the Society’s first President. The founders will determine the other offices for the first year. Together, they lead the Society’s academic direction and its educational and scientific programme.";
 
 function record(value: Json): CmsData | null {
   return value && typeof value === "object" && !Array.isArray(value) ? value : null;

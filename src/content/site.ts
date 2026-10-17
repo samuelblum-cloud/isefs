@@ -10,26 +10,25 @@ export const society = {
   brand: "ENDOFACE",
   brandNote:
     "ENDOFACE is the Society's flagship educational programme and brand. ISEFS is the scientific society behind it.",
-  status: "The Society is currently being established.",
+  status: "Founded in Barcelona on 15 October 2026.",
   tagline: "Advancing endoscopic facial surgery.",
   intro:
     "An international scientific society dedicated to education, practical training and the exchange of surgical knowledge.",
 } as const;
 
 /**
- * Legal form, taken from the draft Articles of Association (v0.1).
- * `articlesApproved` stays false until the founding meeting adopts them.
+ * Legal form following adoption of the Articles of Association at the founding meeting.
  */
 export const legalForm = {
-  articlesApproved: false,
+  articlesApproved: true,
   summary:
-    "ISEFS is being established as a politically and denominationally independent, non-profit association under Articles 60 et seq. of the Swiss Civil Code, with its registered office in Zurich, Switzerland.",
+    "ISEFS is a politically and denominationally independent, non-profit association under Articles 60 et seq. of the Swiss Civil Code, with its registered office in Zurich, Switzerland.",
   seat: "Zurich, Switzerland",
   duration: "The duration of the association is unlimited.",
 } as const;
 
 /**
- * Purpose statements derived from Article 2 of the draft Articles of Association.
+ * Purpose statements derived from Article 2 of the adopted Articles of Association.
  */
 export const purposeStatements = [
   "Promote science, education, patient safety, treatment quality, responsible innovation and international professional exchange in endoscopic facial surgery.",
@@ -41,7 +40,7 @@ export const purposeStatements = [
 ] as const;
 
 /**
- * Membership categories foreseen in Article 4 of the draft Articles of Association.
+ * Membership categories set out in Article 4 of the adopted Articles of Association.
  * These are planned categories; conditions and any contribution require Board approval.
  */
 export const membershipCategories = [
@@ -76,7 +75,7 @@ export const membershipCategories = [
 ] as const;
 
 /**
- * Admission principles from Article 5 of the draft Articles of Association.
+ * Admission principles from Article 5 of the adopted Articles of Association.
  */
 export const admissionNotes = [
   "Applications will undergo professional review by the Credentials and Membership Committee. The Committee will make recommendations to the Board, which will decide on admission. The management office will administer the process and communicate the decision.",
@@ -106,19 +105,18 @@ export const legalStatus = {
 } as const;
 
 /**
- * Launch announcement. Update `confirmed` to true and adjust the copy
- * once the announcement has taken place.
+ * Founding and public announcement in Barcelona.
  */
 export const announcement = {
-  confirmed: false,
-  heading: "ISEFS will be announced in Barcelona in October 2026",
-  body: "The International Society for Endoscopic Facial Surgery will be introduced at the ENDOFACE Masters gala evening in Barcelona on 16 October 2026. The announcement will present the Society’s scientific purpose, leadership and programme for its first two years.",
+  confirmed: true,
+  heading: "ISEFS founded and announced in Barcelona",
+  body: "The International Society for Endoscopic Facial Surgery was founded in Barcelona on 15 October 2026 and introduced at the ENDOFACE Masters gala evening on 16 October 2026. The announcement presented the Society’s scientific purpose, leadership and programme for its first two years.",
   courseName: "Endo Face Masters",
   courseDates: "15–17 October 2026",
   courseLocation: "Barcelona, Spain",
   courseUrl: "https://www.endofacemasters.com/",
   courseNote:
-    "ENDOFACE Masters takes place in Barcelona from 15 to 17 October 2026 and will host the announcement of ISEFS at its gala evening. Its combination of lectures, surgical observation and practical teaching provides an important reference for the Society’s future educational programme. Programme, registration and attendance information is available on the official event website.",
+    "ENDOFACE Masters took place in Barcelona from 15 to 17 October 2026 and hosted the announcement of ISEFS at its gala evening. Its combination of lectures, surgical observation and practical teaching provides an important reference for the Society’s future educational programme. Information about the event is available on the official website.",
 } as const;
 
 export const educationAreas = [

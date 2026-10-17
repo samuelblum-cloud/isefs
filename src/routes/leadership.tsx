@@ -11,10 +11,10 @@ export const Route = createFileRoute("/leadership")({
   head: ({ loaderData }) =>
     pageSeo({
       path: "/leadership",
-      title: loaderData?.metaTitle || "Leadership — ISEFS",
+      title: loaderData?.metaTitle || "ISEFS Founders, President and Managing Director",
       description:
         loaderData?.metaDescription ||
-        "The scientific founders of ISEFS and the Managing Director responsible for Society management and operational implementation.",
+        "Meet the five founding surgeons of ISEFS, first President Dr Marc Mani and Managing Director Samuel Blum.",
       socialDescription:
         loaderData?.metaDescription ||
         "Scientific leadership and operational management of the Society.",
@@ -49,7 +49,7 @@ function LeadershipPage() {
           ))}
         </ul>
         <p className="measure mt-8 text-sm leading-relaxed text-muted-foreground">
-          Dr. Marc Mani will serve as the Society’s first President. The founders will determine the
+          Dr. Marc Mani serves as the Society’s first President. The founders will determine the
           other offices for the first year. Together, they lead the Society’s academic direction and
           its educational and scientific programme.
         </p>

@@ -12,10 +12,10 @@ export const Route = createFileRoute("/membership")({
   head: ({ loaderData }) =>
     pageSeo({
       path: "/membership",
-      title: loaderData?.metaTitle || "Membership — ISEFS",
+      title: loaderData?.metaTitle || "ISEFS Membership | Endoscopic Facial Surgery Society",
       description:
         loaderData?.metaDescription ||
-        "Register your interest to receive news about the Society, membership and upcoming educational activities in endoscopic facial surgery.",
+        "Register your interest in ISEFS membership and receive updates on education, training, scientific collaboration and future Society programmes.",
       socialDescription:
         loaderData?.metaDescription ||
         "Professional exchange, educational resources, scientific collaboration and access to Society programmes.",

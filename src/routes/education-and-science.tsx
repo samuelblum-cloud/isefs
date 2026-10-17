@@ -12,10 +12,10 @@ export const Route = createFileRoute("/education-and-science")({
   head: ({ loaderData }) =>
     pageSeo({
       path: "/education-and-science",
-      title: loaderData?.metaTitle || "Education & Science — ISEFS",
+      title: loaderData?.metaTitle || "Endoscopic Facial Surgery Education & Training | ISEFS",
       description:
         loaderData?.metaDescription ||
-        "Congress, monographic courses, practical laboratories, a fellowship pathway under development, webinars and planned scientific collaboration.",
+        "Explore ISEFS congresses, focused courses, practical laboratories, webinars, fellowship pathways and scientific collaboration.",
       socialDescription:
         loaderData?.metaDescription ||
         "The educational and scientific activities of the International Society for Endoscopic Facial Surgery.",

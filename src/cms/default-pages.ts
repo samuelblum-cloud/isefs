@@ -47,9 +47,9 @@ export const defaultCmsPages: CmsSeedPage[] = [
     slug: "home",
     internalName: "Home",
     pageTitle: "Home",
-    metaTitle: "ISEFS — Advancing endoscopic facial surgery",
+    metaTitle: "ISEFS | International Society for Endoscopic Facial Surgery",
     metaDescription:
-      "ISEFS is an international scientific society being established to advance education, practical training and scientific exchange in endoscopic facial surgery.",
+      "ISEFS advances endoscopic facial surgery through international education, practical training, scientific exchange and professional collaboration.",
     blocks: [
       {
         type: "hero",
@@ -75,7 +75,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
           title: "A professional community for a demanding discipline",
           paragraphs: [
             "Endoscopic facial surgery is a precise, technically demanding field. Progress depends on careful teaching, honest discussion of outcomes and sustained contact between surgeons working in different centres and health systems.",
-            "ISEFS is being established to give that work a permanent home: a scientific society that brings together surgeons, residents, faculty and professional partners around structured education, supervised practical learning and shared scientific enquiry.",
+            "ISEFS gives that work a permanent home: a scientific society that brings together surgeons, residents, faculty and professional partners around structured education, supervised practical learning and shared scientific enquiry.",
           ],
           linkLabel: "Read about our mission",
           linkUrl: "/about",
@@ -154,9 +154,9 @@ export const defaultCmsPages: CmsSeedPage[] = [
     slug: "about",
     internalName: "About",
     pageTitle: "About the Society",
-    metaTitle: "About the Society — ISEFS",
+    metaTitle: "About ISEFS | Endoscopic Facial Surgery Society",
     metaDescription:
-      "ISEFS connects an international professional community through structured education, practical learning, discussion of outcomes and scientific collaboration.",
+      "Learn about ISEFS, its mission and its international work in education, practical training and scientific exchange in endoscopic facial surgery.",
     blocks: [
       {
         type: "page_header",
@@ -175,7 +175,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
           title: "Why the Society exists",
           paragraphs: [
             "Endoscopic approaches to facial surgery have developed rapidly, but the knowledge behind them is still dispersed. Techniques are refined in individual centres, taught informally and discussed at occasional meetings. Surgeons who wish to learn systematically often have no clear route to follow.",
-            `The ${society.name} is being established to address this. Its purpose is to provide a stable, international framework for teaching the discipline, for supervised practical learning, for open discussion of surgical outcomes and for collaborative scientific work.`,
+            `The ${society.name} was founded to address this. Its purpose is to provide a stable, international framework for teaching the discipline, for supervised practical learning, for open discussion of surgical outcomes and for collaborative scientific work.`,
             "The Society is intended for the professional community: surgeons in practice, residents in training, faculty who teach, and the institutional and professional partners who support their work.",
           ],
           linkLabel: "",
@@ -221,10 +221,9 @@ export const defaultCmsPages: CmsSeedPage[] = [
         data: {
           eyebrow: "Purpose",
           title: "What the Society will do",
-          intro: `${legalForm.summary} The purpose set out in its draft articles of association is to:`,
+          intro: `${legalForm.summary} Its purpose under the adopted articles of association is to:`,
           items: [...purposeStatements],
-          footer:
-            "The articles of association remain in draft until adopted at the founding meeting.",
+          footer: "The articles of association were adopted at the founding meeting.",
           surface: false,
         },
       },
@@ -234,7 +233,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
         data: {
           eyebrow: "",
           title: "Current status",
-          body: "The Society is currently being established. Its governing documents, formal registration and admission rules are being prepared, and this website will be updated as each step is completed. Until then, ISEFS makes no claim to registered, charitable, tax-exempt or accredited status, and its programmes are described according to their actual stage of development.",
+          body: "ISEFS was founded in Barcelona on 15 October 2026 as an association under Swiss law with its registered office in Zurich. Membership processes and programmes are described according to their actual stage of development. ISEFS makes no claim to charitable, tax-exempt or accredited status unless and until the relevant status has been formally confirmed.",
           buttonLabel: "Register your interest",
           buttonUrl: "/membership#register",
           surface: false,
@@ -246,9 +245,9 @@ export const defaultCmsPages: CmsSeedPage[] = [
     slug: "education-and-science",
     internalName: "Education & Science",
     pageTitle: "Education & Science",
-    metaTitle: "Education & Science — ISEFS",
+    metaTitle: "Endoscopic Facial Surgery Education & Training | ISEFS",
     metaDescription:
-      "Congress, monographic courses, practical laboratories, a fellowship pathway under development, webinars and planned scientific collaboration.",
+      "Explore ISEFS congresses, focused courses, practical laboratories, webinars, fellowship pathways and scientific collaboration.",
     blocks: [
       {
         type: "page_header",
@@ -291,7 +290,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
           eyebrow: "Related course",
           status: "",
           title: announcement.courseName,
-          body: `${announcement.courseName} takes place in ${announcement.courseLocation} on ${announcement.courseDates}.`,
+          body: `${announcement.courseName} took place in ${announcement.courseLocation} on ${announcement.courseDates}.`,
           eventTitle: announcement.courseName,
           meta: `${announcement.courseDates} · ${announcement.courseLocation}`,
           detail: announcement.courseNote,
@@ -318,9 +317,9 @@ export const defaultCmsPages: CmsSeedPage[] = [
     slug: "membership",
     internalName: "Membership",
     pageTitle: "Membership",
-    metaTitle: "Membership — ISEFS",
+    metaTitle: "ISEFS Membership | Endoscopic Facial Surgery Society",
     metaDescription:
-      "Register your interest to receive news about the Society, membership and upcoming educational activities in endoscopic facial surgery.",
+      "Register your interest in ISEFS membership and receive updates on education, training, scientific collaboration and future Society programmes.",
     blocks: [
       {
         type: "page_header",
@@ -341,7 +340,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
           columns: "2",
           items: membershipValue.map((item) => ({ title: item.title, body: item.body })),
           footer:
-            "Membership categories, conditions and any contribution are being prepared as part of the Society's establishment and will be published once approved. Nothing on this page constitutes an offer of membership or a commitment to any particular benefit.",
+            "Membership categories, conditions and contributions are being finalised and will be published once approved. Nothing on this page constitutes an offer of membership or a commitment to any particular benefit.",
           linkLabel: "",
           linkUrl: "",
           surface: false,
@@ -395,9 +394,9 @@ export const defaultCmsPages: CmsSeedPage[] = [
     slug: "leadership",
     internalName: "Leadership",
     pageTitle: "Leadership",
-    metaTitle: "Leadership — ISEFS",
+    metaTitle: "ISEFS Founders, President and Managing Director",
     metaDescription:
-      "The scientific founders of ISEFS and the Managing Director responsible for Society management and operational implementation.",
+      "Meet the five founding surgeons of ISEFS, first President Dr Marc Mani and Managing Director Samuel Blum.",
     blocks: [
       {
         type: "page_header",
@@ -417,7 +416,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
           intro: "",
           people: founderCards,
           footer:
-            "Dr. Marc Mani will serve as the Society’s first President. The founders will determine the other offices for the first year. Together, they lead the Society’s academic direction and its educational and scientific programme.",
+            "Dr. Marc Mani serves as the Society’s first President. The founders will determine the other offices for the first year. Together, they lead the Society’s academic direction and its educational and scientific programme.",
           linkLabel: "",
           linkUrl: "",
           surface: false,
@@ -443,9 +442,9 @@ export const defaultCmsPages: CmsSeedPage[] = [
     slug: "contact",
     internalName: "Contact",
     pageTitle: "Contact",
-    metaTitle: "Contact — ISEFS",
+    metaTitle: "Contact ISEFS | International Scientific Society",
     metaDescription:
-      "Write to the International Society for Endoscopic Facial Surgery about membership, education, scientific collaboration or partnership.",
+      "Contact the ISEFS management office about membership, education, scientific collaboration, partnerships or the Society’s programme.",
     blocks: [
       {
         type: "page_header",
@@ -463,8 +462,8 @@ export const defaultCmsPages: CmsSeedPage[] = [
           formType: "contact",
           eyebrow: "Management office",
           title: "How to reach us",
-          body: "The Society's published contact details are being confirmed as part of its establishment. Until then, please use the form and the management office will reply to you directly.",
-          secondary: `The registered office of the Society will be in ${legalForm.seat}.`,
+          body: "The Society's published contact details are being finalised. Until then, please use the form and the management office will reply to you directly.",
+          secondary: `The registered office of the Society is in ${legalForm.seat}.`,
           anchor: "contact",
           surface: false,
         },
@@ -546,19 +545,19 @@ export const defaultCmsPages: CmsSeedPage[] = [
         data: {
           status: "Draft — pending approval",
           statusMessage:
-            "This text is a working draft prepared for review. It has not yet been approved and may change before the Society's formal establishment is completed.",
+            "This text is a working draft prepared for review and has not yet been approved.",
           sections: [
             {
               title: "Who is responsible",
-              body: `The International Society for Endoscopic Facial Surgery (ISEFS), being established as an association under Swiss law with its registered office in ${legalForm.seat}, is responsible for the personal data collected through this website. Its management office administers enquiries and interest registrations.`,
+              body: `The International Society for Endoscopic Facial Surgery (ISEFS), an association under Swiss law with its registered office in ${legalForm.seat}, is responsible for the personal data collected through this website. Its management office administers enquiries and interest registrations.`,
             },
             {
               title: "What we collect",
-              body: "Interest registration: first name, last name, email address, country, specialty, an optional institution, your selected areas of interest, whether you agreed to receive news, and the time of submission. Contact enquiries: your name, email address, subject and message.",
+              body: "Interest registration: first name, last name, email address, country, specialty, an optional institution, your selected areas of interest and the time of submission. Contact enquiries: your name, email address, subject and message.",
             },
             {
               title: "Why we use it",
-              body: "To respond to your enquiry, to inform you about the Society, its membership and its educational activities, and to prepare membership processes once these are approved. News is only sent where you have agreed to receive it.",
+              body: "To respond to your enquiry, to inform you about the Society, its membership and its educational activities, and to prepare membership processes once these are approved.",
             },
             {
               title: "Who can see it",
@@ -570,7 +569,7 @@ export const defaultCmsPages: CmsSeedPage[] = [
             },
             {
               title: "Your rights",
-              body: "You may ask for access to your data, for its correction or deletion, and you may withdraw your consent to receive news at any time. Please use the contact form to make such a request.",
+              body: "You may ask for access to your data, for its correction or deletion, and you may ask us not to contact you further. Please use the contact form to make such a request.",
             },
             {
               title: "Cookies and analytics",

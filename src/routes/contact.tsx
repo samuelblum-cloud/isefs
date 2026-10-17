@@ -12,10 +12,10 @@ export const Route = createFileRoute("/contact")({
   head: ({ loaderData }) =>
     pageSeo({
       path: "/contact",
-      title: loaderData?.metaTitle || "Contact — ISEFS",
+      title: loaderData?.metaTitle || "Contact ISEFS | International Scientific Society",
       description:
         loaderData?.metaDescription ||
-        "Write to the International Society for Endoscopic Facial Surgery about membership, education, scientific collaboration or partnership.",
+        "Contact the ISEFS management office about membership, education, scientific collaboration, partnerships or the Society’s programme.",
       socialDescription:
         loaderData?.metaDescription ||
         "Send an enquiry to the Society's management office about membership, education or collaboration.",

@@ -11,13 +11,13 @@ export const Route = createFileRoute("/about")({
   head: ({ loaderData }) =>
     pageSeo({
       path: "/about",
-      title: loaderData?.metaTitle || "About the Society — ISEFS",
+      title: loaderData?.metaTitle || "About ISEFS | Endoscopic Facial Surgery Society",
       description:
         loaderData?.metaDescription ||
-        "ISEFS connects an international professional community through structured education, practical learning, discussion of outcomes and scientific collaboration.",
+        "Learn about ISEFS, its mission and its international work in education, practical training and scientific exchange in endoscopic facial surgery.",
       socialDescription:
         loaderData?.metaDescription ||
-        "The mission of the International Society for Endoscopic Facial Surgery, currently being established.",
+        "The mission of the International Society for Endoscopic Facial Surgery.",
     }),
   component: AboutPage,
 });
@@ -64,8 +64,8 @@ function AboutPage() {
               systematically often have no clear route to follow.
             </p>
             <p>
-              The {society.name} is being established to address this. Its purpose is to provide a
-              stable, international framework for teaching the discipline, for supervised practical
+              The {society.name} was founded to address this. Its purpose is to provide a stable,
+              international framework for teaching the discipline, for supervised practical
               learning, for open discussion of surgical outcomes and for collaborative scientific
               work.
             </p>
@@ -97,7 +97,7 @@ function AboutPage() {
           <SectionTitle eyebrow="Purpose" title="What the Society will do" />
           <div>
             <p className="measure text-base leading-relaxed text-muted-foreground">
-              {legalForm.summary} The purpose set out in its draft articles of association is to:
+              {legalForm.summary} Its purpose under the adopted articles of association is to:
             </p>
             <ul className="mt-6 space-y-3">
               {purposeStatements.map((item) => (
@@ -110,7 +110,7 @@ function AboutPage() {
               ))}
             </ul>
             <p className="measure mt-6 text-sm leading-relaxed text-muted-foreground">
-              The articles of association remain in draft until adopted at the founding meeting.
+              The articles of association were adopted at the founding meeting.
             </p>
           </div>
         </div>
@@ -120,11 +120,11 @@ function AboutPage() {
         <div className="rounded-sm border border-rule p-8 sm:p-12">
           <h2>Current status</h2>
           <p className="measure mt-5 text-base leading-relaxed text-muted-foreground">
-            The Society is currently being established. Its governing documents, formal registration
-            and admission rules are being prepared, and this website will be updated as each step is
-            completed. Until then, ISEFS makes no claim to registered, charitable, tax-exempt or
-            accredited status, and its programmes are described according to their actual stage of
-            development.
+            ISEFS was founded in Barcelona on 15 October 2026 as an association under Swiss law with
+            its registered office in Zurich. Membership processes and programmes are described
+            according to their actual stage of development. ISEFS makes no claim to charitable,
+            tax-exempt or accredited status unless and until the relevant status has been formally
+            confirmed.
           </p>
           <Link to="/membership" hash="register" className="btn-primary mt-8 no-underline">
             Register your interest
