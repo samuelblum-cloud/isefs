@@ -57,7 +57,7 @@ export async function createBoardPdf(records: readonly Tables<"interest_registra
   pdf.setAuthor("ISEFS");
   pdf.setSubject("Confidential Board report");
   pdf.setCreationDate(generatedAt);
-  const widths = [24, 95, 135, 58, 100, 95, 90, 90, 99];
+  const widths = [24, 95, 135, 58, 100, 95, 90, 90, 99] as const;
   const headers = [
     "No.",
     "Full name",
@@ -139,7 +139,7 @@ export async function createBoardPdf(records: readonly Tables<"interest_registra
     page.drawRectangle({ x: margin, y: tableTop - 35, width: 786, height: 35, color: navy });
     let x = margin;
     headers.forEach((header, i) => {
-      wrap(header, widths[i] - 10, semibold, fontSize).forEach((line, j) =>
+      wrap(header, (widths[i] ?? 99) - 10, semibold, fontSize).forEach((line, j) =>
         page.drawText(line, {
           x: x + 5,
           y: tableTop - 12 - j * 11,
@@ -148,14 +148,14 @@ export async function createBoardPdf(records: readonly Tables<"interest_registra
           color: white,
         }),
       );
-      x += widths[i];
+      x += widths[i] ?? 99;
     });
     return page;
   };
   let page = newPage();
   let y = tableTop - 35;
   for (const [index, row] of boardRegistrationRows(records).entries()) {
-    const cells = row.map((cell, i) => wrap(cell, widths[i] - 10, regular, fontSize));
+    const cells = row.map((cell, i) => wrap(cell, (widths[i] ?? 99) - 10, regular, fontSize));
     const length = Math.max(...cells.map((cell) => cell.length));
     // Keep normal rows intact; exceptionally tall rows continue without truncation.
     if (
@@ -188,7 +188,7 @@ export async function createBoardPdf(records: readonly Tables<"interest_registra
             color: ink,
           }),
         );
-        x += widths[i];
+        x += widths[i] ?? 99;
       });
       page.drawLine({
         start: { x: margin, y: y - height },
