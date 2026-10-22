@@ -20,7 +20,8 @@ export async function createBoardPdf(records: readonly Tables<"interest_registra
   if (!swatchContext) throw new Error("Report brand colours are unavailable.");
   const colour = (token: string) => {
     const value = styles.getPropertyValue(token).trim();
-    if (!value || !CSS.supports("color", value)) throw new Error("Report brand colours are unavailable.");
+    if (!value || !CSS.supports("color", value))
+      throw new Error("Report brand colours are unavailable.");
     swatchContext.fillStyle = value;
     swatchContext.fillRect(0, 0, 1, 1);
     const pixel = swatchContext.getImageData(0, 0, 1, 1).data;
