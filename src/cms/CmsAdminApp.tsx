@@ -257,7 +257,11 @@ function InboxManager<T extends Tables<"interest_registrations"> | Tables<"conta
           <p className="mt-2 text-sm text-muted-foreground">{records.length} records</p>
         </div>
         {table === "interest_registrations" && !demo ? (
-          <BoardPdfExport records={records.filter((record): record is T & Tables<"interest_registrations"> => "first_name" in record)} />
+          <BoardPdfExport
+            records={records.filter(
+              (record): record is T & Tables<"interest_registrations"> => "first_name" in record,
+            )}
+          />
         ) : null}
         {message ? <p className="rounded-sm bg-highlight px-4 py-2 text-sm">{message}</p> : null}
       </div>

@@ -10,7 +10,9 @@ export function boardRegistrationRows(records: readonly Tables<"interest_registr
       record.country,
       record.specialty,
       record.institution || "—",
-      record.areas_of_interest.map((area) => area.charAt(0).toUpperCase() + area.slice(1)).join(", "),
+      record.areas_of_interest
+        .map((area) => area.charAt(0).toUpperCase() + area.slice(1))
+        .join(", "),
       new Intl.DateTimeFormat("en-GB", {
         dateStyle: "medium",
         timeStyle: "short",
