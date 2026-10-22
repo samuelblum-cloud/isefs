@@ -116,7 +116,7 @@ export async function createBoardPdf(records: readonly Tables<"interest_registra
     const logoHeight = (logoWidth * image.height) / image.width;
     page.drawImage(image, {
       x: margin,
-      y: 595.28 - 20 - logoHeight,
+      y: 595.28 - 10 - logoHeight,
       width: logoWidth,
       height: logoHeight,
     });

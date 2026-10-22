@@ -1,7 +1,7 @@
 # ISEFS roadmap
 
 ## Current request — Board interest-registration PDF
-- [ ] Add read-only branded export to the authenticated CMS and verify download, fields and pagination.
+- [x] Add read-only branded export to the authenticated CMS and verify download, fields and pagination.
 
 ## Phase 1 — Public website (target 16 October 2026, review by 9 October)
 - [ ] Brand system from approved logo (navy/teal/white/pale grey), editorial typography, reduced-motion support
