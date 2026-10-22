@@ -1,4 +1,5 @@
-import { describe, expect, test } from "bun:test";
+import { strict as assert } from "node:assert";
+import { describe, test } from "node:test";
 
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -30,13 +31,13 @@ describe("Board registration export data", () => {
       record,
     ];
     const rows = boardRegistrationRows(records);
-    expect(rows).toHaveLength(2);
-    expect(rows[0]?.[1]).toBe("Zoë Müller");
-    expect(rows[1]?.[0]).toBe("2");
-    expect(records[0]?.first_name).toBe("Older");
+    assert.equal(rows.length, 2);
+    assert.equal(rows[0]?.[1], "Zoë Müller");
+    assert.equal(rows[1]?.[0], "2");
+    assert.equal(records[0]?.first_name, "Older");
   });
   test("exports only the nine approved Board fields", () => {
-    expect(boardRegistrationRows([record])[0]).toEqual([
+    assert.deepEqual(boardRegistrationRows([record])[0], [
       "1",
       "Zoë Müller",
       "zoe@example.com",
@@ -49,6 +50,6 @@ describe("Board registration export data", () => {
     ]);
   });
   test("handles an empty registration snapshot without fabricating records", () => {
-    expect(boardRegistrationRows([])).toEqual([]);
+    assert.deepEqual(boardRegistrationRows([]), []);
   });
 });
