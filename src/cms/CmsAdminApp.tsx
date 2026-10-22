@@ -28,6 +28,7 @@ import {
   type CmsAdminSnapshot,
 } from "./admin-api";
 import { CmsPageWorkspace, type CmsWorkspaceView } from "./CmsPageWorkspace";
+import { BoardPdfExport } from "./BoardPdfExport";
 
 type AdminView = CmsWorkspaceView;
 
@@ -255,6 +256,9 @@ function InboxManager<T extends Tables<"interest_registrations"> | Tables<"conta
           <h2 className="mt-3 text-3xl">{title}</h2>
           <p className="mt-2 text-sm text-muted-foreground">{records.length} records</p>
         </div>
+        {table === "interest_registrations" && !demo ? (
+          <BoardPdfExport records={records.filter((record): record is T & Tables<"interest_registrations"> => "first_name" in record)} />
+        ) : null}
         {message ? <p className="rounded-sm bg-highlight px-4 py-2 text-sm">{message}</p> : null}
       </div>
       <div className="mt-8 space-y-4">
