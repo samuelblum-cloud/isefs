@@ -13,14 +13,18 @@ export async function createBoardPdf(records: readonly Tables<"interest_registra
   if (!records.length) throw new Error("No registrations to export.");
   const generatedAt = new Date();
   const styles = getComputedStyle(document.documentElement);
+  const swatch = document.createElement("canvas");
+  swatch.width = 1;
+  swatch.height = 1;
+  const swatchContext = swatch.getContext("2d");
+  if (!swatchContext) throw new Error("Report brand colours are unavailable.");
   const colour = (token: string) => {
-    const hex = styles.getPropertyValue(token).trim().replace("#", "");
-    if (!/^[a-f\d]{6}$/i.test(hex)) throw new Error("Report brand colours are unavailable.");
-    return rgb(
-      parseInt(hex.slice(0, 2), 16) / 255,
-      parseInt(hex.slice(2, 4), 16) / 255,
-      parseInt(hex.slice(4, 6), 16) / 255,
-    );
+    const value = styles.getPropertyValue(token).trim();
+    if (!value || !CSS.supports("color", value)) throw new Error("Report brand colours are unavailable.");
+    swatchContext.fillStyle = value;
+    swatchContext.fillRect(0, 0, 1, 1);
+    const pixel = swatchContext.getImageData(0, 0, 1, 1).data;
+    return rgb((pixel[0] ?? 0) / 255, (pixel[1] ?? 0) / 255, (pixel[2] ?? 0) / 255);
   };
   const navy = colour("--primary");
   const teal = colour("--accent");
