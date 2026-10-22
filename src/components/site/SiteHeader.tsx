@@ -22,6 +22,8 @@ function BrandLockup() {
       src={isefsLogoUrl}
       alt={`${society.shortName} — ${society.name}`}
       className="h-12 w-auto sm:h-14"
+      width={1920}
+      height={640}
     />
   );
 }

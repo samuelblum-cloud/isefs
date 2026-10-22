@@ -1,5 +1,15 @@
 export const SITE_ORIGIN = "https://isefs.org";
 
+const navigationLabels: Record<string, string> = {
+  "/about": "About",
+  "/education-and-science": "Education & Science",
+  "/membership": "Membership",
+  "/leadership": "Leadership",
+  "/contact": "Contact",
+  "/privacy": "Privacy information",
+  "/legal": "Legal information",
+};
+
 export const organizationStructuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -38,6 +48,9 @@ export function pageSeo({
   socialDescription?: string;
 }) {
   const url = new URL(path, SITE_ORIGIN).toString();
+  const breadcrumbLabel = navigationLabels[path];
+  const pageType =
+    path === "/about" ? "AboutPage" : path === "/contact" ? "ContactPage" : "WebPage";
 
   return {
     meta: [
@@ -48,6 +61,36 @@ export function pageSeo({
       { property: "og:url", content: url },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: socialDescription },
+      {
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": pageType,
+              "@id": `${url}#webpage`,
+              url,
+              name: title,
+              description,
+              inLanguage: "en",
+              isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
+              about: { "@id": `${SITE_ORIGIN}/#organization` },
+              ...(breadcrumbLabel ? { breadcrumb: { "@id": `${url}#breadcrumb` } } : {}),
+            },
+            ...(breadcrumbLabel
+              ? [
+                  {
+                    "@type": "BreadcrumbList",
+                    "@id": `${url}#breadcrumb`,
+                    itemListElement: [
+                      { "@type": "ListItem", position: 1, name: "ISEFS", item: `${SITE_ORIGIN}/` },
+                      { "@type": "ListItem", position: 2, name: breadcrumbLabel, item: url },
+                    ],
+                  },
+                ]
+              : []),
+          ],
+        },
+      },
     ],
     links: [{ rel: "canonical", href: url }],
   };

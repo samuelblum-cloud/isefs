@@ -87,7 +87,7 @@ function BlockShell({ block, children }: { block: CmsContentBlock; children: Rea
   );
 }
 
-function Carousel({ data }: { data: UnknownRecord }) {
+function Carousel({ data, eager }: { data: UnknownRecord; eager: boolean }) {
   const slides = records(data, "slides");
   const [active, setActive] = useState(0);
   if (slides.length === 0) return null;
@@ -101,6 +101,8 @@ function Carousel({ data }: { data: UnknownRecord }) {
             <img
               src={text(slide, "imageUrl")}
               alt={text(slide, "imageAlt")}
+              loading={eager ? "eager" : "lazy"}
+              decoding="async"
               className="h-full max-h-[560px] w-full object-cover"
               style={{ objectPosition: focalPosition(slide) }}
             />
@@ -152,7 +154,7 @@ function Carousel({ data }: { data: UnknownRecord }) {
   );
 }
 
-function CmsBlockView({ block }: { block: CmsContentBlock }) {
+function CmsBlockView({ block, eager }: { block: CmsContentBlock; eager: boolean }) {
   const data = block.data as UnknownRecord;
 
   if (block.type === "page_header") {
@@ -196,6 +198,8 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
                 src={text(data, "imageUrl")}
                 alt={text(data, "imageAlt")}
                 className="brand-mark-soft h-auto w-full"
+                loading={eager ? "eager" : "lazy"}
+                fetchPriority={eager ? "high" : "auto"}
               />
             </div>
           ) : null}
@@ -243,6 +247,8 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
                 <img
                   src={text(item, "imageUrl")}
                   alt={text(item, "imageAlt")}
+                  loading={eager ? "eager" : "lazy"}
+                  decoding="async"
                   className="mb-6 aspect-[4/3] w-full object-cover"
                   style={{ objectPosition: focalPosition(item) }}
                 />
@@ -368,6 +374,8 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
                 <img
                   src={text(person, "imageUrl")}
                   alt={text(person, "imageAlt")}
+                  loading={eager ? "eager" : "lazy"}
+                  decoding="async"
                   className="mb-6 aspect-[4/5] w-full object-cover"
                   style={{ objectPosition: focalPosition(person) }}
                 />
@@ -405,6 +413,8 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
                 src={text(data, "imageUrl")}
                 alt={text(data, "imageAlt")}
                 className="aspect-[4/5] w-full object-cover"
+                loading={eager ? "eager" : "lazy"}
+                decoding="async"
                 style={{ objectPosition: focalPosition(data) }}
               />
             </div>
@@ -498,6 +508,8 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
             src={text(data, "imageUrl")}
             alt={text(data, "imageAlt")}
             className="w-full rounded-sm object-cover"
+            loading={eager ? "eager" : "lazy"}
+            decoding="async"
             style={{ objectPosition: focalPosition(data) }}
           />
         ) : null}
@@ -554,6 +566,8 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
               <img
                 src={text(image, "imageUrl")}
                 alt={text(image, "imageAlt")}
+                loading={eager ? "eager" : "lazy"}
+                decoding="async"
                 className="aspect-[4/3] w-full object-cover"
                 style={{ objectPosition: focalPosition(image) }}
               />
@@ -576,7 +590,7 @@ function CmsBlockView({ block }: { block: CmsContentBlock }) {
         {text(data, "intro") ? (
           <p className="measure mt-5 text-base text-muted-foreground">{text(data, "intro")}</p>
         ) : null}
-        <Carousel data={data} />
+        <Carousel data={data} eager={eager} />
       </BlockShell>
     );
   }
@@ -616,8 +630,8 @@ export function CmsPageRenderer({ page }: { page: CmsPageDocument }) {
     <>
       {page.blocks
         .filter((block) => block.visible)
-        .map((block) => (
-          <CmsBlockView key={block.id} block={block} />
+        .map((block, index) => (
+          <CmsBlockView key={block.id} block={block} eager={index < 2} />
         ))}
     </>
   );

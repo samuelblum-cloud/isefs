@@ -14,8 +14,8 @@ export function SiteFooter() {
             src={isefsLogoUrl}
             alt="ISEFS — International Society for Endoscopic Facial Surgery logo"
             className="h-auto w-full max-w-[360px]"
-            width={320}
-            height={104}
+            width={1920}
+            height={640}
             loading="lazy"
           />
           <p className="measure mt-5 text-sm leading-relaxed text-muted-foreground">
