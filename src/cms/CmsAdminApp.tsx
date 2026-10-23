@@ -8,18 +8,29 @@ import {
   RefreshCw,
   Save,
   ShieldCheck,
+  Trash2,
   Upload,
   Users,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Input } from "@/components/ui/input";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { isefsLogoUrl } from "@/content/assets";
 import type { Json, Tables } from "@/integrations/supabase/types";
 
 import {
+  deleteInboxRecord,
   loadCmsAdminSnapshot,
   setCmsAdminInvitation,
   signOutCms,
@@ -230,6 +241,8 @@ function InboxManager<T extends Tables<"interest_registrations"> | Tables<"conta
   statuses,
   reload,
   demo,
+  canDelete,
+  onDeleted,
 }: {
   title: string;
   records: T[];
@@ -237,8 +250,28 @@ function InboxManager<T extends Tables<"interest_registrations"> | Tables<"conta
   statuses: string[];
   reload: () => Promise<void>;
   demo: boolean;
+  canDelete: boolean;
+  onDeleted: (id: string) => void;
 }) {
   const [message, setMessage] = useState("");
+  const [pendingDelete, setPendingDelete] = useState<T | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+  async function remove() {
+    if (!pendingDelete || deleting || !canDelete) return;
+    setDeleting(true);
+    setDeleteError("");
+    try {
+      if (!demo) await deleteInboxRecord(table, pendingDelete.id, pendingDelete.email);
+      onDeleted(pendingDelete.id);
+      setPendingDelete(null);
+      setMessage(demo ? "Demo only — no stored data deleted." : "Record permanently deleted.");
+    } catch (cause) {
+      setDeleteError(cause instanceof Error ? cause.message : "Deletion failed. Please try again.");
+    } finally {
+      setDeleting(false);
+    }
+  }
   async function save(record: T, status: string, notes: string) {
     try {
       if (!demo) await updateRegistration(table, record.id, status, notes);
@@ -267,7 +300,20 @@ function InboxManager<T extends Tables<"interest_registrations"> | Tables<"conta
       </div>
       <div className="mt-8 space-y-4">
         {records.map((record) => (
-          <InboxRecord key={record.id} record={record} statuses={statuses} onSave={save} />
+          <InboxRecord
+            key={record.id}
+            record={record}
+            statuses={statuses}
+            onSave={save}
+            onDelete={
+              canDelete
+                ? () => {
+                    setDeleteError("");
+                    setPendingDelete(record);
+                  }
+                : undefined
+            }
+          />
         ))}
         {records.length === 0 ? (
           <div className="rounded-sm border border-rule bg-background p-8 text-sm text-muted-foreground">
@@ -275,6 +321,52 @@ function InboxManager<T extends Tables<"interest_registrations"> | Tables<"conta
           </div>
         ) : null}
       </div>
+      <AlertDialog
+        open={pendingDelete !== null}
+        onOpenChange={(open) => {
+          if (!open && !deleting) setPendingDelete(null);
+        }}
+      >
+        <AlertDialogContent className="max-w-[calc(100%-2rem)] sm:max-w-lg">
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Delete this {table === "interest_registrations" ? "registration" : "enquiry"}?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This permanently deletes the selected entry, including its internal notes. This cannot
+              be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          {pendingDelete ? (
+            <div className="break-words rounded-sm border border-rule p-4 text-sm">
+              <p className="font-semibold">
+                {"first_name" in pendingDelete
+                  ? `${pendingDelete.first_name} ${pendingDelete.last_name}`
+                  : pendingDelete.name}
+              </p>
+              <p>{pendingDelete.email}</p>
+              <p className="mt-1 text-muted-foreground">{formatDate(pendingDelete.created_at)}</p>
+            </div>
+          ) : null}
+          {deleteError ? (
+            <p role="alert" className="text-sm text-destructive">
+              {deleteError}
+            </p>
+          ) : null}
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <button
+              type="button"
+              disabled={deleting}
+              onClick={() => void remove()}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-sm bg-destructive px-4 text-sm font-semibold text-destructive-foreground disabled:opacity-50"
+            >
+              <Trash2 className="h-4 w-4" />
+              {deleting ? "Deleting…" : "Delete permanently"}
+            </button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
@@ -283,10 +375,12 @@ function InboxRecord<T extends Tables<"interest_registrations"> | Tables<"contac
   record,
   statuses,
   onSave,
+  onDelete,
 }: {
   record: T;
   statuses: string[];
   onSave: (record: T, status: string, notes: string) => Promise<void>;
+  onDelete?: (() => void) | undefined;
 }) {
   const [status, setStatus] = useState(record.workflow_status);
   const [notes, setNotes] = useState(record.internal_notes);
@@ -338,13 +432,26 @@ function InboxRecord<T extends Tables<"interest_registrations"> | Tables<"contac
             onChange={(event) => setNotes(event.target.value)}
           />
         </div>
-        <button
-          type="button"
-          className="btn-secondary min-h-11 px-4 text-sm lg:mt-7"
-          onClick={() => onSave(record, status, notes)}
-        >
-          <Save className="h-4 w-4" /> Save
-        </button>
+        <div className="flex gap-2 lg:mt-7 lg:flex-col">
+          <button
+            type="button"
+            className="btn-secondary min-h-11 px-4 text-sm"
+            onClick={() => onSave(record, status, notes)}
+          >
+            <Save className="h-4 w-4" /> Save
+          </button>
+          {onDelete ? (
+            <button
+              type="button"
+              onClick={onDelete}
+              aria-label={`Delete ${isInterest ? `${record.first_name} ${record.last_name}` : record.name}`}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-sm border border-destructive/30 px-4 text-sm text-destructive hover:bg-destructive/5"
+            >
+              <Trash2 className="h-4 w-4" />
+              Delete
+            </button>
+          ) : null}
+        </div>
       </div>
     </article>
   );
@@ -720,22 +827,46 @@ export function CmsAdminApp({
         {view === "media" ? <MediaManager snapshot={snapshot} reload={reload} demo={demo} /> : null}
         {view === "registrations" ? (
           <InboxManager
+            key="registrations"
             title="Interest registrations"
             records={snapshot.registrations}
             table="interest_registrations"
             statuses={["new", "reviewing", "contacted", "closed"]}
             reload={reload}
             demo={demo}
+            canDelete={snapshot.role === "owner"}
+            onDeleted={(id) =>
+              setSnapshot((current) =>
+                current
+                  ? {
+                      ...current,
+                      registrations: current.registrations.filter((record) => record.id !== id),
+                    }
+                  : current,
+              )
+            }
           />
         ) : null}
         {view === "enquiries" ? (
           <InboxManager
+            key="enquiries"
             title="Contact enquiries"
             records={snapshot.enquiries}
             table="contact_enquiries"
             statuses={["new", "reviewing", "answered", "closed"]}
             reload={reload}
             demo={demo}
+            canDelete={snapshot.role === "owner"}
+            onDeleted={(id) =>
+              setSnapshot((current) =>
+                current
+                  ? {
+                      ...current,
+                      enquiries: current.enquiries.filter((record) => record.id !== id),
+                    }
+                  : current,
+              )
+            }
           />
         ) : null}
         {view === "access" && snapshot.role === "owner" ? (

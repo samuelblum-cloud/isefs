@@ -2,6 +2,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Json, Tables } from "@/integrations/supabase/types";
 
 import { bootstrapCms } from "./cms.functions";
+import { deleteCmsInboxRecord } from "./inbox.functions";
 import { enrichFounderPeopleData, enrichManagementProfileData } from "./founder-profiles";
 import type { CmsBlockType, CmsContentBlock, CmsPageDocument } from "./types";
 
@@ -59,6 +60,14 @@ export async function getCmsSession() {
 
 export async function ensureCmsBootstrap() {
   return bootstrapCms();
+}
+
+export async function deleteInboxRecord(
+  table: "interest_registrations" | "contact_enquiries",
+  id: string,
+  email: string,
+) {
+  return deleteCmsInboxRecord({ data: { table, id, email, confirmed: true } });
 }
 
 function toRecord(value: Json): Record<string, Json | undefined> {
